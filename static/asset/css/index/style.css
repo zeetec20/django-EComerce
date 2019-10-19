@@ -1,0 +1,520 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html, body{
+    height: 100%;
+}
+
+body{
+    background-color: white;
+}
+
+.header{
+    background-color: white;
+    height: 200px;
+    margin-bottom: 5px;
+}
+
+.header1{
+    height: 55px;
+    border-bottom: solid 1px #e8e8e8;
+}
+
+.header1 .search{
+    width: 80%;
+    margin: 7.5px;
+    color: #313131;
+    border-radius: 0px;
+    border-color: white;
+    /* border: solid 1px #313131; */
+}
+
+.header1 .search::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    transition: all 0.5s;
+    height: 10px;
+    width: 10px;
+    background-color: #313131;
+    border-radius: 10%;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.header1 .cart .iconCart{
+    width: 20px;
+    float: right;
+    margin-top: 15px;
+}
+
+.header1 .cart .cartText{
+    font-size: 14px;
+    float: right;
+    margin: 10px;
+    margin-top: 18px;
+}
+
+.header1 .cart .checkOut{
+    font-size: 14px;
+    float: right;
+    margin-top: 18px;
+    margin-right: 16px;
+}
+
+.header1 .search:hover{
+    transition: all 0.5s;
+    border-bottom-color: #313131;
+}
+
+.header1 .search:focus{
+    border-bottom-color: #313131;
+    outline: none !important;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.header1 .iconSeacrh{
+    width: 18px;
+    float: left;
+    margin: 17px;
+}
+
+.header1 .buttonMain{
+    font-size: 14px;
+    float: right;
+    margin: 10px;
+    margin-top: 18px;
+    cursor: pointer;
+}
+
+.header1 .buttonMain::after{
+    display: none;
+}
+
+.header2{
+    height: 144px;
+}
+
+.header2 .title{
+    font-weight: bold;
+    font-size: 55px;
+    margin-top: 33px;
+}
+
+.select{
+    border-top: solid 1px #e8e8e8;
+    width: 90%;
+    font-weight: bold;
+    font-size: 14px;
+    /* margin-bottom: 10px; */
+    padding-top: 15px;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+    color: #313131;
+    text-decoration: none;
+}
+
+.body2 .header{
+    height: 50px;
+    width: 100% !important;
+}
+
+.body2 .titleLeft{
+    float: left;
+    margin: 5px;
+}
+
+.body2 .header .buttonRight{
+    position: absolute !important;
+    right: 0;
+    margin: 5px;
+
+}
+
+.body2 .header .buttonMain{
+    border-radius: 0;
+    border: solid 1px #313131;
+    height: 70% !important;
+    font-size: 16px;
+    width: 120px;
+    background-color: white;
+    color: #313131;
+}
+
+.body2 .header .buttonMain:focus{
+    background-color: white;
+    color: #313131;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.body2 .header .buttonMain:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
+.body2 .header .dropdown-item:focus{
+    background-color: #313131;
+    color: white;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.footer{
+    border-top: solid 1px #e8e8e8;
+    background-color: white;
+}
+
+.footer .body1 .title{
+    color: #313131;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.footer .body2 .title{
+    color: #313131;
+    margin-top: 15px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.footer .body2 .text{
+    width: 100%;
+}
+
+.footer .footerLink{
+    color: #313131;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.footer .inputSubscribe input{
+    border-radius: 0px;
+    border-right: none;
+    border-color: white;
+    background-color: #f4f4f4;
+}
+
+.footer .inputSubscribe input:hover{
+    transition: all 0.5s;
+    border-color: #313131;
+}
+
+.footer .inputSubscribe input:focus{
+    box-shadow: 0px 0px 0px 0px;
+    border-color: #313131;
+}
+
+.footer .inputSubscribe .button{
+    border-radius: 0px;
+    border-color: #313131;
+    color: #313131;
+    background-color: #f4f4f4;
+    z-index: 3 !important;
+}
+
+.footer .inputSubscribe .button:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
+.footer2{
+    margin-top: 10px;
+    border-top: solid 1px #e8e8e8;
+}
+
+.copyright{
+    margin: 10px;
+    width: 100%;
+    font-size: 12px;
+}
+
+.login-register{
+    position: fixed;
+    width: 60%;
+    height: 440px;
+    background-color: #f4f4f4;
+    z-index: 4;
+    display: block;
+    margin: 5% auto;
+    left: 0;
+    right: 0;
+    top: -90%;
+    visibility: hidden;
+    border-radius: 0px;
+    box-shadow: rgba(0, 0, 0, 0.116) 0px 3px 10px 0px;
+    transition: all 1s,
+}
+
+.login-register .cancel{
+    position: absolute;
+    right: 0;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.login-register .cancel img{
+    width: 18px;
+}
+
+.login-register .cancel:hover img{
+    transition: all 0.5s;
+    transform: rotate(180deg);
+}
+
+.login-register .buttonSelect{
+    width: 264px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.login-register .buttonSelect button{
+    border-radius: 0px;
+    width: 130px;
+    background-color: #f4f4f4;
+    color: #313131;
+    border: solid 1px #313131;
+    margin-left: -4px;
+    margin-right: -4px;
+}
+
+.login-register .buttonSelect button:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
+.login-register .col-md-6, .login-register .col-md-10{
+    margin: auto;
+}
+
+.login .row:nth-child(2){
+    margin-top: 55px;
+}
+
+.login .input input{
+    width: 100%;
+    border-radius: 0px;
+    border-color: #f4f4f4;
+    background-color: white;
+}
+
+.login .input .borderBottom{
+    position: relative;
+    background-color: #313131;
+    height: 1px;
+    width: 0%;
+    display: block;
+    margin: auto;
+}
+
+.login .input input:focus{
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.login .input input:focus ~ .borderBottom{
+    transition: all 0.5s;
+    width: 100%;
+}
+
+.login .buttonLoginRegister{
+    margin: auto;
+    margin-top: 20px;
+}
+
+.login .buttonLoginRegister .borderTop,
+.login .buttonLoginRegister .borderBottom{
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #313131;
+}
+
+.login .buttonLoginRegister .borderTop{
+    top: 0;
+}
+
+.login .buttonLoginRegister .borderBottom{
+    bottom: 0px;
+}
+
+.login .buttonLoginRegister .borderLeft, 
+.login .buttonLoginRegister .borderRight{
+    position: absolute;
+    width: 1px;
+    height: 0%;
+    background-color: #313131;
+}
+
+.login .buttonLoginRegister .borderLeft{
+    left: 15px;
+    top: 0;
+}
+
+.login .buttonLoginRegister .borderRight{
+    right: 15px;
+    bottom: 0;
+}
+
+.login .buttonLoginRegister:hover .borderLeft,
+.login .buttonLoginRegister:hover .borderRight{
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.login .buttonLoginRegister .button{
+    background-color: #f4f4f4;
+    color: #313131;
+    border-radius: 0px;
+    width: 100%;
+    border: none;
+    height: 100%;
+}
+
+.login .buttonLoginRegister .button:focus{
+    box-shadow: none;
+}
+
+.login .buttonLoginRegister:hover .button{
+    transition: 0.3s;
+    transition-delay: 0.3s;
+    background-color: #313131;
+    color: #f4f4f4;
+}
+
+.login-register .otherChoice{
+    margin-top: 20px;
+    border-top: solid 1px #c5c5c5;
+}
+
+.login-register .otherChoice small{
+    margin: auto;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.barang .cover{
+    width: 100%;
+    height: 220px;
+}
+
+.barang{
+    margin: 10px auto;
+}
+
+.barang .title{
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.barang .price{
+    font-size: 14px;
+}
+
+.barang .add{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    margin-top: -3px;
+}
+
+.barang .title{
+    height: 35px;
+}
+
+.barang .add{
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 100px) and (max-width: 750px){
+    .select{
+        display: block;
+        margin: auto;
+        text-align: center;
+    }
+
+    .login-register .buttonSelect{
+        margin-top: 50px;
+    }
+
+    .header1{
+        margin: auto;
+    }
+
+    .cart .iconCart,
+    .cart .cartText,
+    .cart .checkOut{
+        float: left !important;
+    }
+
+    .header2{
+        margin-top: 30px ;
+    }
+
+    .footer{
+        margin-left: 10px;
+        width: 95%;
+        margin-top: 20px;
+    }
+
+    .footer2{
+        width: 100%;
+    }
+
+    .barang .cover{
+        height: 400px;
+    }
+}
+
+
+
+.dropdown-menu{
+    border-radius: 0px;
+    border: solid 1px #0000004f;
+    color: #313131;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.dropdown-item{
+    font-size: 14px !important;
+}
+
+.dropdown-item:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white !important;
+}
+
+.username{
+    color: #dd4445 !important;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px !important;
+}
+
+.username:hover{
+    background-color: white;
+    color: #dd4445;
+}
+
+.profile{
+    display: block;
+    margin: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.screenBlank{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #0000005b;
+    z-index: 4 !important;
+    opacity: 0;
+    visibility: hidden;
+}

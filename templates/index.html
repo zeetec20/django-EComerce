@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+    <title>Three Laptop</title>
+{% endblock title %}
+    
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'asset/css/index/style.css' %}">
+{% endblock style %}
+
+{% block body %}
+    <div class="screenBlank"></div>
+
+    <div class="container login-register">
+        <div class="login">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="cancel" id="buttonCloseLoginRegister">
+                        <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
+                    </div>
+                    <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-lg btn-secondary login active">Login</button>
+                        <button type="button" class="btn btn-lg btn-secondary register">Register</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group input">
+                        <input class="form-control" type="text" placeholder="Username or your@email.com">
+                        <div class="borderBottom"></div>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group input">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <div class="borderBottom"></div>
+                        <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-12 buttonLoginRegister">
+                    <div class="borderTop"></div>
+                    <div class="borderLeft"></div>
+                    <button class="btn button">Submit</button>
+                    <div class="borderBottom"></div>
+                    <div class="borderRight"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="rigester"></div>
+
+        <div class="row">
+            <div class="col-md-10 otherChoice">
+                <small id="emailHelp" class="form-text text-muted">Or Login Using</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="container header">
+        <div class="row col-lg-12 header1">
+            <div class="searchBar col-lg-6">
+                <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh">
+                <input class="form-control search" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="cart col-lg-6 col-sm-12">
+                <div class="dropdown button">
+                    <h1 class="dropdown-toggle buttonMain" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        User
+                    </h1>
+                    <div class="dropdown-menu userBar" aria-labelledby="dropdownMenuOffset">
+                        {% if user.is_authenticated %}
+                            <img src="media/{{ profile_user }}" class="profile" alt="">
+                            <a class="dropdown-item username">{{ user.username }}</a>
+                            <a class="dropdown-item">Profil</a>
+                            <a class="dropdown-item" id="logout">Logout</a>
+                        {% else %}
+                            <a class="dropdown-item" onclick="showLogin_Register()">Login</a>
+                            <a class="dropdown-item">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <h6 class="checkOut">Check Out</h6>
+                <h6 class="cartText">Cart [ <span id="numberCart">0</span> ]</h6>
+                <img class="iconCart" src="{% static 'asset/images/icon/cart.png' %}" alt="">
+            </div>
+        </div>
+        <div class="row header2 col-lg-12 col-sm-12">
+            <h1 class="title">Tree Laptop</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-xs-12 body1">
+                <div class="row">
+                    <h3 class="select">ASUS</h3>
+                </div>
+                <div class="row">
+                    <h3 class="select">HP</h3>
+                </div>
+                <div class="row">
+                    <h3 class="select">Lenovo</h3>
+                </div>
+                <div class="row">
+                    <h3 class="select">MacBook</h3>
+                </div>
+                <div class="row">
+                    <h3 class="select">MSI</h3>
+                </div>
+                <div class="row">
+                    <h3 class="select">Acer</h3>
+                </div>
+                <div class="row socialMedia">
+
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12 body2">
+                <div class="row header">
+                    <h3 class="titleLeft">Featured Collection</h3>
+                    <div class="dropdown buttonRight">
+                        <button type="button" class="btn btn-secondary dropdown-toggle buttonMain" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Short By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            <a class="dropdown-item" href="#">Popular</a>
+                            <a class="dropdown-item" href="#">Price Low to High</a>
+                            <a class="dropdown-item" href="#">Price High to Low</a>
+                            <a class="dropdown-item" href="#">Name A -> Z</a>
+                            <a class="dropdown-item" href="#">Price Z -> A</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row barang">
+                        {% include 'listBarang.html' %}
+                    </div>
+                    <div class="row pagination"></div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container type">
+        <div class="row">
+            <div class="col-sm-4 col-sm-3"></div>
+            <div class="col-sm-4 col-sm-3"></div>
+            <div class="col-sm-4 col-sm-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-sm-3"></div>
+            <div class="col-sm-4 col-sm-3"></div>
+            <div class="col-sm-4 col-sm-3"></div>
+        </div>
+    </div>
+
+    <div class="container footer">
+        <div class="row">
+            <div class="col-sm-5 body1">
+                <div class="row ">
+                    <h4 class="title">Link</h4>
+                </div>
+                <div class="row ">
+                    <h4 class="footerLink">Search</h4>
+                </div>
+                <div class="row ">
+                    <h4 class="footerLink">News</h4>
+                </div>
+                <div class="row ">
+                    <h4 class="footerLink">Our Story</h4>
+                </div>
+                <div class="row ">
+                    <h4 class="footerLink">FAQ</h4>
+                </div>
+                <div class="row ">
+                    <h4 class="footerLink">Return Police</h4>
+                </div>
+                <div class="row ">
+                    <h4 class="footerLink">Contact us</h4>
+                </div>
+            </div>
+            <div class="col-sm-5 body2">
+                <div class="row">
+                    <h4 class="title">Subscribe</h4>
+                    <h6 class="text">Sign up for the latest news</h6>
+                    <div class="input-group inputSubscribe">
+                        <input type="email" class="form-control" placeholder="your@email.com" aria-label="email" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary button" type="button" id="button-addon2">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row footer2">
+            <div class="col-lg-10 col-sm-10">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <h6 class="copyright">Copyright © 2019, Three Laptop. E-Commerce Software by Three Laptop</h6>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="sponsor">
+                            <img src="" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block script %}
+    <script src="{% static 'asset/js/function.js' %}"></script>
+    <script src="{% static 'asset/js/script.js' %}"></script>
+{% endblock script %}
