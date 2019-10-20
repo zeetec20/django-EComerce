@@ -41,3 +41,12 @@ class Barang(models.Model):
         os.chmod('/media', 0o757)
         self.slugifyBarang = slugify(self.nama)
         super(Barang, self).save()
+    
+    def delete(self):
+        try:
+            shutil.rmtree('media/barang/' + self.nama)
+        except OSError as e:
+            print ("Error: %s - %s." % (e.filename, e.strerror))
+        
+        super(CustomUser, self).delete()
+

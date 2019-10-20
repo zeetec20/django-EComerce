@@ -14,49 +14,124 @@
 {% block body %}
     <div class="screenBlank"></div>
 
-    <div class="container login-register">
-        <div class="login">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="cancel" id="buttonCloseLoginRegister">
-                        <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
-                    </div>
-                    <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-lg btn-secondary login active">Login</button>
-                        <button type="button" class="btn btn-lg btn-secondary register">Register</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group input">
-                        <input class="form-control" type="text" placeholder="Username or your@email.com">
-                        <div class="borderBottom"></div>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group input">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        <div class="borderBottom"></div>
-                        <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-sm-12 buttonLoginRegister">
-                    <div class="borderTop"></div>
-                    <div class="borderLeft"></div>
-                    <button class="btn button">Submit</button>
-                    <div class="borderBottom"></div>
-                    <div class="borderRight"></div>
-                </div>
-            </div>
+    <div class="cart">
 
+    </div>
+
+    <div class="container login-register">
+        <div class="login" id="loginPage">
+            <form action="ajax/login" method="post" id="form-login">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="cancel" id="buttonCloseLoginRegister" onclick="pageLogin_Register('close'); screenBlank('close')">
+                            <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
+                        </div>
+                        <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-lg btn-secondary login active">Login</button>
+                            <button type="button" class="btn btn-lg btn-secondary register" onclick="showLogin_Register('register')">Register</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            <input class="form-control" type="text" placeholder="Username or your@email.com">
+                            <div class="borderBottom"></div>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 buttonLoginRegister">
+                        <div class="borderTop"></div>
+                        <div class="borderLeft"></div>
+                        <button class="btn button" type="submit">Submit</button>
+                        <div class="borderBottom"></div>
+                        <div class="borderRight"></div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="rigester"></div>
+        
+        <div class="register" id="registerPage">
+            <form action="/ajax/register" enctype="multipart/form-data" id="form-register" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="cancel" id="buttonCloseLoginRegister" onclick="pageLogin_Register('close'); screenBlank('close')">
+                            <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
+                        </div>
+                        <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-lg btn-secondary login" onclick="showLogin_Register('login')">Login</button>
+                            <button type="button" class="btn btn-lg btn-secondary register active">Register</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row fullname">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.fullname}}
+                            <div class="borderBottom"></div>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.username}}
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.email}}
+                            <div class="borderBottom"></div>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.password}}
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.profile}}
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 buttonLoginRegister">
+                        <div class="borderTop"></div>
+                        <div class="borderLeft"></div>
+                        <button class="btn button" onclick="" type="submit">Submit</button>
+                        <div class="borderBottom"></div>
+                        <div class="borderRight"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         <div class="row">
             <div class="col-md-10 otherChoice">
@@ -81,10 +156,10 @@
                             <img src="media/{{ profile_user }}" class="profile" alt="">
                             <a class="dropdown-item username">{{ user.username }}</a>
                             <a class="dropdown-item">Profil</a>
-                            <a class="dropdown-item" id="logout">Logout</a>
+                            <a class="dropdown-item" id="logout" onclick="logout()">Logout</a>
                         {% else %}
-                            <a class="dropdown-item" onclick="showLogin_Register()">Login</a>
-                            <a class="dropdown-item">Register</a>
+                            <a class="dropdown-item" onclick="showLogin_Register('login')" onload="showLogin_Register('login')">Login</a>
+                            <a class="dropdown-item" onclick="showLogin_Register('register')">Register</a>
                         {% endif %}
                     </div>
                 </div>
@@ -166,7 +241,7 @@
 
     <div class="container footer">
         <div class="row">
-            <div class="col-sm-5 body1">
+            <div class="col-md-6 col-sm-12 body1">
                 <div class="row ">
                     <h4 class="title">Link</h4>
                 </div>
@@ -189,7 +264,7 @@
                     <h4 class="footerLink">Contact us</h4>
                 </div>
             </div>
-            <div class="col-sm-5 body2">
+            <div class="col-md-6 col-sm-12 body2">
                 <div class="row">
                     <h4 class="title">Subscribe</h4>
                     <h6 class="text">Sign up for the latest news</h6>
@@ -222,6 +297,7 @@
 {% endblock body %}
 
 {% block script %}
+    <script src="{% static 'asset/js/ajax.js' %}"></script>
     <script src="{% static 'asset/js/function.js' %}"></script>
     <script src="{% static 'asset/js/script.js' %}"></script>
 {% endblock script %}

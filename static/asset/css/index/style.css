@@ -243,7 +243,8 @@ body{
     visibility: hidden;
     border-radius: 0px;
     box-shadow: rgba(0, 0, 0, 0.116) 0px 3px 10px 0px;
-    transition: all 1s,
+    transition: all 1s;
+    overflow: hidden;
 }
 
 .login-register .cancel{
@@ -318,52 +319,64 @@ body{
     width: 100%;
 }
 
-.login .buttonLoginRegister{
+.login .buttonLoginRegister, 
+.register .buttonLoginRegister{
     margin: auto;
     margin-top: 20px;
 }
 
 .login .buttonLoginRegister .borderTop,
-.login .buttonLoginRegister .borderBottom{
+.login .buttonLoginRegister .borderBottom,
+.register .buttonLoginRegister .borderTop,
+.register .buttonLoginRegister .borderBottom{
     position: relative;
     width: 100%;
     height: 1px;
     background-color: #313131;
 }
 
-.login .buttonLoginRegister .borderTop{
-    top: 0;
+.login .buttonLoginRegister .borderTop,
+.register .buttonLoginRegister .borderTop{
+    top: 0px;
 }
 
-.login .buttonLoginRegister .borderBottom{
+.login .buttonLoginRegister .borderBottom,
+.register .buttonLoginRegister .borderBottom{
     bottom: 0px;
 }
 
 .login .buttonLoginRegister .borderLeft, 
-.login .buttonLoginRegister .borderRight{
+.login .buttonLoginRegister .borderRight,
+.register .buttonLoginRegister .borderLeft, 
+.register .buttonLoginRegister .borderRight{
     position: absolute;
     width: 1px;
     height: 0%;
     background-color: #313131;
 }
 
-.login .buttonLoginRegister .borderLeft{
+.login .buttonLoginRegister .borderLeft,
+.register .buttonLoginRegister .borderLeft{
     left: 15px;
     top: 0;
 }
 
-.login .buttonLoginRegister .borderRight{
+.login .buttonLoginRegister .borderRight,
+.register .buttonLoginRegister .borderRight{
     right: 15px;
     bottom: 0;
 }
 
 .login .buttonLoginRegister:hover .borderLeft,
-.login .buttonLoginRegister:hover .borderRight{
+.login .buttonLoginRegister:hover .borderRight,
+.register .buttonLoginRegister:hover .borderLeft,
+.register .buttonLoginRegister:hover .borderRight{
     transition: all 0.3s;
     height: 100%;
 }
 
-.login .buttonLoginRegister .button{
+.login .buttonLoginRegister .button,
+.register .buttonLoginRegister .button{
     background-color: #f4f4f4;
     color: #313131;
     border-radius: 0px;
@@ -372,15 +385,38 @@ body{
     height: 100%;
 }
 
-.login .buttonLoginRegister .button:focus{
+.login .buttonLoginRegister .button:focus,
+.register .buttonLoginRegister .button:focus{
     box-shadow: none;
 }
 
-.login .buttonLoginRegister:hover .button{
-    transition: 0.3s;
-    transition-delay: 0.3s;
+.login .buttonLoginRegister:hover .button
+.register .buttonLoginRegister:hover .button{
     background-color: #313131;
     color: #f4f4f4;
+}
+
+.register .form-group input{
+    border-radius: 0px;
+    border-color: white;
+    background-color: white;
+}
+
+.register .form-group input:focus{
+    box-shadow: none;
+}
+
+.register .fullname{
+    margin-top: 30px;
+}
+
+.register .input{
+    margin: 10px;
+}
+
+.register .profile{
+    width: 100%;
+    height: 37px;
 }
 
 .login-register .otherChoice{
@@ -407,10 +443,19 @@ body{
     margin-top: 20px;
     font-size: 14px;
     font-weight: bold;
+    color: #313131;
+    text-decoration: none !important;
 }
 
 .barang .price{
     font-size: 14px;
+    color: #313131;
+    text-decoration: none !important;
+}
+
+.barang .title:hover,
+.barang .price:hover{
+    text-decoration: none !important;
 }
 
 .barang .add{
@@ -428,6 +473,9 @@ body{
 .barang .add{
     cursor: pointer;
 }
+
+
+
 
 @media only screen and (min-width: 100px) and (max-width: 750px){
     .select{
@@ -517,4 +565,8 @@ body{
     z-index: 4 !important;
     opacity: 0;
     visibility: hidden;
+}
+
+a{
+    text-decoration: none !important;
 }
