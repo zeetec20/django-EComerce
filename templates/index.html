@@ -6,16 +6,15 @@
     <title>Three Laptop</title>
 {% endblock title %}
     
-
 {% block style %}
-    <link rel="stylesheet" href="{% static 'asset/css/index/style.css' %}">
+    <link rel="stylesheet" href="{% static 'asset/css/style.css' %}">
 {% endblock style %}
 
 {% block body %}
     <div class="screenBlank"></div>
 
-    <div class="cart">
-
+    <div class="container cartPage shadow-lg">
+        {% include "cart.html" %}
     </div>
 
     <div class="container login-register">
@@ -158,19 +157,19 @@
                             <a class="dropdown-item">Profil</a>
                             <a class="dropdown-item" id="logout" onclick="logout()">Logout</a>
                         {% else %}
-                            <a class="dropdown-item" onclick="showLogin_Register('login')" onload="showLogin_Register('login')">Login</a>
-                            <a class="dropdown-item" onclick="showLogin_Register('register')">Register</a>
+                            <a class="dropdown-item login" onclick="showLogin_Register('login')" onload="showLogin_Register('login')">Login</a>
+                            <a class="dropdown-item register" onclick="showLogin_Register('register')">Register</a>
                         {% endif %}
                     </div>
                 </div>
                 
                 <h6 class="checkOut">Check Out</h6>
-                <h6 class="cartText">Cart [ <span id="numberCart">0</span> ]</h6>
-                <img class="iconCart" src="{% static 'asset/images/icon/cart.png' %}" alt="">
+                <h6 class="cartText cart" onclick="cart(); pageCart('show');">Cart [ <span id="numberCart">0</span> ]</h6>
+                <img class="iconCart cart" onclick="cart(); pageCart('show');" src="{% static 'asset/images/icon/cart.png' %}" alt="" onclick="checkCookie('barang')">
             </div>
         </div>
         <div class="row header2 col-lg-12 col-sm-12">
-            <h1 class="title">Tree Laptop</h1>
+            <h1 class="title" onclick="checkCookie('barang')">Three Laptop</h1>
         </div>
     </div>
 

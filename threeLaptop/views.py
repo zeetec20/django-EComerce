@@ -5,6 +5,8 @@ from django.contrib.auth import logout, login, authenticate
 from goods.models import Barang
 from users.forms import RegisterForm
 
+import random
+
 class Index(View):
     template_name = 'index.html'
     context = {
@@ -71,6 +73,47 @@ class Ajax(View):
             if self.action == 'logout':
                 logout(request)
                 return JsonResponse({'success': True})
-        
+
+            if self.action == 'cart':
+                if 'barang' in request.COOKIES:
+                    listBarang = request.COOKIES['barang'].split(', ')
+
+                    data = []
+                    listCookie = ''
+                    for barang in listBarang:
+                        listBarang = barang.split(' : ')
+                        barang = Barang.objects.get(nama = listBarang[0])
+
+                        if listBarang[1] == 'random':
+                            barangWarna = barang.warna.split(', ')
+                            length = len(barangWarna) 
+                            randomNumber = random.randint(1, length) - 1
+                            listBarang[1] = barangWarna[randomNumber]
+
+                        data.append({
+                            'nama': listBarang[0],
+                            'warna': listBarang[1],
+                            'jumlah': listBarang[2],
+                            'cover': barang.image1,
+                            'harga': barang.harga,
+                            'hargaTotal': int(listBarang[2]) * int(barang.harga)
+                        })
+                        # cookie = "{} : {} : {}".format(listBarang[0], listBarang[1], listBarang[2])
+                        # if listCookie == '':
+                        #     listCookie += cookie
+                        # else:
+                        #     listCookie += ', ' + cookie
+
+                    totalHarga = 0
+                    for harga in data:
+                        totalHarga += harga['hargaTotal']
+
+                    self.context = {
+                        'barangCart': data,
+                        'totalHarga': totalHarga,
+                        'success': True
+                    }
+                return render(self.request, 'cart.html', self.context)
+
         return HttpResponse("logout")
 

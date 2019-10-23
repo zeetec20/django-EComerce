@@ -8,7 +8,7 @@ class SemuaJenis(models.Model):
     def __str__(self):
         return "{}".format(self.jenis)
 
-class SemuaBarang(models.Model):
+class SemuaBrand(models.Model):
     brand       = models.CharField(max_length = 30)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Barang(models.Model):
     harga           = models.DecimalField(max_digits=12, decimal_places=0)
     warna           = models.CharField(max_length = 50)
     jenis           = models.ForeignKey(SemuaJenis, on_delete=models.CASCADE)
-    barang          = models.ForeignKey(SemuaBarang, on_delete=models.CASCADE)
+    brand           = models.ForeignKey(SemuaBrand, on_delete=models.CASCADE)
     image1          = models.ImageField(upload_to = pathUpload)
     image2          = models.ImageField(upload_to = pathUpload, null = True, blank = True)
     image3          = models.ImageField(upload_to = pathUpload, null = True, blank = True)
@@ -35,7 +35,7 @@ class Barang(models.Model):
     slugifyBarang   = models.CharField(max_length = 100, null = True, blank = True)
 
     def __str__(self):
-        return "{}. {} | {} | Rp.{:20,.2f} | Tersedia({})".format(self.id, self.nama, self.barang, self.harga, self.tersedia)
+        return "{}. {} | {} | Rp.{:20,.2f} | Tersedia({})".format(self.id, self.nama, self.brand, self.harga, self.tersedia)
 
     def save(self):
         os.chmod('/media', 0o757)

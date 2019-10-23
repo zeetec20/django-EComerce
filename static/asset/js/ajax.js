@@ -67,3 +67,4 @@ function login(event) {
 
 $('#form-register').submit(register);
 $('#form-login').submit(login);
+cart();

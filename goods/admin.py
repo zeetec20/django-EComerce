@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import SemuaJenis, Barang, SemuaBarang
+from .models import SemuaJenis, Barang, SemuaBrand
 
 admin.site.register(SemuaJenis)
 admin.site.register(Barang)
-admin.site.register(SemuaBarang)
+admin.site.register(SemuaBrand)

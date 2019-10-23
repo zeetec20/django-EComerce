@@ -12,3 +12,5 @@ $('#logout').click(function () {
     logout();
 })
 
+showLogin_Register('login');
+cart();

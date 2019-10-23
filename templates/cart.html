@@ -1,0 +1,75 @@
+{% load humanize %}
+{% load static %}
+
+<div class="row col-lg-12">
+
+    <div class="closePageCart">
+        <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="" onclick="pageCart('close')">
+    </div>
+
+    <div class="row col-lg-12 header">
+        <div class="col-lg-6 header-bar product">
+            <h3>Product</h3>
+        </div>
+        <div class="col-lg-2 header-bar price">
+            <h3>Price</h3>
+        </div>
+        <div class="col-lg-2 header-bar quantity">
+            <h3>Quantity</h3>
+        </div>
+        <div class="col-lg-2 header-bar total">
+            <h3>Total</h3>
+        </div>
+    </div>
+
+    <div class="list">
+        {% for barang in barangCart %}
+        <div class="row col-lg-12 cart" cart="{{forloop.counter}}" onloadstart="cart('{{forloop.counter}}')">
+            <div class="col-lg-6 col-sm-12 content product">
+                <div class="row">
+                    <div class="col-lg-4 cover">
+                        <img src="/media/{{barang.cover}}" alt="" class="col-lg-12">
+                    </div>
+                    <div class="col-lg-8 name">
+                        <h6 class="">{{barang.nama}}</h6>
+                        <h6>{{barang.warna}}</h6>
+                        <h6 class="">remove</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 content price">
+                <h6>Rp. <span id="price{{forloop.counter}}">{{barang.harga | intcomma}}</span></h6>
+            </div>
+            <div class="col-lg-2 content quantity">
+                <input type="number" name="quantity" id="quantity{{forloop.counter}}" value="{{barang.jumlah}}">
+            </div>
+            <div class="col-lg-2 content total">
+                <h6 id="totalPrice{{forloop.counter}}">Rp. {{barang.hargaTotal | intcomma}}</h6>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row col-lg-12 action">
+    <div class="row col-lg-6">
+        <button class="btn">Check Out</button>
+    </div>
+    <div class="row col-lg-6">
+        <h5 class="subtotal">Subtotal <span class="number">Rp. {{totalHarga | intcomma}}</span></h5>
+        <h5 class="message">Taxes and shipping calculated at checkout</h5>
+    </div>
+</div>
+
+<script>
+    function cart(id) {
+        var harga = $('#price' + id).text();
+        var jumlah = $('#quantity' +id).val();
+        var totalPrice = parseFloat(harga.replace(/,/g,'')) * parseFloat(jumlah);
+        return totalPrice;
+    }
+
+    for(let a = 0; a >= 5; a++){
+        cart(a);
+    }
+</script>
