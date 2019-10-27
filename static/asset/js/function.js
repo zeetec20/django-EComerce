@@ -1,3 +1,17 @@
+function cart() {
+    $.ajax({
+        url: '/ajax/cart',
+        type: 'GET',
+        data: {
+
+        },
+        success: function (returnData) {
+            $('.cartPage').html(returnData);
+        }
+    });
+    console.log('cart');
+}
+
 function screenBlank(action) {
     if (action == 'show') {
         $('.screenBlank').css({
@@ -136,6 +150,16 @@ function pageCart(action) {
             'left': '0',
         });
         screenBlank('show');
+        $.ajax({
+            url: '/ajax/cart',
+            type: 'GET',
+            data: {
+    
+            },
+            success: function (returnData) {
+                $('.cartPage').html(returnData);
+            }
+        });
     }
     if (action == 'close') {
         $('.cartPage').css({

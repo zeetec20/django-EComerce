@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="row header2 col-lg-12 col-sm-12">
-            <h1 class="title">Three Laptop</h1>
+            <a href="/"><h1 class="title">Three Laptop</h1></a>
         </div>
     </div>
 
@@ -74,7 +74,7 @@
             </div>
             <div class="col-lg-9 col-sm-12 body2">
                 <div class="row link">
-                    <h6><a href="/">Home</a> > <a href="/barang/{{barang.slugifyBarang}}">{{barang.nama}}</a></h6>
+                    <h6><a href="/">Home</a> &nbsp;&nbsp;>&nbsp;&nbsp; <a href="/barang/{{barang.slugifyBarang}}">{{barang.nama}}</a></h6>
                 </div>
                 <div class="row barang">
                     <div class="col-lg-6 leftBar">
@@ -83,18 +83,34 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-6 image2 col-sm-6">
-                                <img src="/media/{{barang.image1}}" alt="">
+                                {% if barang.image2 == "" %}
+                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                                {% else %}
+                                    <img src="/media/{{barang.image2}}" alt="" class="imageChild1">
+                                {% endif %}
                             </div>
                             <div class="col-lg-6 image3 col-sm-6">
-                                <img src="/media/{{barang.image1}}" alt="">
+                                {% if barang.image3 == "" %}
+                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                                {% else %}
+                                    <img src="/media/{{barang.image3}}" alt="" class="imageChild1">
+                                {% endif %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 image4 col-sm-6">
-                                <img src="/media/{{barang.image1}}" alt="">
+                                {% if barang.image4 == "" %}
+                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                                {% else %}
+                                    <img src="/media/{{barang.image4}}" alt="" class="imageChild1">
+                                {% endif %}
                             </div>
                             <div class="col-lg-6 image5 col-sm-6">
-                                <img src="/media/{{barang.image1}}" alt="">
+                                {% if barang.image5 == "" %}
+                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                                {% else %}
+                                    <img src="/media/{{barang.image5}}" alt="" class="imageChild1">
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -104,6 +120,23 @@
                         </div>
                         <div class="row">
                             <h1 class="price">Rp. {{barang.harga | intcomma}}</h1>
+                        </div>
+                        <div class="row">
+                            <input type="number" name="" id="" class="quantity" value="1" min="1">
+                            <div class="dropdown buttonColor">
+                                <button type="button" class="btn btn-secondary {% if warnaLength is not 1 %} dropdown-toggle {% else %} clearHover {% endif %} buttonMain rounded-0" id="dropdownMenuOffset" {% if warnaLength is not 1 %} data-toggle="dropdown" {% endif %} aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                                    {% if warnaLength is not 1 %}
+                                        Warna
+                                    {% else %}
+                                        {{warna.0}}
+                                    {% endif %}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                    {% for color in warna %}
+                                        <a class="dropdown-item" href="#">{{color}}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <button class="btn button1 button">Add To Cart</button>
@@ -124,7 +157,7 @@
                     <div class="row">
                         
                         {% for barang in barangSimilar %}
-                            <div class="col-lg-4 col-sm-12">
+                            <a href="/barang/{{barang.slugifyBarang}}" class="col-lg-4 col-sm-12 barang">
                                 <img src="/media/{{barang.image1}}" alt="" class="col-lg-12">
                                 <div class="row">
                                     <h6 class="title">{{barang.nama}}</h6>
@@ -132,7 +165,7 @@
                                 <div class="row">
                                     <h6 class="price">Rp. {{barang.harga | intcomma}}</h6>
                                 </div>
-                            </div>
+                            </a>
                         {% endfor %}
                             
                     </div>

@@ -95,10 +95,11 @@ body{
     height: 144px;
 }
 
-.header2 .title{
+.header2 a .title{
     font-weight: bold;
     font-size: 55px;
     margin-top: 33px;
+    color: #313131 !important;
 }
 
 .select{
@@ -229,13 +230,73 @@ body{
     font-size: 12px;
 }
 
+.barang .displayImage img{
+    height: 350px;
+}
+
 .barang .title{
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
 }
 
 .barang .price{
-    font-size: 26px;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.barang .quantity{
+    padding: 3px;
+    text-align: center;
+    width: 50px;
+    font-size: 14px;
+    border: solid 1px #313131;
+    border-left-color: #313131;
+    transition: all 0.5s;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: default;
+}
+
+.barang .quantity::-webkit-inner-spin-button,
+.barang .quantity::-webkit-outer-spin-button{
+    cursor: pointer;
+    height: 25px;
+}
+
+.barang .buttonColor button{
+    background-color: white;
+    color: #313131;
+    border-color: #313131;
+}
+
+.barang .buttonColor button:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
+.barang .buttonColor button:focus{
+    background-color: #313131;
+    color: white;
+    box-shadow: none !important;
+}
+
+.barang .buttonColor .clearHover:hover{
+    background-color: white;
+    color: #313131;
+}
+
+.barang .buttonColor .clearHover:focus{
+    background-color: white;
+    color: #313131;
+}
+
+.barang .buttonColor .clearHover{
+    cursor: default;
+}
+
+.barang .quantity:focus{
+    outline: none;
 }
 
 .link{
@@ -246,7 +307,7 @@ body{
 .link h6{
     color: #313131 !important;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .link a{
@@ -256,9 +317,22 @@ body{
 .barang .button{
     margin: 5px;
     margin-right: 0;
-    width: 50%;
+    width: 70%;
     border: solid 1px #313131;
     border-radius: 0;
+}
+
+.barang .button:focus{
+    box-shadow: none !important;
+}
+
+.barang .button1{
+    margin-top: 35px;
+}
+
+.barang .button2{
+    background-color: #313131;
+    color: white;
 }
 
 .barang .image2 img,
@@ -269,6 +343,13 @@ body{
     display: block;
     margin: auto;
     margin-top: 20px;
+    height: 90px;
+}
+
+.barang .leftBar .row:nth-child(2),
+.barang .leftBar .row:nth-child(3){
+    border-top: solid 1px #e8e8e8;
+    margin-bottom: 20px;
 }
 
 .barang .deskripsi{
@@ -282,6 +363,24 @@ body{
     border-bottom: solid 1px #e8e8e8;
     resize: none;
     margin-bottom: 20px;
+}
+
+.similar img{
+    height: 230px;
+}
+
+.similar .title{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.similar .price{
+    font-size: 14px;
+}
+
+.similar .barang{
+    margin-top: 20px;
+    color: #313131;
 }
 
 @media only screen and (min-width: 100px) and (max-width: 750px){

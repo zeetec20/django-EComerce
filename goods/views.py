@@ -15,4 +15,8 @@ class DetailBarang(View):
         barangSimilar = Barang.objects.filter(jenis = barang.jenis)
         self.context['barang'] = barang
         self.context['barangSimilar'] = barangSimilar
+        warna = barang.warna.split(", ")
+        
+        self.context['warna']       = warna
+        self.context['warnaLength'] = len(warna)
         return render(self.request, 'barang/index.html', self.context)

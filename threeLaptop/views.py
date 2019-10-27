@@ -117,3 +117,13 @@ class Ajax(View):
 
         return HttpResponse("logout")
 
+class Address(View):
+    context = {
+
+    }
+
+    def post(self, request):
+        pass
+
+    def get(self, request):
+        return render(self.request, 'address/index.html', self.context)
