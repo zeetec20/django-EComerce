@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load custom_filter %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'asset/css/address/style.css' %}">    
+{% endblock style %}
+    
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 leftBar">
+                {% include 'address/leftBar.html' %}
+            </div>
+
+            <div class="col-lg-6 rightBar">
+                <div class="row">
+                    <div class="row col-lg-12 listBarang">
+                        <div class="row barang col-lg-12">
+                            <div class="col-lg-3 cover">
+                                <img src="/media/{{barang.image1}}" alt="">
+                            </div>
+                            <div class="col-lg-6 data">
+                                <h1 class="title row">{{barang.nama}}</h1>
+                                <h1 class="warna row">{{request.GET.color}}</h1>
+                            </div>
+                            <div class="col-lg-3 angka">
+                                <h1 class="harga row">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                                <h1 class="quantity row">Jumlah: {{request.GET.quantity | match:request.GET.quantity }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12 calculate">
+                        <div class="row col-lg-12 barang">
+                            <h1 class="col-lg-6">Total Barang Barang</h1>
+                            <h1 class="col-lg-6">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                        </div>
+                        <div class="row col-lg-12 pengiriman">
+                            <h1 class="col-lg-6">Harga Pengiriman</h1>
+                            <h1 class="col-lg-6">Dihitung Nanti</h1>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12 total">
+                        <div class="col-lg-6">
+                            <h1 class="label">Total</h1>
+                        </div>
+                        <div class="col-lg-6">
+                            <h1 class="jumlah">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+
+{% block script %}
+    <script src="{% static 'asset/js/address/function.js' %}"></script>
+{% endblock script %}
+    

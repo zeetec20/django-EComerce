@@ -1,0 +1,105 @@
+<div class="row header">
+    <div class="row col-lg-12">
+        <h1 class="title">Three Laptop</h1>
+    </div>
+    <div class="row col-lg-12">
+        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
+    </div>
+</div>
+<div class="row contact">
+    <div class="row col-lg-12">
+        <h1 class="title">Kontak</h1>
+    </div>
+    <div class="row col-lg-12">
+        <div class="form-group input">
+            <input type="email" class="form-control email" id="contactEmail" placeholder="Email">
+            <div class="borderBottom"></div>
+            <small id="passwordHelp" class="form-text text-muted">Silahkan masukkan email yang selalu anda gunakan</small>
+        </div>
+    </div>
+    <div class="row col-lg-12">
+        <div class="form-group input">
+            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control nomorHP" id="contactNomorHP" placeholder="081231131272" maxlength="13" minlength="11">
+            <div class="borderBottom"></div>
+            <small id="passwordHelp" class="form-text text-muted">Silahkan masukkan nomer hp anda yang bisa dihubungi</small>
+        </div>
+    </div>
+</div>
+<div class="row address">
+    <div class="row col-lg-12">
+        <h1 class="title">Alamat</h1>
+    </div>
+    <div class="row col-lg-12">
+        <div class="form-group input">
+            <input type="text" class="form-control labelAddress" id="contactEmail" placeholder="Label Alamat">
+            <div class="borderBottom"></div>
+            <small id="passwordHelp" class="form-text text-muted">Contoh: Alamat Rumah, Alamat Kantor, Apartemen, Rumah Kos</small>
+        </div>
+    </div>
+    <div class="row col-lg-12">
+        <div class="form-group input">
+            <input type="text" class="form-control fullname" id="contactEmail" placeholder="Nama Lengkap">
+            <div class="borderBottom"></div>
+            <small id="passwordHelp" class="form-text text-muted">Dimohon untuk mengisikan nama lengkap anda demi kemudahan pengiriman</small>
+        </div>
+    </div>
+    <div class="row col-lg-12">
+        <div class="dropdown provinsi row col-lg-12">
+            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonProvinsi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Provinsi
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                
+                {% for province in allProvince %}
+                    <a class="dropdown-item" kode="{{province.id}}" onclick="provinsi('{{province.id}}', '{{province.nama}}');">{{province.nama}}</a>
+                {% endfor %}
+                    
+            </div>
+        </div>
+        <div class="dropdown kabupaten row col-lg-12">
+            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
+                Kabupaten / Kota
+            </button>
+            <div class="dropdown-menu dropdown-menu-kabupaten" aria-labelledby="dropdownMenuOffset">
+                
+                {% include 'address/listKabupaten.html' %}
+                    
+            </div>
+        </div>
+        <div class="dropdown kecamatan row col-lg-12">
+            <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKecamatan" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
+                Kecamatan
+            </button>
+            <div class="dropdown-menu dropdown-menu-kecamatan" aria-labelledby="dropdownMenuOffset">
+                
+                {% include 'address/listKecamatan.html' %}
+
+            </div>
+        </div>
+    </div>
+    <div class="row col-lg-12 kodePost">
+        <div class="form-group input">
+            <input type="number" class="form-control inputKodePost" id="kodePost" placeholder="Kode Pos" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+            <div class="borderBottom"></div>
+            <small id="passwordHelp" class="form-text text-muted">Dimohon untuk mengisikan kode pos dengan tepat dan benar</small>
+        </div>
+    </div>
+    <div class="row col-lg-12 additionalInformation">
+        <div class="row">
+            <textarea name="" id="" placeholder="Informasi Tambahan"></textarea>
+            <div class="borderBottom"></div>
+            <small id="passwordHelp" class="form-text text-muted">Isikan dengan detail alamatmu seperti dusun, RT/RW, ciri-ciri rumah</small>
+        </div>
+    </div>
+    <div class="row col-lg-12 saveInformation">
+        <label class="container">Simpan alamat ini untuk pembelian selanjutnya
+            <input type="checkbox">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+    <div class="row col-lg-12 submit">
+        <div>
+            <button class="btn rounded-0">Prosess</button>
+        </div>
+    </div>
+</div>

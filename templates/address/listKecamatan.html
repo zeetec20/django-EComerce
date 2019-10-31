@@ -1,0 +1,3 @@
+{% for kecamatan in listKecamatan %}
+    <a class="dropdown-item" kode="{{kecamatan.id}}" onclick="kecamatan('{{kecamatan.id}}', '{{kecamatan.nama}}');">{{kecamatan.nama}}</a>
+{% endfor %}

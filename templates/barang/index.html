@@ -122,9 +122,9 @@
                             <h1 class="price">Rp. {{barang.harga | intcomma}}</h1>
                         </div>
                         <div class="row">
-                            <input type="number" name="" id="" class="quantity" value="1" min="1">
+                            <input type="number" name="" id="quantity" class="quantity" value="1" min="1">
                             <div class="dropdown buttonColor">
-                                <button type="button" class="btn btn-secondary {% if warnaLength is not 1 %} dropdown-toggle {% else %} clearHover {% endif %} buttonMain rounded-0" id="dropdownMenuOffset" {% if warnaLength is not 1 %} data-toggle="dropdown" {% endif %} aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                                <button color="{% if warnaLength is not 1 %}random{% else %}{{warna.0}}{% endif %}" type="button" class="btn btn-secondary {% if warnaLength is not 1 %} dropdown-toggle {% else %} clearHover {% endif %} buttonMain rounded-0" id="buttonColor" {% if warnaLength is not 1 %} data-toggle="dropdown" {% endif %} aria-haspopup="true" aria-expanded="false" data-offset="10,20">
                                     {% if warnaLength is not 1 %}
                                         Warna
                                     {% else %}
@@ -133,16 +133,16 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                                     {% for color in warna %}
-                                        <a class="dropdown-item" href="#">{{color}}</a>
+                                        <a class="dropdown-item">{{color}}</a>
                                     {% endfor %}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <button class="btn button1 button">Add To Cart</button>
+                            <button class="btn button1 button">Tambahkan ke Keranjang</button>
                         </div>
                         <div class="row">
-                            <button class="btn button2 button">Buy It Now</button>
+                            <button onclick="buy(this)" class="btn button2 button" id="buttonBuy" href="/address/{{user.username}}/barang?barang={{barang.slugifyBarang}}">Beli Sekarang</button>
                         </div>
                         <div class="row share">
                             
@@ -245,6 +245,7 @@
 {% endblock body %}
     
 {% block script %}
+    <script src="{% static 'asset/js/barang/function.js' %}"></script>
     <script src="{% static 'asset/js/barang/script.js' %}"></script>
 {% endblock script %}
     

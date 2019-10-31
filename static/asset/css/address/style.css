@@ -1,0 +1,351 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.leftBar{
+    margin-top: 20px;
+    border-right: solid 1px #f4f4f4;
+    height: 1050px;
+    margin-bottom: 20px;
+}
+
+.leftBar .contact .title,
+.leftBar .address .title{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.leftBar .contact,
+.leftBar .address{
+    margin-top: 20px;
+}
+
+.header{
+    margin-top: 20px;
+}
+
+.header .title{
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.header .link{
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.header .linkItem{
+    color: #313131dc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header .active{
+    color: #313131;
+}
+
+.leftBar .input{
+    width: 90%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.leftBar .input .inputKodePost{
+    letter-spacing: 5px;
+}
+
+.leftBar .input .inputKodePost::-webkit-input-placeholder{
+    letter-spacing: 0.3px;
+}
+
+.leftBar .input .borderBottom{
+    width: 0%;
+    height: 1px;
+    background-color: #313131;
+}
+
+.leftBar .input input::placeholder{
+    color: #313131dc;
+    font-size: 14px;
+}
+
+.leftBar .input input{
+    border-radius: 0;
+    border-color: white;
+    color: #313131 !important;
+    background-color: #f4f4f4;
+    letter-spacing: 0.3px;
+}
+
+.leftBar .input input:focus{
+    box-shadow: none;
+}
+
+.leftBar .input input:focus ~ .borderBottom{
+    transition: 0.8s;
+    width: 100%;
+}
+
+.leftBar .input input:hover{
+    transition: 0.5s;
+    background-color: #eeeeee;
+}
+
+.leftBar .input input:focus{
+    background-color: #eeeeee;
+}
+
+.leftBar .input .nomorHP::-webkit-outer-spin-button,
+.leftBar .input .nomorHP::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.leftBar .contact .nomorHP{
+    letter-spacing: 5px;
+}
+
+.leftBar .kodePost{
+    margin-top: 15px;
+}
+
+.address .provinsi .dropdown-menu,
+.address .kabupaten .dropdown-menu,
+.address .kecamatan .dropdown-menu{
+    height: 400px;
+    overflow: auto;
+    border-radius: 0;
+    border-color: #313131;
+}
+
+.address .provinsi,
+.address .kabupaten,
+.address .kecamatan{
+    margin: auto;
+}
+
+.address .buttonGroup{
+    width: 80%;
+    border-radius: 0;
+    background-color: white;
+    border-color: #313131;
+    color: #313131;
+    margin: 2.5px auto;
+    overflow: hidden;
+}
+
+.address .buttonGroup:hover{
+    transition: 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
+.address .buttonGroup:focus{
+    box-shadow: none;
+    background-color: #313131;
+    color: white;
+}
+
+.additionalInformation .row{
+    width: 90%;
+    margin: auto;
+}
+
+.additionalInformation textarea{
+    background-color: #f4f4f4;
+    width: 100%;
+    border-color: white;
+    height: 150px;
+    padding: 10px;
+}
+
+.additionalInformation textarea::placeholder{
+    color: #313131dc;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+.additionalInformation textarea:hover{
+    transition: 0.5s;
+    background-color: #eeeeee;
+}
+
+.additionalInformation .borderBottom{
+    width: 0%;
+    height: 1px;
+    background-color: #313131;
+}
+
+.additionalInformation small{
+    width: 100%;
+}
+
+.additionalInformation textarea:focus{
+    background-color: #eeeeee;
+    outline: none;
+}
+
+.additionalInformation textarea:focus ~ .borderBottom{
+    transition: 0.8s;
+    width: 100%;
+}
+
+.saveInformation{
+    margin-top: 30px;
+}
+
+.saveInformation .container {
+    display: block;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    color: #313131;
+}
+
+.saveInformation .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.saveInformation .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #f4f4f4;
+}
+
+.saveInformation .container:hover input~.checkmark {
+    transition: 0.5s;
+    background-color: #eeeeee;
+}
+
+.saveInformation .container input:checked~.checkmark {
+    transition: 0.5s;
+    background-color: #313131;
+}
+
+.saveInformation .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.saveInformation .container input:checked~.checkmark:after {
+    transition-delay: 0.5s;
+    display: block;
+}
+
+.saveInformation .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.submit div{
+    position: absolute;
+    width: 90%;
+    margin: auto;
+}
+
+.submit button{
+    position: absolute;
+    color: #313131;
+    border-color: #313131;
+    right: 0;
+    width: 150px;
+}
+
+.rightBar{
+    margin-top: 20px;
+    height: 1050px;
+    margin-bottom: 20px;
+    padding-left: 45px;
+}
+
+.rightBar .listBarang{
+    padding-bottom: 10px;
+    border-bottom: solid 1px #f4f4f4;
+}
+
+.rightBar .row .listBarang:nth-child(1){
+    margin-top: 20px;
+}
+
+.rightBar .listBarang .cover img{
+    width: 100%;
+    height: 90px;
+}
+
+.rightBar .listBarang .title{
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.rightBar .listBarang .warna{
+    font-size: 14px;
+}
+
+.rightBar .listBarang .harga{
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.rightBar .listBarang .quantity{
+    font-size: 14px;
+}
+
+.rightBar .calculate{
+    margin-top: 15px;
+    border-bottom: solid 1px #f4f4f4;
+    padding-bottom: 10px;
+}
+
+.rightBar .calculate .barang h1,
+.rightBar .calculate .pengiriman h1{
+    font-size: 14px;
+    color: #313131;
+}
+
+.rightBar .calculate .barang h1:nth-child(2),
+.rightBar .calculate .pengiriman h1:nth-child(2){
+    text-align: right;
+    font-weight: bold;
+}
+
+.rightBar .total{
+    margin-top: 10px;
+}
+
+.rightBar .total .label{
+    font-size: 18px;
+}
+
+.rightBar .total .jumlah{
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+}

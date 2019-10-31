@@ -1,3 +1,6 @@
+import random
+import requests as req
+
 from django.views import View
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
@@ -5,17 +8,18 @@ from django.contrib.auth import logout, login, authenticate
 from goods.models import Barang
 from users.forms import RegisterForm
 
-import random
+
 
 class Index(View):
     template_name = 'index.html'
     context = {
-        
+
     }
 
     def post(self, request):
         form = RegisterForm(request.POST, request.FILES or None)
-        self.context['registerForm'] = RegisterForm(request.POST, request.FILES or None)
+        self.context['registerForm'] = RegisterForm(
+            request.POST, request.FILES or None)
         if form.is_valid():
             form.save()
         else:
@@ -28,7 +32,7 @@ class Index(View):
         lane = 1
         barangLane = [[], []]
         for barang in barangAll:
-            index+=1
+            index += 1
             if (index / 3) == 0:
                 lane += 1
                 barangLane[lane] = []
@@ -46,20 +50,22 @@ class Index(View):
 
         return render(request, self.template_name, self.context)
 
+
 class Ajax(View):
     action = ''
     context = {
-        
+
     }
+
     def post(self, request):
         if request.is_ajax():
             if self.action == 'login':
                 inputUsername = ''
                 inputPassword = ''
-                user = authenticate(request, username = inputUsername, password = inputPassword)
+                user = authenticate(request, username=inputUsername, password=inputPassword)
                 login(request, user)
                 return JsonResponse({'success': True})
-                
+
             if self.action == 'register':
                 form = RegisterForm(request.POST, request.FILES or None)
                 if form.is_valid():
@@ -79,14 +85,14 @@ class Ajax(View):
                     listBarang = request.COOKIES['barang'].split(', ')
 
                     data = []
-                    listCookie = ''
+                    # listCookie = ''
                     for barang in listBarang:
                         listBarang = barang.split(' : ')
-                        barang = Barang.objects.get(nama = listBarang[0])
+                        barang = Barang.objects.get(nama=listBarang[0])
 
                         if listBarang[1] == 'random':
                             barangWarna = barang.warna.split(', ')
-                            length = len(barangWarna) 
+                            length = len(barangWarna)
                             randomNumber = random.randint(1, length) - 1
                             listBarang[1] = barangWarna[randomNumber]
 
@@ -114,16 +120,21 @@ class Ajax(View):
                         'success': True
                     }
                 return render(self.request, 'cart.html', self.context)
-
-        return HttpResponse("logout")
-
-class Address(View):
-    context = {
-
-    }
-
-    def post(self, request):
-        pass
-
-    def get(self, request):
-        return render(self.request, 'address/index.html', self.context)
+            
+            if self.action == 'get_kabupaten':
+                idProvinsi = self.request.GET['id_provinsi']
+                kabupaten = req.get("http://dev.farizdotid.com/api/daerahindonesia/provinsi/" + idProvinsi + "/kabupaten").json()
+                self.context = {
+                    'listKabupaten': kabupaten['kabupatens']
+                }
+                return render(self.request, 'address/listKabupaten.html', self.context)
+            
+            if self.action == 'get_kecamatan':
+                idKecamatan = self.request.GET['id_kabupaten']
+                kecamatan = req.get("http://dev.farizdotid.com/api/daerahindonesia/provinsi/kabupaten/" + idKecamatan + "/kecamatan").json()
+                self.context = {
+                    'listKecamatan': kecamatan['kecamatans']
+                }
+                return render(self.request, 'address/listKecamatan.html', self.context)
+        
+        return HttpResponse("ajax django")

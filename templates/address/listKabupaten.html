@@ -1,0 +1,3 @@
+{% for kabupaten in listKabupaten %}
+    <a class="dropdown-item" kode="{{kabupaten.id}}" onclick="kabupaten('{{kabupaten.id}}', '{{kabupaten.nama}}');">{{kabupaten.nama}}</a>
+{% endfor %}
