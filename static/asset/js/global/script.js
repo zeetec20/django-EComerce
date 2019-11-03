@@ -6,7 +6,6 @@ function mediaQuery(min, max) {
 }
 
 function setCookie(name, value) {
-    console.log(value);
     let expDay = 30;
     var date = new Date();
     date.setTime(date.getTime() + (expDay * 24 * 60 * 60 * 1000));
@@ -24,6 +23,15 @@ function setCookie(name, value) {
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
     // document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function replaceCookie(name, value) {
+    let expDay = 30;
+    var date = new Date();
+    date.setTime(date.getTime() + (expDay * 24 * 60 * 60 * 1000));
+    var expires = "expires="+date.toUTCString();
+
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
 // jangan diubah 

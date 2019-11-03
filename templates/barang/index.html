@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div class="row col-lg-12">
-                        <textarea name="" id="" class="deskripsi">{{barang.deskripsi}}</textarea>
+                        <textarea name="" id="" class="deskripsi  {% if lineDeskripsi > 22 %}deskripsi-lg {% elif lineDeskripsi < 13 %}deskripsi-sm{% endif %}">{{barang.deskripsi}}</textarea>
                     </div>
                 </div>
                 <div class="row similar">

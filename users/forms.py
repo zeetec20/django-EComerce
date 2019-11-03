@@ -41,13 +41,13 @@ class RegisterForm(forms.ModelForm):
             'fullname': forms.TextInput(
                 attrs = {
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'Full Name'
+                    'placeholder': 'Nama Lengkap'
                 }
             ),
             'email': forms.EmailInput(
                 attrs = {
                     'class': 'form-control form-control-sm',
-                    'placeholder': 'your@email.com'
+                    'placeholder': 'email@kamu.com'
                 }
             ),
             'username': forms.TextInput(
@@ -65,16 +65,8 @@ class RegisterForm(forms.ModelForm):
             'profile': forms.FileInput(
                 attrs = {
                     'class': 'form-control form-control-sm profile',
-                    'placeholder': 'Profile'
+                    'title': ' ',
+                    'data-buttonText': 'Profile'
                 }
             )
         }
-
-        labels  = {
-            'fullname'  : 'Full Name ',
-            'email'     : 'Email ',
-            'username'  : 'Username ',
-            'password'  : 'Password ',
-            'profile'   : 'Foto Profile '
-        }
-

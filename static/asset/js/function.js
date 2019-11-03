@@ -9,7 +9,23 @@ function cart() {
             $('.cartPage').html(returnData);
         }
     });
-    console.log('cart');
+}
+
+function listBarang(action) {
+    if (action == 'close') {
+        $('.item').css({
+            'transition': '0s',
+            'opacity': '0',
+            'margin-top': '120px'
+        });
+    }
+    if (action == 'show') {
+        $('.item').css({
+            'transition': '0.7s',
+            'opacity': '1',
+            'margin-top': '0'
+        });
+    }
 }
 
 function screenBlank(action) {
@@ -121,15 +137,66 @@ function pageCart(action) {
     }
 }
 
+function numberCart() {
+    let barang = getCookie("barang");
+    if (barang != "") {
+        $('#numberCart').html(barang.split(', ').length);
+    } else {
+        $('#numberCart').html('0');
+    }
+}
+
 function addBarangCart(nama, warna, quantity = 1) {
     let data = nama + " : " + warna + " : " + quantity;
     setCookie("barang", data);
+    numberCart();
 }
 
-function removeBarangCart(params) {
-    
+function removeBarangCart(nama) {
+    let semuaBarang = "";
+    let cookieBarang = getCookie("barang").split(', ');
+    let index = 0;
+    cookieBarang.forEach(barang => {
+        index += 1;
+        barangNama = barang.split(' : ')[0];
+        if (barangNama == nama) {
+            
+        } else {
+            semuaBarang += barang + ', ';
+        }
+    });
+    semuaBarang = semuaBarang.substring(0, semuaBarang.length - 2);
+    replaceCookie('barang', semuaBarang);
+    $.ajax({
+        url: '/ajax/cart',
+        type: 'GET',
+        data: {
+
+        },
+        success: function (returnData) {
+            $('.cartPage').html(returnData);
+        }
+    });
+    numberCart();
 }
 
-function checkTotalFunction(params) {
-    
+function pagination(page) {
+    $.ajax({
+        url: '/',
+        type: 'GET',
+        data: {
+            'pagination': page
+        },
+        async: false,
+        success: function (returnData) {
+            $('.listBarang').html(returnData);
+            // listBarang('close');
+            // listBarang('show');
+        }
+    });
 }
+
+
+// delete_cookie('barang');
+// checkCookie('barang');
+

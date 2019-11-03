@@ -19,7 +19,7 @@
 
     <div class="container login-register">
         <div class="login" id="loginPage">
-            <form action="ajax/login" method="post" id="form-login">
+            <form action="/ajax/login" method="POST" id="form-login">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="cancel" id="buttonCloseLoginRegister" onclick="pageLogin_Register('close'); screenBlank('close')">
@@ -33,19 +33,24 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        {% csrf_token %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group input">
-                            <input class="form-control" type="text" placeholder="Username or your@email.com">
+                            <input class="form-control" type="text" placeholder="Username" name="username">
                             <div class="borderBottom"></div>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <small id="emailHelp" class="form-text text-muted">Tolong masukkan username atau email yang sesuai</small>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group input">
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                             <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                            <small id="passwordHelp" class="form-text text-muted">Jangan beri tahu passowrd anda pada orang lain</small>
                         </div>
                     </div>
                 </div>
@@ -53,7 +58,7 @@
                     <div class="col-md-3 col-sm-12 buttonLoginRegister">
                         <div class="borderTop"></div>
                         <div class="borderLeft"></div>
-                        <button class="btn button" type="submit">Submit</button>
+                        <button class="btn button" type="submit">Kirim</button>
                         <div class="borderBottom"></div>
                         <div class="borderRight"></div>
                     </div>
@@ -80,7 +85,7 @@
                         <div class="form-group input">
                             {{registerForm.fullname}}
                             <div class="borderBottom"></div>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <small id="emailHelp" class="form-text text-muted">Masukkan nama lengkap anda </small>
                         </div>
                     </div>
                 </div>
@@ -89,7 +94,7 @@
                         <div class="form-group input">
                             {{registerForm.username}}
                             <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                            <small id="passwordHelp" class="form-text text-muted">Masukkan username yang anda inginkan</small>
                         </div>
                     </div>
                 </div>
@@ -98,7 +103,7 @@
                         <div class="form-group input">
                             {{registerForm.email}}
                             <div class="borderBottom"></div>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <small id="emailHelp" class="form-text text-muted">Masukkan email yang anda gunakan</small>
                         </div>
                     </div>
                 </div>
@@ -107,7 +112,7 @@
                         <div class="form-group input">
                             {{registerForm.password}}
                             <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                            <small id="passwordHelp" class="form-text text-muted">Masukkan password anda, jangan beri tahu password anda ke orang lain</small>
                         </div>
                     </div>
                 </div>
@@ -116,7 +121,7 @@
                         <div class="form-group input">
                             {{registerForm.profile}}
                             <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Don't tell your password to other people.</small>
+                            <small id="passwordHelp" class="form-text text-muted">Masukkan foto / gambar yang anda inginkan</small>
                         </div>
                     </div>
                 </div>
@@ -124,7 +129,7 @@
                     <div class="col-md-3 col-sm-12 buttonLoginRegister">
                         <div class="borderTop"></div>
                         <div class="borderLeft"></div>
-                        <button class="btn button" onclick="" type="submit">Submit</button>
+                        <button class="btn button" onclick="" type="submit">Kirim</button>
                         <div class="borderBottom"></div>
                         <div class="borderRight"></div>
                     </div>
@@ -152,12 +157,9 @@
                     </h1>
                     <div class="dropdown-menu userBar" aria-labelledby="dropdownMenuOffset">
                         {% if user.is_authenticated %}
-                            <img src="media/{{ profile_user }}" class="profile" alt="">
-                            <a class="dropdown-item username">{{ user.username }}</a>
-                            <a class="dropdown-item">Profil</a>
-                            <a class="dropdown-item" id="logout" onclick="logout()">Logout</a>
+                            {% include 'user.html' %}
                         {% else %}
-                            <a class="dropdown-item login" onclick="showLogin_Register('login')" onload="showLogin_Register('login')">Login</a>
+                            <a class="dropdown-item login" onclick="showLogin_Register('login')">Login</a>
                             <a class="dropdown-item register" onclick="showLogin_Register('register')">Register</a>
                         {% endif %}
                     </div>
@@ -176,27 +178,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-xs-12 body1">
-                <div class="row">
-                    <h3 class="select">ASUS</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">HP</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">Lenovo</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">MacBook</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">MSI</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">Acer</h3>
-                </div>
-                <div class="row socialMedia">
-
-                </div>
+                
+                {% for brand in allBrand %}
+                    <div class="row">
+                        <h3 class="select select{{forloop.counter}}">{{brand}}</h3>
+                    </div>
+                {% endfor %}
+                    
             </div>
             <div class="col-lg-9 col-sm-12 body2">
                 <div class="row header">
@@ -214,12 +202,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row barang">
-                        {% include 'listBarang.html' %}
-                    </div>
-                    <div class="row pagination"></div>
-                        
+                <div class="row listBarang">
+                    {% include 'listBarang.html' %}
                 </div>
             </div>
         </div>

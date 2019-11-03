@@ -1,7 +1,8 @@
+import shutil
+
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
-import shutil
 
 class CustomUser(AbstractUser):
     
@@ -10,6 +11,7 @@ class CustomUser(AbstractUser):
 
     profile     = models.ImageField(upload_to = path_upload)
     fullname    = models.CharField(max_length = 40)
+    token       = models.CharField(max_length=37)
 
     def __str__(self):
         return "{}. {} | {}".format(self.id, self.fullname, self.email)

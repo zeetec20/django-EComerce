@@ -1,24 +1,57 @@
 
 {% load humanize %}
 {% load static %}
-                        {% for lane in barangLane %}
-                            <div class="row">
-                            {% for barang in lane %}
-                                <div class="col-lg-4">
-                                    <a href="/barang/{{barang.slugifyBarang}}">
-                                        <div class="row col-lg-12">
-                                            <img src="media/{{ barang.image1 }}" alt="" class="cover">
-                                        </div>
-                                        <div class="row col-lg-12">
-                                            <h5 class="title">{{barang.nama}}</h5>
-                                        </div>
-                                    </a>
-                                    <div class="row col-lg-12">
-                                        <h6 class="price">Rp {{barang.harga | intcomma}}</h6>
-                                        <img src="{% static 'asset/images/icon/add-to-cart.png' %}" alt="" nama="{{barang.nama}}" class="add add{{ forloop.counter }}" onclick="addBarangCart('{{barang.nama}}', 'random', 1)">
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            </div>
-                        {% endfor %}
-                        
+{% load custom_filter %}
+
+<div class="row barang">
+    {% for lane in barangLane %}
+        <div class="row">
+        {% for barang in lane %}
+            <div class="col-lg-4 item">
+                <a href="/barang/{{barang.slugifyBarang}}">
+                    <div class="row col-lg-12">
+                        <img src="media/{{ barang.image1 }}" alt="" class="cover">
+                    </div>
+                    <div class="row col-lg-12">
+                        <h5 class="title">{{barang.nama}}</h5>
+                    </div>
+                </a>
+                <div class="row col-lg-12">
+                    <h6 class="price">Rp {{barang.harga | intcomma}}</h6>
+                    <img src="{% static 'asset/images/icon/add-to-cart.png' %}" alt="" nama="{{barang.nama}}" class="add add{{ forloop.counter }}" onclick="addBarangCart('{{barang.nama}}', 'random', 1); ">
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+<div class="row paginationBar">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item {% if paginationNumber.0 < 2 %}disabled{% endif %}">
+                <a class="page-link" onclick="pagination('{{ paginationNumber.0 | mathMinus:1 }}')" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            
+            {% for number in paginationNumber %}
+                <li class="page-item {% if number > pagination %}disabled" {% else %} onclick="pagination('{{number}}')" {% endif %}><a class="page-link page{{number}} {% if forloop.counter == 1 %}active{% endif %}" {% if number > pagination %}{% else %} onclick="pagination('{{number}}')" {% endif %}>{{number}}</a></li>
+            {% endfor %}
+                
+            <li class="page-item {% if paginationNumber.0 == pagination %}disabled{% endif %}">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script src="{% static 'asset/js/jquery-3.4.1.js' %}"></script>
+
+    <style>
+        .barang .item{
+            opacity: 1 !important;
+            margin-top: 0 !important;
+        }
+    </style>

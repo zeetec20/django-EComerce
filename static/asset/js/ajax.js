@@ -12,23 +12,9 @@ function logout() {
     });
 }
 
-function login() {
-    $.ajax({
-        url: '/ajax/login',
-        type: 'POST',
-        data: {
-
-        },
-        success: function (returnData) {
-
-        }
-    });
-}
-
 function register(event) {
     event.preventDefault();
     var data = new FormData($('#form-register').get(0));
-    
     $.ajax({
         url: $(this).attr('action'),
         type: $(this).attr('method'),
@@ -48,8 +34,7 @@ function register(event) {
 
 function login(event) {
     event.preventDefault();
-    var data = new FormData($('#from-login').get(0));
-
+    var data = new FormData($('#form-login').get(0));
     $.ajax({
         url: $(this).attr('action'),
         type: $(this).attr('method'),
@@ -61,6 +46,7 @@ function login(event) {
             pageLogin_Register('close');
             screenBlank('close');
             $('#form-login').get(0).reset();
+            $('.userBar').html(data);
         }
     });
 }

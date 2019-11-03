@@ -1,6 +1,6 @@
 let notLogin = (
-    '<a class="dropdown-item" onclick="showLogin_Register()">Login</a>' + 
-    '<a class="dropdown-item">Register</a>'
+    '<a class="dropdown-item login" onclick="showLogin_Register(\'login\')">Login</a>' + 
+    '<a class="dropdown-item register" onclick="showLogin_Register(\'register\')">Register</a>'
 );
 
 $('.active').css({
@@ -12,5 +12,6 @@ $('#logout').click(function () {
     logout();
 })
 
-showLogin_Register('login');
-cart();
+// showLogin_Register('login');
+listBarang('show');
+numberCart();

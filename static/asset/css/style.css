@@ -451,6 +451,20 @@ body{
     height: 37px;
 }
 
+.register .profile::-webkit-file-upload-button{
+    background-color: white;
+    border: solid 1px #313131;
+    color: #313131;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.register .profile::-webkit-file-upload-button:hover{
+    transition: 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
 .login-register .otherChoice{
     margin-top: 20px;
     border-top: solid 1px #c5c5c5;
@@ -469,6 +483,12 @@ body{
 
 .barang{
     margin: 10px auto;
+}
+
+.barang .col-lg-4{
+    transition: all 0.7s;
+    margin-top: 120px;
+    opacity: 0;
 }
 
 .barang .title{
@@ -635,6 +655,23 @@ body{
 .cartPage .closePageCart img:hover{
     transition: all 0.5s;
     transform: rotate(180deg);
+}
+
+.paginationBar{
+    margin: 20px auto;
+}
+
+.paginationBar a{
+    color: #313131 !important;
+    cursor: pointer;
+    border-color: #313131 !important;
+    border-radius: 0 !important;
+}
+
+.paginationBar .active{
+    font-weight: bold;
+    background-color: #313131 !important;
+    color: white !important;
 }
 
 @media only screen and (min-width: 100px) and (max-width: 750px){

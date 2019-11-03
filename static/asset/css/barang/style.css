@@ -365,6 +365,14 @@ body{
     margin-bottom: 20px;
 }
 
+.barang .deskripsi-lg{
+    height: 700px;
+}
+
+.barang .deskripsi-sm{
+    height: 300px;
+}
+
 .similar img{
     height: 230px;
 }
