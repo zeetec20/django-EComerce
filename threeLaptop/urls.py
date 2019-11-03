@@ -13,6 +13,8 @@ urlpatterns = [
     path('ajax/register', Ajax.as_view(action='register'), name='register'),
     path('ajax/cart', Ajax.as_view(action='cart'), name='cart'),
     path('ajax/search', Ajax.as_view(action='search'), name='search'),
+    path('ajax/profile', Ajax.as_view(action='profile'), name='profile'),
+
     path('ajax/api/kabupaten', Ajax.as_view(action = 'get_kabupaten'), name='api_kabupaten'),
     path('ajax/api/kecamatan', Ajax.as_view(action = 'get_kecamatan'), name='api_kecamatan'),
     

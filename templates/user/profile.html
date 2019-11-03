@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="row col-lg-12">
+    <h1 class="title">Profile Akun</h1>
+    <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="" class="iconClose" onclick="profile('close')">
+</div>
+
+<div class="row col-lg-12 areaScroll">
+    <div class="row col-lg-6 leftBar">
+        <div class="col-lg-12">
+            <div class="form-group input">
+                <label for="username">Nama Lengkap</label>
+                <input class="form-control" type="text" placeholder="{{user.username}}" name="username" disabled value="{{user.fullname}}">
+                <div class="borderBottom"></div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group input">
+                <label for="username">Username</label>
+                <input class="form-control" type="text" placeholder="{{user.username}}" name="username" disabled value="{{user.username}}">
+                <div class="borderBottom"></div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group input">
+                <label for="username">Email</label>
+                <input class="form-control" type="text" placeholder="{{user.username}}" name="username" disabled value="{{user.email}}">
+                <div class="borderBottom"></div>
+            </div>
+        </div>
+        <div class="row col-lg-12 edit">
+            <a class="btn col-lg-6 col-md-12 col-sm-12">Ubah Data</a>
+            <a class="btn col-lg-6 col-md-12 col-sm-12">Ganti Password</a>
+        </div>
+        <div class="row col-lg-12 button">
+            <a class="btn col-lg-6 col-md-12 col-sm-12">Pelanggan</a>
+            <a class="btn col-lg-6 col-md-12 col-sm-12">Hidupkan Notifikasi</a>
+        </div>
+    </div>
+    <div class="row col-lg-6 rightBar">
+        <div class="col-lg-12 foto">
+            <img src="/media/{{profile_user}}" alt="">
+        </div>
+        <div class="col-lg-12 changeProfile">
+            <label class="btn" for="image">Ganti Foto Profile</label>
+            <input type="file" name="image" id="image" style="display: none;">
+        </div>
+        <div class="col-lg-12 address">
+            <a class="btn">Lihat Alamat</a>
+        </div>
+        <div class="row col-lg-12 transaksi">
+            <h1 class="left col-lg-5">Pembelian : </h1>
+            <h1 class="right col-lg-7">{{user.transaksi}} Pembelian</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row col-lg-12 buttonAction">
+    <button type="reset" class="btn left" onclick="profile('close')">Tutup Halaman</button>
+    <button type="submit" class="btn right">Simpan Perubahan</button>
+</div>

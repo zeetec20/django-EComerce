@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     profile     = models.ImageField(upload_to = path_upload)
     fullname    = models.CharField(max_length = 40)
     token       = models.CharField(max_length=37)
+    transaksi   = models.IntegerField()
 
     def __str__(self):
         return "{}. {} | {}".format(self.id, self.fullname, self.email)

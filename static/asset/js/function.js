@@ -48,15 +48,15 @@ function screenBlank(action) {
 function pageLogin_Register(action) {
     if (action == 'show') {
         $('.login-register').css({
-            'visibility': 'visible',
             'transition': 'all 1s',
+            'opacity': '1',
             'top': '5%',
         });
     } else if (action == 'close') {
         $('.login-register').css({
             'transition': 'all 1s',
+            'opacity': '0',
             'top': '-90%',
-            'visibility': 'hidden'
         });
     }
 }
@@ -180,22 +180,32 @@ function removeBarangCart(nama) {
     numberCart();
 }
 
-function pagination(page) {
-    $.ajax({
-        url: '/',
-        type: 'GET',
-        data: {
-            'pagination': page
-        },
-        async: false,
-        success: function (returnData) {
-            $('.listBarang').html(returnData);
-            // listBarang('close');
-            // listBarang('show');
+function profile(action) {
+    if (action == 'close') {
+        $('.pageProfile').css({
+            'transition': 'all 1s',
+            'margin-top': '-600px',
+            'opacity': '0',
+            'visibility': 'hidden',
+        });
+        screenBlank('close');
+    }
+    if (action == 'show') {
+        ajaxProfile();
+        $('.pageProfile').css({
+            'visibility': 'visible',
+            'transition': 'all 1s',
+            'margin-top': '150px',
+            'opacity': '1',
+        });
+        if (mediaQuery(750, 1440).matches) {
+            $('.pageProfile').css({
+                'margin-top': '30px'
+            });
         }
-    });
+        screenBlank('show');
+    }
 }
-
 
 // delete_cookie('barang');
 // checkCookie('barang');

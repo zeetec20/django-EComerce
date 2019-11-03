@@ -13,5 +13,6 @@ $('#logout').click(function () {
 })
 
 // showLogin_Register('login');
+// screenBlank('show');
 listBarang('show');
 numberCart();

@@ -270,7 +270,7 @@ body{
     left: 0;
     right: 0;
     top: -90%;
-    visibility: hidden;
+    opacity: 0;
     border-radius: 0px;
     box-shadow: rgba(0, 0, 0, 0.116) 0px 3px 10px 0px;
     transition: all 1s;
@@ -674,7 +674,201 @@ body{
     color: white !important;
 }
 
-@media only screen and (min-width: 100px) and (max-width: 750px){
+.pageProfile{
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 5;
+    width: 55%;
+    height: 580px;
+    margin-top: -600px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.pageProfile .title{
+    font-size: 30px;
+    padding: 15px;
+    font-weight: bold;
+    color: #313131;
+}
+
+.pageProfile .row:nth-child(1){
+    border-bottom: solid 1px #f4f4f4;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.pageProfile .leftBar{
+    background-color: #f4f4f4;
+    margin-right: 5px;
+    padding-bottom: 25px;
+}
+
+.pageProfile .rightBar{
+    background-color: #f4f4f4;
+    margin-left: 5px;
+    height: 407px;
+}
+
+.pageProfile .rightBar .foto img{
+    margin: auto;
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.pageProfile .rightBar .transaksi h1:nth-child(1){
+    font-weight: bold;
+}
+
+.pageProfile .rightBar .transaksi h1{
+    font-size: 14px;
+}
+
+.pageProfile .rightBar .changeProfile{
+    margin: auto;
+    margin-top: -10px;
+}
+
+.pageProfile .rightBar .address{
+    margin-top: -30px;
+}
+
+.pageProfile .rightBar .address .btn,
+.pageProfile .rightBar .changeProfile .btn{
+    background-color: white;
+    color: #313131;
+    border-radius: 0;
+    border-color: #313131;
+    font-size: 14px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-weight: bold;
+}
+
+.pageProfile .rightBar .transaksi{
+    margin: auto;
+    margin-top: -20px;
+}
+
+.pageProfile .rightBar .transaksi .right{
+    text-align: right;
+}
+
+.pageProfile .leftBar input{
+    background-color: white;
+    border-radius: 0;
+    font-size: 14px;
+    height: 40px;
+    color: #313131;
+    border-color: #f4f4f4;
+    border-top-color: #313131;
+}
+
+.pageProfile .leftBar label{
+    position: relative;
+    bottom: -10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pageProfile .leftBar .edit{
+    margin: auto;
+    margin-top: 15px;
+}
+
+.pageProfile .leftBar .button{
+    margin: auto;
+    margin-top: 25px;
+}
+
+.pageProfile .leftBar .button a:nth-child(2)
+.pageProfile .leftBar .edit a:nth-child(2){
+    cursor: pointer;
+    float: right;
+}
+
+.pageProfile .leftBar .button a,
+.pageProfile .leftBar .edit a{
+    transition: all 0.5s;
+    width: 48%;
+    background-color: white;
+    border-radius: 0;
+    border-color: #313131;
+    color: #313131;
+    margin: auto;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: -1px;
+    margin-left: -1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pageProfile .buttonAction{
+    margin: auto;
+}
+
+.pageProfile .buttonAction button{
+    background-color: white;
+    border-radius: 0;
+    border-color: #313131;
+    color: #313131;
+    width: 30%;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    transition: all 0.5s;
+    box-shadow: none;
+}
+
+.pageProfile .buttonAction .left{
+    left: 0;
+}
+
+.pageProfile .buttonAction .right{
+    right: 10px;
+}
+
+.pageProfile .leftBar .button a:nth-child(2),
+.pageProfile .leftBar .edit a:nth-child(1),
+.pageProfile .leftBar .edit a:nth-child(2){
+    cursor: pointer;
+}
+
+.pageProfile .leftBar .button a:nth-child(2):hover,
+.pageProfile .leftBar .edit a:nth-child(1):hover,
+.pageProfile .leftBar .edit a:nth-child(2):hover,
+.pageProfile .rightBar .btn:hover,
+.pageProfile .buttonAction button:hover{
+    background-color: #313131;
+    color: white;
+}
+
+.pageProfile .iconClose{
+    position: absolute;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.pageProfile .iconClose:hover{
+    transition: 0.5s;
+    transform: rotate(180deg);
+}
+
+@media only screen and (min-width: 100px) and (max-width: 750px){ /* HP */
     .select{
         display: block;
         margin: auto;
@@ -730,9 +924,13 @@ body{
         float: right;
         margin-top: -40px;
     }
+
+    .pageProfile{
+        width: 95%;
+    }
 }
 
-@media only screen and (min-width: 750px) and (max-width: 1440px){
+@media only screen and (min-width: 750px) and (max-width: 1440px){ /* Laptop */
     .cartPage{
         margin-top: 20px;
         height: 600px;
@@ -744,6 +942,12 @@ body{
 
     .login-register{
         margin-top: 5px;
+    }
+}
+
+@media only screen and (min-width: 990px) and (max-width: 1050px){
+    .pageProfile .leftBar .edit a{
+        font-size: 9px;
     }
 }
 

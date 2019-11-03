@@ -51,6 +51,34 @@ function login(event) {
     });
 }
 
+function pagination(page) {
+    $.ajax({
+        url: '/',
+        type: 'GET',
+        data: {
+            'pagination': page
+        },
+        success: function (returnData) {
+            $('.listBarang').html(returnData);
+            // listBarang('close');
+            // listBarang('show');
+        }
+    });
+}
+
+function ajaxProfile() {
+    $.ajax({
+        url: '/ajax/profile',
+        type: 'GET',
+        data: {
+
+        },
+        success: function (returnData) {
+            $('.pageProfile').html(returnData);
+        }
+    })
+}
+
 $('#form-register').submit(register);
 $('#form-login').submit(login);
 cart();

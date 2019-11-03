@@ -19,7 +19,6 @@ class Index(View):
     }
 
     def get(self, request, *args, **kwargs):
-        print(getToken())
         jumlahBarang = Barang.objects.all()
         page = 1
         if 'pagination' in request.GET:
@@ -78,6 +77,7 @@ class Ajax(View):
                     self.context['profile_user'] = '/static/asset/images/icon/user.png'
                 else:
                     self.context['profile_user'] = request.user.profile
+
                 return render(self.request, 'user.html', self.context)
 
             if self.action == 'register':
@@ -159,5 +159,14 @@ class Ajax(View):
             if self.action == 'search':
                 barang = Barang.objects.filter(name__unaccent__lower__trigram_simila = request.GET['search'])
                 return render(self.request, 'listBarang.html', self.context)
-        
+            
+            if self.action == 'profile':
+                if request.user.profile == "":
+                    self.context['profile_user'] = '/static/asset/images/icon/user.png'
+                else:
+                    self.context['profile_user'] = request.user.profile
+
+                return render(self.request, 'user/profile.html', self.context)
+        else:
+            return redirect('index')
         return HttpResponse("ajax django")
