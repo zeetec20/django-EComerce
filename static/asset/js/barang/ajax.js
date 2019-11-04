@@ -8,6 +8,7 @@ function logout() {
         success: function (returnData) {
             $('.userBar').html(notLogin);
             showLogin_Register('login');
+            $('#buttonBuy').attr('onclick', "showLogin_Register('login')");
         }
     });
 }
@@ -35,6 +36,7 @@ function register(event) {
 function login(event) {
     event.preventDefault();
     var data = new FormData($('#form-login').get(0));
+    console.log(data)
     $.ajax({
         url: $(this).attr('action'),
         type: $(this).attr('method'),
@@ -43,29 +45,16 @@ function login(event) {
         processData: false,
         contentType: false,
         success: function (data) {
+            let username = $('.username').text();
             pageLogin_Register('close');
             screenBlank('close');
             $('#form-login').get(0).reset();
             $('.userBar').html(data);
+            $('#buttonBuy').attr('onclick', "buy($('.username').text().trim())");
         }
     });
 
     return false;
-}
-
-function pagination(page) {
-    $.ajax({
-        url: '/',
-        type: 'GET',
-        data: {
-            'pagination': page
-        },
-        success: function (returnData) {
-            $('.listBarang').html(returnData);
-            // listBarang('close');
-            // listBarang('show');
-        }
-    });
 }
 
 function ajaxProfile() {

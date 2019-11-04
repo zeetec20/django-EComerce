@@ -1,6 +1,8 @@
+import os
+import shutil
+
 from django.db import models
 from django.utils.text import slugify
-import os 
 
 class SemuaJenis(models.Model):
     jenis       = models.CharField(max_length = 30)
@@ -48,5 +50,4 @@ class Barang(models.Model):
         except OSError as e:
             print ("Error: %s - %s." % (e.filename, e.strerror))
         
-        super(CustomUser, self).delete()
-
+        super(Barang, self).delete()

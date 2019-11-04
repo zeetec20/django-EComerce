@@ -3,6 +3,7 @@ import random
 from django.shortcuts import render
 from django.views import View
 from .models import Barang
+from users.forms import RegisterForm
 
 class DetailBarang(View):
     context = {
@@ -39,9 +40,16 @@ class DetailBarang(View):
         warna = barang.warna.split(", ")
         lineDeskripsi = len(barang.deskripsi.split('\r'))
 
+        if request.user.is_authenticated:
+            if request.user.profile == "":
+                self.context['profile_user'] = '/static/asset/images/icon/user.png'
+            else:
+                self.context['profile_user'] = request.user.profile
+
         self.context['lineDeskripsi']   = lineDeskripsi
         self.context['barang']          = barang
         self.context['barangSimilar']   = barangSimilar
         self.context['warna']           = warna
         self.context['warnaLength']     = len(warna)
+        self.context['registerForm']    = RegisterForm()
         return render(self.request, 'barang/index.html', self.context)

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'users.apps.UsersConfig',
     'django.contrib.humanize',
+    'transaksi'
 ]
 
 MIDDLEWARE = [

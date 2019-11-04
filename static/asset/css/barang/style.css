@@ -391,48 +391,6 @@ body{
     color: #313131;
 }
 
-@media only screen and (min-width: 100px) and (max-width: 750px){
-    .select{
-        display: block;
-        margin: auto;
-        text-align: center;
-    }
-
-    .login-register .buttonSelect{
-        margin-top: 50px;
-    }
-
-    .header1{
-        margin: auto;
-    }
-
-    .cart .iconCart,
-    .cart .cartText,
-    .cart .checkOut{
-        float: left !important;
-    }
-
-    .header2{
-        margin-top: 30px ;
-    }
-
-    .footer{
-        margin-left: 10px;
-        width: 95%;
-        margin-top: 20px;
-    }
-
-    .footer2{
-        width: 100%;
-    }
-
-    .barang .cover{
-        height: 400px;
-    }
-}
-
-
-
 .dropdown-menu{
     border-radius: 0px;
     border: solid 1px #0000004f;
@@ -483,4 +441,598 @@ body{
 
 a{
     text-decoration: none !important;
+}
+
+
+.login-register{
+    position: fixed;
+    width: 60%;
+    height: 440px;
+    background-color: #f4f4f4;
+    z-index: 4;
+    display: block;
+    margin: 5% auto;
+    left: 0;
+    right: 0;
+    top: -90%;
+    opacity: 0;
+    border-radius: 0px;
+    box-shadow: rgba(0, 0, 0, 0.116) 0px 3px 10px 0px;
+    transition: all 1s;
+    overflow: hidden;
+}
+
+.login-register .cancel{
+    position: absolute;
+    right: 0;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.login-register .cancel img{
+    width: 18px;
+}
+
+.login-register .cancel:hover img{
+    transition: all 0.5s;
+    transform: rotate(180deg);
+}
+
+.login-register .buttonSelect{
+    width: 264px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.login-register .buttonSelect button{
+    border-radius: 0px;
+    width: 130px;
+    background-color: #f4f4f4;
+    color: #313131;
+    border: solid 1px #313131;
+    margin-left: -4px;
+    margin-right: -4px;
+}
+
+.login-register .buttonSelect button:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
+.login-register .col-md-6, .login-register .col-md-10{
+    margin: auto;
+}
+
+.login .row:nth-child(2){
+    margin-top: 55px;
+}
+
+.login .input input{
+    width: 100%;
+    border-radius: 0px;
+    border-color: #f4f4f4;
+    background-color: white;
+}
+
+.login .input .borderBottom{
+    position: relative;
+    background-color: #313131;
+    height: 1px;
+    width: 0%;
+    display: block;
+    margin: auto;
+}
+
+.login .input input:focus{
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.login .input input:focus ~ .borderBottom{
+    transition: all 0.5s;
+    width: 100%;
+}
+
+.login .buttonLoginRegister, 
+.register .buttonLoginRegister{
+    margin: auto;
+    margin-top: 20px;
+}
+
+.login .buttonLoginRegister .borderTop,
+.login .buttonLoginRegister .borderBottom,
+.register .buttonLoginRegister .borderTop,
+.register .buttonLoginRegister .borderBottom{
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #313131;
+}
+
+.login .buttonLoginRegister .borderTop,
+.register .buttonLoginRegister .borderTop{
+    top: 0px;
+}
+
+.login .buttonLoginRegister .borderBottom,
+.register .buttonLoginRegister .borderBottom{
+    bottom: 0px;
+}
+
+.login .buttonLoginRegister .borderLeft, 
+.login .buttonLoginRegister .borderRight,
+.register .buttonLoginRegister .borderLeft, 
+.register .buttonLoginRegister .borderRight{
+    position: absolute;
+    width: 1px;
+    height: 0%;
+    background-color: #313131;
+}
+
+.login .buttonLoginRegister .borderLeft,
+.register .buttonLoginRegister .borderLeft{
+    left: 15px;
+    top: 0;
+}
+
+.login .buttonLoginRegister .borderRight,
+.register .buttonLoginRegister .borderRight{
+    right: 15px;
+    bottom: 0;
+}
+
+.login .buttonLoginRegister:hover .borderLeft,
+.login .buttonLoginRegister:hover .borderRight,
+.register .buttonLoginRegister:hover .borderLeft,
+.register .buttonLoginRegister:hover .borderRight{
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.login .buttonLoginRegister .button,
+.register .buttonLoginRegister .button{
+    background-color: #f4f4f4;
+    color: #313131;
+    border-radius: 0px;
+    width: 100%;
+    border: none;
+    height: 100%;
+}
+
+.login .buttonLoginRegister .button:focus,
+.register .buttonLoginRegister .button:focus{
+    box-shadow: none;
+}
+
+.login .buttonLoginRegister:hover .button,
+.register .buttonLoginRegister:hover .button{
+    transition: 0.5s;
+    transition-delay: 0.3s;
+    background-color: #313131;
+    color: #f4f4f4;
+}
+
+.register .form-group input{
+    border-radius: 0px;
+    border-color: white;
+    background-color: white;
+}
+
+.register .form-group input:focus{
+    box-shadow: none;
+}
+
+.register .fullname{
+    margin-top: 30px;
+}
+
+.register .input{
+    margin: 10px;
+}
+
+.register .profile{
+    width: 100%;
+    height: 37px;
+}
+
+.register .profile::-webkit-file-upload-button{
+    background-color: white;
+    border: solid 1px #313131;
+    color: #313131;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.register .profile::-webkit-file-upload-button:hover{
+    transition: 0.5s;
+    background-color: #313131;
+    color: white;
+}
+
+.login-register .otherChoice{
+    margin-top: 20px;
+    border-top: solid 1px #c5c5c5;
+}
+
+.login-register .otherChoice small{
+    margin: auto;
+    text-align: center;
+    margin-top: 5px;
+}
+
+
+.cartPage{
+    position: fixed;
+    z-index: 6;
+    display: block;
+    margin: auto;
+    margin-top: 50px;
+    left: -160%;
+    right: 0;
+    background-color: white;
+    height: 650px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.cartPage .header{
+    height: 40px;
+    border-bottom: solid 1px #e8e8e8;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.cartPage .list{
+    margin-top: 10px;
+    overflow: auto;
+    height: 450px;
+}
+
+.cartPage .header-bar h3{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.cartPage .product .cover{
+    float: left;
+}
+
+.cartPage .product .name{
+    float: right;
+}
+
+.cartPage .product .name h6{
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.cartPage .product .name h6:nth-child(1){
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.cartPage .product .name h6:nth-child(3){
+    cursor: pointer;
+}
+
+.cartPage .price h6{
+    font-size: 14px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cartPage .quantity input{
+    background-color: white;
+    width: 50px;
+    border: solid 1px white;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin: 20px auto;
+    margin-top: 25px;
+    height: 30px;
+    text-align: center;
+}
+
+.cartPage .quantity input:hover{
+    transition: all 0.5s;
+    border-color: #313131;
+}
+
+.cartPage .quantity input:focus{
+    outline: none;
+    border-color: #313131;
+}
+
+.cartPage .total h6{
+    font-size: 14px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.cartPage .action{
+    margin-top: 40px;
+    float: right;
+}
+
+.cartPage .action button{
+    background-color: white;
+    border-radius: 0;
+    border: solid 1px #313131;
+    width: 150px;
+    height: 40px !important;
+}
+
+.cartPage .action h5{
+    width: 100%;
+    text-align: right;
+    font-size: 16px;
+}
+
+.cartPage .action .number{
+    font-weight: bold;
+}
+
+.cartPage .action .message{
+    font-size: 14px;
+}
+
+.cartPage .closePageCart img{
+    position: absolute;
+    top: 16px;
+    right: -12px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.cartPage .closePageCart img:hover{
+    transition: all 0.5s;
+    transform: rotate(180deg);
+}
+
+.pageProfile{
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 5;
+    width: 55%;
+    height: 580px;
+    margin-top: -600px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.pageProfile .title{
+    font-size: 30px;
+    padding: 15px;
+    font-weight: bold;
+    color: #313131;
+}
+
+.pageProfile .row:nth-child(1){
+    border-bottom: solid 1px #f4f4f4;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.pageProfile .leftBar{
+    background-color: #f4f4f4;
+    margin-right: 5px;
+    padding-bottom: 25px;
+}
+
+.pageProfile .rightBar{
+    background-color: #f4f4f4;
+    margin-left: 5px;
+    height: 407px;
+}
+
+.pageProfile .rightBar .foto img{
+    margin: auto;
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.pageProfile .rightBar .transaksi h1:nth-child(1){
+    font-weight: bold;
+}
+
+.pageProfile .rightBar .transaksi h1{
+    font-size: 14px;
+}
+
+.pageProfile .rightBar .changeProfile{
+    margin: auto;
+    margin-top: -10px;
+}
+
+.pageProfile .rightBar .address{
+    margin-top: -30px;
+}
+
+.pageProfile .rightBar .address .btn,
+.pageProfile .rightBar .changeProfile .btn{
+    background-color: white;
+    color: #313131;
+    border-radius: 0;
+    border-color: #313131;
+    font-size: 14px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-weight: bold;
+}
+
+.pageProfile .rightBar .transaksi{
+    margin: auto;
+    margin-top: -20px;
+}
+
+.pageProfile .rightBar .transaksi .right{
+    text-align: right;
+}
+
+.pageProfile .leftBar input{
+    background-color: white;
+    border-radius: 0;
+    font-size: 14px;
+    height: 40px;
+    color: #313131;
+    border-color: #f4f4f4;
+    border-top-color: #313131;
+}
+
+.pageProfile .leftBar label{
+    position: relative;
+    bottom: -10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pageProfile .leftBar .edit{
+    margin: auto;
+    margin-top: 15px;
+}
+
+.pageProfile .leftBar .button{
+    margin: auto;
+    margin-top: 25px;
+}
+
+.pageProfile .leftBar .button a:nth-child(2)
+.pageProfile .leftBar .edit a:nth-child(2){
+    cursor: pointer;
+    float: right;
+}
+
+.pageProfile .leftBar .button a,
+.pageProfile .leftBar .edit a{
+    transition: all 0.5s;
+    width: 48%;
+    background-color: white;
+    border-radius: 0;
+    border-color: #313131;
+    color: #313131;
+    margin: auto;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: -1px;
+    margin-left: -1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pageProfile .buttonAction{
+    margin: auto;
+}
+
+.pageProfile .buttonAction button{
+    background-color: white;
+    border-radius: 0;
+    border-color: #313131;
+    color: #313131;
+    width: 30%;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    transition: all 0.5s;
+    box-shadow: none;
+}
+
+.pageProfile .buttonAction .left{
+    left: 0;
+}
+
+.pageProfile .buttonAction .right{
+    right: 10px;
+}
+
+.pageProfile .leftBar .button a:nth-child(2),
+.pageProfile .leftBar .edit a:nth-child(1),
+.pageProfile .leftBar .edit a:nth-child(2){
+    cursor: pointer;
+}
+
+.pageProfile .leftBar .button a:nth-child(2):hover,
+.pageProfile .leftBar .edit a:nth-child(1):hover,
+.pageProfile .leftBar .edit a:nth-child(2):hover,
+.pageProfile .rightBar .btn:hover,
+.pageProfile .buttonAction button:hover{
+    background-color: #313131;
+    color: white;
+}
+
+.pageProfile .iconClose{
+    position: absolute;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.pageProfile .iconClose:hover{
+    transition: 0.5s;
+    transform: rotate(180deg);
+}
+
+@media only screen and (min-width: 100px) and (max-width: 750px){
+    .select{
+        display: block;
+        margin: auto;
+        text-align: center;
+    }
+
+    .login-register .buttonSelect{
+        margin-top: 50px;
+    }
+
+    .header1{
+        margin: auto;
+    }
+
+    .cart .iconCart,
+    .cart .cartText,
+    .cart .checkOut{
+        float: left !important;
+    }
+
+    .header2{
+        margin-top: 30px ;
+    }
+
+    .footer{
+        margin-left: 10px;
+        width: 95%;
+        margin-top: 20px;
+    }
+
+    .footer2{
+        width: 100%;
+    }
+
+    .barang .cover{
+        height: 400px;
+    }
+}
+
+.screenBlank{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #0000005b;
+    z-index: 4 !important;
+    opacity: 0;
+    visibility: hidden;
 }

@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #f4f4f4;
+}
+
+.page{
+    position: absolute;
+    top: -400px;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 60%;
+    margin: auto;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.11);
+    opacity: 0;
+}
+
+.page .title{
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px;
+}
+
+.page .data{
+    margin-top: 5px;
+}
+
+.page .data label,
+.page .data input::placeholder{
+    color: #313131;
+    font-size: 14px;
+}
+
+.page .data label{
+    position: relative;
+    bottom: -10px;
+    font-weight: bold;
+}
+
+.page .data input{
+    background-color: #f4f4f4;
+    border-radius: 0;
+    border-color: white;
+    border-top-color: #313131;
+    margin-bottom: -10px;
+}
+
+.page .buttonLogin{
+    margin: auto;
+    margin-top: 30px;
+}
+
+.page .buttonLogin button{
+    background-color: #f4f4f4;
+    border-radius: 0;
+    border-color: #f4f4f4;
+    border-top-color: #313131;
+    border-bottom-color: #313131;
+    color: #313131;
+    width: 100%;
+}
+
+.page .buttonLogin .borderLeft,
+.page .buttonLogin .borderRight{
+    position: absolute;
+    width: 1px;
+    background-color: #313131;
+    height: 0%;
+}
+
+.page .buttonLogin .borderLeft{
+    bottom: 0;
+    left: 15px;
+}
+
+.page .buttonLogin .borderRight{
+    top: 0;
+    right: 15px;
+}
+
+.page .buttonLogin:hover .borderLeft,
+.page .buttonLogin:hover .borderRight{
+    transition: 0.4s;
+    height: 100%;
+}
+
+.col-lg-12{
+    margin: auto;
+}
+
+.page .buttonLogin:hover button{
+    transition: 0.4s;
+    transition-delay: 0.5s;
+    background-color: #313131;
+    color: #f4f4f4;
+}

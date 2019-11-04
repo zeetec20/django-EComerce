@@ -287,4 +287,12 @@
     <script src="{% static 'asset/js/ajax.js' %}"></script>
     <script src="{% static 'asset/js/function.js' %}"></script>
     <script src="{% static 'asset/js/script.js' %}"></script>
+    
+    {% if user.is_authenticated == False %}
+        <script>
+            showLogin_Register('login');
+            screenBlank('show');
+        </script>
+    {% endif %}
+        
 {% endblock script %}

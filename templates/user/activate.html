@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Aktivasi Akun</title>
+{% endblock title %}
+    
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'asset/css/user/style.css' %}">
+{% endblock style %}
+    
+
+{% block body %}
+    <div class="container page">
+        <div class="row col-lg-12">
+            <h1 class="title">Aktifasi Akun Berhasil</h1>
+        </div>
+        <div class="row col-lg-12 data">
+            <div class="col-lg-12">
+                <div class="form-group input">
+                    <label for="username">Username</label>
+                    <input class="form-control" type="text" placeholder="{{username}}" name="username" disabled>
+                    <div class="borderBottom"></div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group input">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="text" placeholder="{{email}}" name="email" disabled>
+                    <div class="borderBottom"></div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group input">
+                    <label for="fullname">Nama Lengkap</label>
+                    <input class="form-control" type="text" placeholder="{{fullname}}" name="fullname" disabled>
+                    <div class="borderBottom"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-12">
+            <div class="col-md-5 buttonLogin">
+                <div class="borderTop"></div>
+                <div class="borderLeft"></div>
+                <button class="btn button" onclick="window.location.href = '/'">Silahkan Login</button>
+                <div class="borderBottom"></div>
+                <div class="borderRight"></div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block script %}
+    <script>
+        $('.page').css({
+            'transition': 'all 1s',
+            'top': '110px',
+            'opacity': '1'
+        })
+    </script>
+{% endblock script %}
+    

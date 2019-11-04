@@ -34,3 +34,7 @@ function kabupaten(idKabupaten, nama) {
 function kecamatan(idKecamatan, nama) {
     $('.buttonKecamatan').html(nama);
 }
+
+function getAddress() {
+    
+}

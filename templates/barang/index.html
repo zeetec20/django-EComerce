@@ -11,7 +11,143 @@
 {% endblock style %}
     
 {% block body %}
-    <div class="screenBlank"></div>
+    <div class="screenBlank"></div> 
+
+    <div class="container cartPage shadow-lg">
+        {% include "cart.html" %}
+    </div>  
+
+    <div class="container pageProfile">
+        {% include 'user/profile.html' %}
+    </div>
+    
+    <div class="container login-register">
+        <div class="login" id="loginPage">
+            <form action="/ajax/login" method="POST" id="form-login">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="cancel" id="buttonCloseLoginRegister" onclick="pageLogin_Register('close'); screenBlank('close')">
+                            <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
+                        </div>
+                        <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-lg btn-secondary login active">Login</button>
+                            <button type="button" class="btn btn-lg btn-secondary register" onclick="showLogin_Register('register')">Register</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {% csrf_token %}
+                        <input type="hidden" name="from" value="goods">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            <input class="form-control" type="text" placeholder="Username" name="username">
+                            <div class="borderBottom"></div>
+                            <small id="emailHelp" class="form-text text-muted">Tolong masukkan username atau email yang sesuai</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Jangan beri tahu passowrd anda pada orang lain</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 buttonLoginRegister">
+                        <div class="borderTop"></div>
+                        <div class="borderLeft"></div>
+                        <button class="btn button" type="submit">Kirim</button>
+                        <div class="borderBottom"></div>
+                        <div class="borderRight"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="register" id="registerPage">
+            <form action="/ajax/register" enctype="multipart/form-data" id="form-register" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="cancel" id="buttonCloseLoginRegister" onclick="pageLogin_Register('close'); screenBlank('close')">
+                            <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
+                        </div>
+                        <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-lg btn-secondary login" onclick="showLogin_Register('login')">Login</button>
+                            <button type="button" class="btn btn-lg btn-secondary register active">Register</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row fullname">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.fullname}}
+                            <div class="borderBottom"></div>
+                            <small id="emailHelp" class="form-text text-muted">Masukkan nama lengkap anda </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.username}}
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Masukkan username yang anda inginkan</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.email}}
+                            <div class="borderBottom"></div>
+                            <small id="emailHelp" class="form-text text-muted">Masukkan email yang anda gunakan</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.password}}
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Masukkan password anda, jangan beri tahu password anda ke orang lain</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group input">
+                            {{registerForm.profile}}
+                            <div class="borderBottom"></div>
+                            <small id="passwordHelp" class="form-text text-muted">Masukkan foto / gambar yang anda inginkan</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 buttonLoginRegister">
+                        <div class="borderTop"></div>
+                        <div class="borderLeft"></div>
+                        <button class="btn button" onclick="" type="submit">Kirim</button>
+                        <div class="borderBottom"></div>
+                        <div class="borderRight"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 otherChoice">
+                <small id="emailHelp" class="form-text text-muted">Or Login Using</small>
+            </div>
+        </div>
+    </div>
 
     <div class="container header">
         <div class="row col-lg-12 header1">
@@ -26,24 +162,21 @@
                     </h1>
                     <div class="dropdown-menu userBar" aria-labelledby="dropdownMenuOffset">
                         {% if user.is_authenticated %}
-                            <img src="/media/{{ user.profile }}" class="profile" alt="">
-                            <a class="dropdown-item username">{{ user.username }}</a>
-                            <a class="dropdown-item">Profil</a>
-                            <a class="dropdown-item" id="logout" onclick="logout()">Logout</a>
+                            {% include 'user.html' %}
                         {% else %}
-                            <a class="dropdown-item" onclick="showLogin_Register('login')" onload="showLogin_Register('login')">Login</a>
-                            <a class="dropdown-item" onclick="showLogin_Register('register')">Register</a>
+                            <a class="dropdown-item login" onclick="showLogin_Register('login')">Login</a>
+                            <a class="dropdown-item register" onclick="showLogin_Register('register')">Register</a>
                         {% endif %}
                     </div>
                 </div>
                 
                 <h6 class="checkOut">Check Out</h6>
-                <h6 class="cartText">Cart [ <span id="numberCart">0</span> ]</h6>
-                <img class="iconCart" src="{% static 'asset/images/icon/cart.png' %}" alt="">
+                <h6 class="cartText cart" onclick="pageCart('show');">Cart [ <span id="numberCart">0</span> ]</h6>
+                <img class="iconCart cart" onclick="pageCart('show');" src="{% static 'asset/images/icon/cart.png' %}" alt="" onclick="checkCookie('barang')">
             </div>
         </div>
         <div class="row header2 col-lg-12 col-sm-12">
-            <a href="/"><h1 class="title">Three Laptop</h1></a>
+            <a href="{% url 'index' %}"><h1 class="title">Three Laptop</h1></a>
         </div>
     </div>
 
@@ -142,7 +275,7 @@
                             <button class="btn button1 button">Tambahkan ke Keranjang</button>
                         </div>
                         <div class="row">
-                            <button onclick="buy(this)" class="btn button2 button" id="buttonBuy" href="/address/{{user.username}}/barang?barang={{barang.slugifyBarang}}">Beli Sekarang</button>
+                            <button {% if user.is_authenticated %}onclick="buy('')"{% else %}onclick="showLogin_Register('login')"{% endif %} class="btn button2 button" id="buttonBuy" href="/address/{{user.username}}/barang?barang={{barang.slugifyBarang}}">Beli Sekarang</button>
                         </div>
                         <div class="row share">
                             
@@ -245,6 +378,7 @@
 {% endblock body %}
     
 {% block script %}
+    <script src="{% static 'asset/js/barang/ajax.js' %}"></script>
     <script src="{% static 'asset/js/barang/function.js' %}"></script>
     <script src="{% static 'asset/js/barang/script.js' %}"></script>
 {% endblock script %}

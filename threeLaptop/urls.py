@@ -20,7 +20,7 @@ urlpatterns = [
     
     path('barang/', include('goods.urls')),
     path('address/', include('address.urls')),
-    path('user', include('users.urls')),
+    path('user/', include('users.urls')),
 ]
 
 if settings.DEBUG:

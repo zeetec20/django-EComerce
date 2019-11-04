@@ -78,7 +78,11 @@ class Ajax(View):
                 else:
                     self.context['profile_user'] = request.user.profile
 
-                return render(self.request, 'user.html', self.context)
+                print(request.POST)
+                if 'from' in request.POST:
+                    return render(self.request, 'user.html', self.context)
+                else:
+                    return render(self.request, 'user.html', self.context)
 
             if self.action == 'register':
                 form = RegisterForm(request.POST, request.FILES or None)
