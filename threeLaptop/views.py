@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 from goods.models import Barang, SemuaBrand
 from users.forms import RegisterForm
 from users.token import getToken
+from address.api_rajaongkir import cekTarif, template as templateRajaOngkir
 
 class Index(View):
     template_name = 'index.html'
@@ -67,6 +68,22 @@ class Ajax(View):
 
     def post(self, request):
         if request.is_ajax():
+            if self.action == 'saveAlamat':
+                alamat = {
+                    'label': request.POST['label'],
+                    'namaLengkap': request.POST['namaLengkap'],
+                    'provinsi': request.POST['provinsi'],
+                    'kabupaten': request.POST['kabupaten'],
+                    'kecamatan': request.POST['kecamatan'],
+                    'kodePos': request.POST['kodePos'],
+                    'informasiTambahan': request.POST['informasiTambahan']
+                }
+                user = get_user_model().objects.get(username = request.user)
+                user.alamat = ''
+                user.save()
+
+                return JsonResponse({'success': True})
+
             if self.action == 'login':
                 inputUsername = request.POST['username']
                 inputPassword = request.POST['password']
@@ -78,7 +95,6 @@ class Ajax(View):
                 else:
                     self.context['profile_user'] = request.user.profile
 
-                print(request.POST)
                 if 'from' in request.POST:
                     return render(self.request, 'user.html', self.context)
                 else:
@@ -169,8 +185,43 @@ class Ajax(View):
                     self.context['profile_user'] = '/static/asset/images/icon/user.png'
                 else:
                     self.context['profile_user'] = request.user.profile
-
                 return render(self.request, 'user/profile.html', self.context)
+            
+            if self.action == 'ongkir':
+                kontak = {
+                    'email': request.GET['email'],
+                    'nomerHp': request.GET['nomerHp'],
+                }
+                alamat = {
+                    'label': request.GET['label'],
+                    'namaLengkap': request.GET['namaLengkap'],
+                    'provinsi': request.GET['provinsi'],
+                    'kabupaten': request.GET['kabupaten'],
+                    'kecamatan': request.GET['kecamatan'],
+                    'kodePos': request.GET['kodePos'],
+                    'informasiTambahan': request.GET['informasiTambahan'],
+                    'simpan': request.GET['simpan']
+                }
+
+                if alamat['simpan'] == 'true':
+                    pass
+                
+                kotaAsal = 'Banyuwangi'
+                kotaTujuan = alamat['kabupaten']
+                berat = '2000'
+                ekspedisi = ['tiki', 'jne', 'pos']
+                dataOngkirTiki  = cekTarif(kotaAsal, kotaTujuan, berat, ekspedisi[0])
+                dataOngkirJne   = cekTarif(kotaAsal, kotaTujuan, berat, ekspedisi[1])
+                dataOngkirPos   = cekTarif(kotaAsal, kotaTujuan, berat, ekspedisi[2])
+                
+                self.context['alamat']      = alamat
+                self.context['kontak']      = kontak
+                self.context['ekspedisi']   = ekspedisi
+                self.context['tiki']        = templateRajaOngkir(dataOngkirTiki[0]['costs'], dataOngkirTiki[0]['code'])
+                self.context['jne']         = templateRajaOngkir(dataOngkirJne[0]['costs'], dataOngkirTiki[0]['code'])
+                self.context['pos']         = templateRajaOngkir(dataOngkirPos[0]['costs'], dataOngkirTiki[0]['code'])
+
+                return render(self.request, 'address/leftBar2.html', self.context)
         else:
             return redirect('index')
         return HttpResponse("ajax django")

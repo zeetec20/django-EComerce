@@ -9,9 +9,20 @@
     
 
 {% block body %}
+    <div class="screenBlank"></div>
+
+    <img src="{% static 'asset/images/gif/loading-rolling.gif' %}" alt="" class="loading">
+
+    <div class="container textBox">
+        <div class="row col-lg-12">
+            <h1 class="text">Proses Pembayaran Sudah Siap Anda Akan Segera di Alihkan Ke Halaman Pembayaran</h1>
+            <button class="btn">Menuju Halaman Pembayaran</button>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 leftBar">
+            <div class="col-lg-6 leftBar" id="leftBar">
                 {% include 'address/leftBar.html' %}
             </div>
 
@@ -35,11 +46,11 @@
                     <div class="row col-lg-12 calculate">
                         <div class="row col-lg-12 barang">
                             <h1 class="col-lg-6">Total Barang Barang</h1>
-                            <h1 class="col-lg-6">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                            <h1 class="col-lg-6" id="totalHargaBarang">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
                         </div>
                         <div class="row col-lg-12 pengiriman">
                             <h1 class="col-lg-6">Harga Pengiriman</h1>
-                            <h1 class="col-lg-6">Dihitung Nanti</h1>
+                            <h1 class="col-lg-6" id="hargaPengiriman">Dihitung Nanti</h1>
                         </div>
                     </div>
                     <div class="row col-lg-12 total">
@@ -47,7 +58,7 @@
                             <h1 class="label">Total</h1>
                         </div>
                         <div class="col-lg-6">
-                            <h1 class="jumlah">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                            <h1 class="jumlah" id="total">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
                         </div>
                     </div>
                 </div>
@@ -59,6 +70,7 @@
 
 
 {% block script %}
+    <script src="{% static 'asset/js/address/ajax.js' %}"></script>
     <script src="{% static 'asset/js/address/function.js' %}"></script>
 {% endblock script %}
     

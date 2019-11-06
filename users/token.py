@@ -10,3 +10,7 @@ def getToken():
     while token in allToken:
         token = uuid4()
     return token
+
+def getTokenInt():
+    token = uuid4().int
+    return token

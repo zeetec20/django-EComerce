@@ -1,0 +1,146 @@
+<div class="row header">
+    <div class="row col-lg-12">
+        <h1 class="title">Three Laptop</h1>
+    </div>
+    <div class="row col-lg-12">
+        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
+    </div>
+</div>
+<div class="row address leftBar2">
+    <div class="row col-lg-12">
+        <h1 class="title">Alamat</h1>
+    </div>
+    <div class="row col-lg-12">
+        <div class="row col-lg-12 data">
+            <h6 class="labelLabel">Label Alamat</h6>
+            <h1 class="label" id="namaLengkap">{{ alamat.label }}</h1>
+        </div>
+        <div class="row col-lg-12 data">
+            <h6 class="labelNamaLengkap">Nama Lengkap</h6>
+            <h1 class="namaLengkap" id="namaLengkap">{{ alamat.namaLengkap }}</h1>
+        </div>
+        <div class="row col-lg-12 data">
+            <h6 class="labelAlamat">Provinsi / Kabupaten / Kecamatan</h6>
+            <h1 class="alamat" id="alamat">{{ alamat.provinsi }} / {{ alamat.kabupaten }} / {{ alamat.kecamatan }}</h1>
+        </div>
+        <div class="row col-lg-12 data">
+            <h6 class="labelKodePos">Kode Pos</h6>
+            <h1 class="kodePos" id="kodePos">{{ alamat.kodePos }}</h1>
+        </div>
+        <div class="row col-lg-12 data">
+            <h6 class="labelInformasiTambahan">Informasi Tambahan</h6>
+            <textarea name="" id="" class="informasiTambahan">{{ alamat.informasiTambahan }}</textarea>
+        </div>
+        <div class="row col-lg-12 data">
+            <div class="dropdown ekspedisi row col-lg-12">
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonEkspedisi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                    Ekspedisi
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                    
+                    {% for ekp in ekspedisi %}
+                        <a class="dropdown-item" onclick="ekspedisi('{{ekp | upper}}', '{{ekp}}');">{{ekp | upper}}</a>
+                    {% endfor %}
+                        
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-12 data">
+            <div class="dropdown ekspedisi row col-lg-12">
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonJenisPengiriman" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
+                    Jenis Pengiriman
+                </button>
+                <div class="dropdown-menu jenisEkspedisi" aria-labelledby="dropdownMenuOffset">
+                    
+                    {% for jne in jne %}
+                        <a class="dropdown-item jne" onclick="jenisPengiriman('{{ jne.1 }}', '{{jne.2}}')">{{ jne.0 }}</a>
+                    {% endfor %}
+                    
+                    {% for tiki in tiki %}
+                        <a class="dropdown-item tiki" onclick="jenisPengiriman('{{ tiki.1 }}', '{{jne.2}}')">{{ tiki.0 }}</a>
+                    {% endfor %}
+                    
+                    {% for pos in pos %}
+                        <a class="dropdown-item pos" onclick="jenisPengiriman('{{ pos.1 }}', '{{jne.2}}')">{{ pos.0 }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-12 data">
+            <button class="btn bayar">Lanjut ke Pembayaran</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.leftBar2 .data h6,
+.leftBar2 .data h1{
+    background-color: #f4f4f4;
+    width: 90%;
+    margin: auto;
+}
+
+.leftBar2 .data h6{
+    padding: 5px;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.leftBar2 .data h1{
+    font-size: 14px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.leftBar2 .data .kodePos{
+    letter-spacing: 5px;
+}
+
+.leftBar2 .data .labelLabel{
+    margin-top: 0px;
+}
+
+.leftBar2 .data .informasiTambahan{
+    width: 90%;
+    background-color: #f4f4f4;
+    height: 150px;
+    margin: auto;
+    border-color: #f4f4f4;
+    font-size: 14px;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.leftBar2 .data .ekspedisi{
+    margin: auto;
+    margin-top: 15px;
+}
+
+.leftBar2 .data .ekspedisi .buttonEkspedisi,
+.leftBar2 .data .ekspedisi .buttonJenisPengiriman{
+    width: 90%;
+    margin: auto;
+}
+
+.leftBar2 .data .ekspedisi .buttonEkspedisi:focus,
+.leftBar2 .data .ekspedisi .buttonJenisPengiriman:focus{
+    box-shadow: none;
+}
+
+.leftBar2 .data .bayar{
+    position: absolute;
+    margin-top: 30px;
+    right: 0;
+    font-weight: bold;
+    font-size: 14px;
+    border-color: #313131;
+    color: #313131;
+    border-radius: 0;
+}
+
+.jne,
+.tiki,
+.pos{
+    visibility: hidden;
+}
+</style>

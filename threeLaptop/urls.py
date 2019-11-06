@@ -14,9 +14,11 @@ urlpatterns = [
     path('ajax/cart', Ajax.as_view(action='cart'), name='cart'),
     path('ajax/search', Ajax.as_view(action='search'), name='search'),
     path('ajax/profile', Ajax.as_view(action='profile'), name='profile'),
+    path('ajax/ongkir', Ajax.as_view(action='ongkir'), name='ongkir'),
 
     path('ajax/api/kabupaten', Ajax.as_view(action = 'get_kabupaten'), name='api_kabupaten'),
     path('ajax/api/kecamatan', Ajax.as_view(action = 'get_kecamatan'), name='api_kecamatan'),
+    path('ajax/api/xendit', Ajax.as_view(action = 'xendit'), name='xendit'),
     
     path('barang/', include('goods.urls')),
     path('address/', include('address.urls')),

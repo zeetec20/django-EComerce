@@ -32,3 +32,47 @@ def cekTarif(asal, tujuan, berat, ekspedisi):
     data = res.read()
     data_json = json.loads(data.decode('utf-8'))
     return data_json['rajaongkir']['results']
+
+def template(list, ekpdsi):
+    template = []
+    if ekpdsi == 'pos':
+        for a in list:
+            template.append(
+                [
+                    a['service'] + ' - ' + 'Rp' + str(format(a['cost'][0]['value'], ',d')) + ' - ' + a['cost'][0]['etd'], 
+                    a['cost'][0]['value'],
+                    a['service']
+                ]
+            )
+    else:
+        for a in list:
+            template.append(
+                [
+                    a['service'] + ' - ' + 'Rp' + str(format(a['cost'][0]['value'], ',d')) + ' - ' + a['cost'][0]['etd'] + 'Hari', 
+                    a['cost'][0]['value'],
+                    a['service']
+                ]
+            )
+    return template
+
+# [{
+#     'code': 'jne',
+#     'name': 'Jalur Nugraha Ekakurir (JNE)',
+#     'costs': [{
+#         'service': 'OKE',
+#         'description': 'Ongkos Kirim Ekonomis',
+#         'cost': [{
+#             'value': 7000,
+#             'etd': '2-3',
+#             'note': ''
+#         }]
+#     }, {
+#         'service': 'REG',
+#         'description': 'Layanan Reguler',
+#         'cost': [{
+#             'value': 8000,
+#             'etd': '1-2',
+#             'note': ''
+#         }]
+#     }]
+# }]
