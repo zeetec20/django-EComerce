@@ -93,16 +93,60 @@ function getAddress(username) {
 
 function ekspedisi(namaEkpd, ekpd) {
     $('.buttonEkspedisi').html(namaEkpd + '&nbsp');
-    $('.' + ekpd).css({
-        'visibility': 'visible'
-    });
     $('.buttonJenisPengiriman').removeAttr('disabled');
+    $('.buttonJenisPengiriman').html('Jenis Pengiriman&nbsp');
+    $('.jne, .tiki, .pos').css({
+        'display': ''
+    });
+    if (ekpd == 'jne') {
+        $('.tiki').css({
+            'display': 'none'
+        });
+        $('.pos').css({
+            'display': 'none'
+        });
+    } else if (ekpd == 'tiki') {
+        $('.jne').css({
+            'display': 'none'
+        });
+        $('.pos').css({
+            'display': 'none'
+        });
+    } else if (ekpd == 'pos') {
+        $('.jne').css({
+            'display': 'none'
+        });
+        $('.tiki').css({
+            'display': 'none'
+        });
+    }
+    $('#total').html($('#totalHargaBarang').text());
+    $('#hargaPengiriman').html('Dihitung Nanti');
 }
 
 function jenisPengiriman(harga, nama) {
     let totalHargaBarang = parseInt($('#totalHargaBarang').text().split(' ')[1].replace(/,/g, ''));
     let total = totalHargaBarang + parseInt(harga);
-    $('#hargaPengiriman').text('Rp. ' + harga.toString().numberComma());
-    $('#total').text('Rp. ' + total.toString().numberComma());
-    $('.buttonJenisPengiriman').html(nama);
+    $('#hargaPengiriman').text('Rp. {0}'.format(harga.toString().numberComma()));
+    $('#total').text('Rp. {0}'.format(total.toString().numberComma()));
+    $('.buttonJenisPengiriman').text(nama);
+}
+
+function textBox(action) {
+    if (action == 'visible') {
+        $('.textBox').css({
+            'visibility': 'visible',
+            'transition': 'all 1s',
+            'width': '40%',
+            'opacity': '1'
+        });
+    }
+    if (action == 'hidden') {
+        $('.textBox').css({
+            'transition': 'all 1s',
+            'width': '0%',
+            'opacity': '0',
+            'visibility': 'hidden',
+        });
+    }
 }

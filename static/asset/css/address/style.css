@@ -352,14 +352,18 @@
 
 .textBox{
     position: fixed;
-    width: 40%;
+    width: 0%;
     background-color: #f4f4f4;
-    height: 115px; 
+    height: 130px;
     margin: auto;
-    margin-top: -130px; /* 380 */
+    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     z-index: 5;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
 }
 
 .textBox .row{
@@ -380,7 +384,7 @@
     border-color: #313131;
     font-size: 14px;
     font-weight: bold;
-    width: 90%;
+    width: 350px;
     margin: auto;
     color: #313131;
     cursor: pointer;

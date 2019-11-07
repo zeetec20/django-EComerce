@@ -1,6 +1,7 @@
 import random
 import math
 import requests as req
+import http
 
 from django.views import View
 from django.shortcuts import render, redirect
@@ -10,8 +11,10 @@ from django.contrib.auth import get_user_model
 
 from goods.models import Barang, SemuaBrand
 from users.forms import RegisterForm
-from users.token import getToken
+from users.token import getTokenUser, getIdTransaksi
 from address.api_rajaongkir import cekTarif, template as templateRajaOngkir
+from transaksi.xendit import makeInvoice
+from transaksi.models import Transaksi
 
 class Index(View):
     template_name = 'index.html'
@@ -106,7 +109,7 @@ class Ajax(View):
                     form.save()
                     user = get_user_model().objects.get(username = request.POST['username'])
                     user.is_active = False
-                    user.token = getToken()
+                    user.token = getTokenUser()
                     user.save()
 
                     return JsonResponse({'success': True})
@@ -202,6 +205,8 @@ class Ajax(View):
                     'informasiTambahan': request.GET['informasiTambahan'],
                     'simpan': request.GET['simpan']
                 }
+                
+                id_transaksi = getIdTransaksi()
 
                 if alamat['simpan'] == 'true':
                     pass
@@ -214,14 +219,19 @@ class Ajax(View):
                 dataOngkirJne   = cekTarif(kotaAsal, kotaTujuan, berat, ekspedisi[1])
                 dataOngkirPos   = cekTarif(kotaAsal, kotaTujuan, berat, ekspedisi[2])
                 
-                self.context['alamat']      = alamat
-                self.context['kontak']      = kontak
-                self.context['ekspedisi']   = ekspedisi
-                self.context['tiki']        = templateRajaOngkir(dataOngkirTiki[0]['costs'], dataOngkirTiki[0]['code'])
-                self.context['jne']         = templateRajaOngkir(dataOngkirJne[0]['costs'], dataOngkirTiki[0]['code'])
-                self.context['pos']         = templateRajaOngkir(dataOngkirPos[0]['costs'], dataOngkirTiki[0]['code'])
+                self.context['id_transaksi']    = id_transaksi
+                self.context['alamat']          = alamat
+                self.context['kontak']          = kontak
+                self.context['ekspedisi']       = ekspedisi
+                self.context['tiki']            = templateRajaOngkir(dataOngkirTiki[0]['costs'], dataOngkirTiki[0]['code'])
+                self.context['jne']             = templateRajaOngkir(dataOngkirJne[0]['costs'], dataOngkirTiki[0]['code'])
+                self.context['pos']             = templateRajaOngkir(dataOngkirPos[0]['costs'], dataOngkirTiki[0]['code'])
 
                 return render(self.request, 'address/leftBar2.html', self.context)
+            
+            if self.action == 'xendit':
+                data = makeInvoice(request.GET['id_transaksi'], request.user.email, request.GET['description'], str(request.GET['amount']))
+                return JsonResponse(data)
         else:
             return redirect('index')
         return HttpResponse("ajax django")

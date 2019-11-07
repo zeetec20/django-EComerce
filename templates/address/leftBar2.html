@@ -3,73 +3,83 @@
         <h1 class="title">Three Laptop</h1>
     </div>
     <div class="row col-lg-12">
-        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
+        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/barang/{{ request.GET.barang }}" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
     </div>
 </div>
+
 <div class="row address leftBar2">
     <div class="row col-lg-12">
         <h1 class="title">Alamat</h1>
     </div>
-    <div class="row col-lg-12">
-        <div class="row col-lg-12 data">
-            <h6 class="labelLabel">Label Alamat</h6>
-            <h1 class="label" id="namaLengkap">{{ alamat.label }}</h1>
-        </div>
-        <div class="row col-lg-12 data">
-            <h6 class="labelNamaLengkap">Nama Lengkap</h6>
-            <h1 class="namaLengkap" id="namaLengkap">{{ alamat.namaLengkap }}</h1>
-        </div>
-        <div class="row col-lg-12 data">
-            <h6 class="labelAlamat">Provinsi / Kabupaten / Kecamatan</h6>
-            <h1 class="alamat" id="alamat">{{ alamat.provinsi }} / {{ alamat.kabupaten }} / {{ alamat.kecamatan }}</h1>
-        </div>
-        <div class="row col-lg-12 data">
-            <h6 class="labelKodePos">Kode Pos</h6>
-            <h1 class="kodePos" id="kodePos">{{ alamat.kodePos }}</h1>
-        </div>
-        <div class="row col-lg-12 data">
-            <h6 class="labelInformasiTambahan">Informasi Tambahan</h6>
-            <textarea name="" id="" class="informasiTambahan">{{ alamat.informasiTambahan }}</textarea>
-        </div>
-        <div class="row col-lg-12 data">
-            <div class="dropdown ekspedisi row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonEkspedisi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                    Ekspedisi
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                    
-                    {% for ekp in ekspedisi %}
-                        <a class="dropdown-item" onclick="ekspedisi('{{ekp | upper}}', '{{ekp}}');">{{ekp | upper}}</a>
-                    {% endfor %}
+    <!-- <form action="/ajax/saveTransaksi" method="post"> -->
+        {% csrf_token %}
+        <div class="row col-lg-12">
+            <div class="row col-lg-12 data">
+                <h6 class="labelLabel">Label Alamat</h6>
+                <h1 class="label" id="label">{{ alamat.label }}</h1>
+                <input type="hidden" name="label" value="" id="labelHidden">
+            </div>
+            <div class="row col-lg-12 data">
+                <h6 class="labelNamaLengkap">Nama Lengkap</h6>
+                <h1 class="namaLengkap" id="namaLengkap">{{ alamat.namaLengkap }}</h1>
+                <input type="hidden" name="namaLengkap" value="" id="namaLengkapHidden">
+            </div>
+            <div class="row col-lg-12 data">
+                <h6 class="labelAlamat">Provinsi / Kabupaten / Kecamatan</h6>
+                <h1 class="alamat" id="alamat">{{ alamat.provinsi }} / {{ alamat.kabupaten }} / {{ alamat.kecamatan }}</h1>
+                <input type="hidden" name="namaLengkap" value="" id="alamatHidden">
+            </div>
+            <div class="row col-lg-12 data">
+                <h6 class="labelKodePos">Kode Pos</h6>
+                <h1 class="kodePos" id="kodePos">{{ alamat.kodePos }}</h1>
+                <input type="hidden" name="kodePos" value="" id="kodePosHidden">
+            </div>
+            <div class="row col-lg-12 data">
+                <h6 class="labelInformasiTambahan">Informasi Tambahan</h6>
+                <textarea name="" id="" class="informasiTambahan">{{ alamat.informasiTambahan }}</textarea>
+                <input type="hidden" name="informasiTambahan" value="" id="informasiTambahanHidden">
+            </div>
+            <div class="row col-lg-12 data">
+                <div class="dropdown ekspedisi row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonEkspedisi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        Ekspedisi
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                         
+                        {% for ekp in ekspedisi %}
+                            <a class="dropdown-item" onclick="ekspedisi('{{ekp | upper}}', '{{ekp}}');">{{ekp | upper}}</a>
+                        {% endfor %}
+                            
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row col-lg-12 data">
-            <div class="dropdown ekspedisi row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonJenisPengiriman" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
-                    Jenis Pengiriman
-                </button>
-                <div class="dropdown-menu jenisEkspedisi" aria-labelledby="dropdownMenuOffset">
-                    
-                    {% for jne in jne %}
-                        <a class="dropdown-item jne" onclick="jenisPengiriman('{{ jne.1 }}', '{{jne.2}}')">{{ jne.0 }}</a>
-                    {% endfor %}
-                    
-                    {% for tiki in tiki %}
-                        <a class="dropdown-item tiki" onclick="jenisPengiriman('{{ tiki.1 }}', '{{jne.2}}')">{{ tiki.0 }}</a>
-                    {% endfor %}
-                    
-                    {% for pos in pos %}
-                        <a class="dropdown-item pos" onclick="jenisPengiriman('{{ pos.1 }}', '{{jne.2}}')">{{ pos.0 }}</a>
-                    {% endfor %}
+            <div class="row col-lg-12 data">
+                <div class="dropdown ekspedisi row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonJenisPengiriman" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
+                        Jenis Pengiriman
+                    </button>
+                    <div class="dropdown-menu jenisEkspedisi" aria-labelledby="dropdownMenuOffset">
+                        
+                        {% for jne in jne %}
+                            <a class="dropdown-item jne" onclick="jenisPengiriman('{{ jne.1 }}', '{{jne.2}}')">{{ jne.0 }}</a>
+                        {% endfor %}
+                        
+                        {% for tiki in tiki %}
+                            <a class="dropdown-item tiki" onclick="jenisPengiriman('{{ tiki.1 }}', '{{tiki.2}}')">{{ tiki.0 }}</a>
+                        {% endfor %}
+
+                        {% for pos in pos %}
+                            <a class="dropdown-item pos" onclick="jenisPengiriman('{{ pos.1 }}', '{{pos.2}}')">{{ pos.0 }}</a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
+            <input type="hidden" name="" id="id_transaksi" value="{{ id_transaksi }}">
+            <div class="row col-lg-12 data">
+                <button class="btn bayar" onclick="xendit();">Lanjut ke Pembayaran</button>
+            </div>
         </div>
-        <div class="row col-lg-12 data">
-            <button class="btn bayar">Lanjut ke Pembayaran</button>
-        </div>
-    </div>
+    <!-- </form> -->
 </div>
 
 <style>
@@ -136,11 +146,5 @@
     border-color: #313131;
     color: #313131;
     border-radius: 0;
-}
-
-.jne,
-.tiki,
-.pos{
-    visibility: hidden;
 }
 </style>

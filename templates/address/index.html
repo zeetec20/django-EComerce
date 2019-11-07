@@ -3,10 +3,13 @@
 {% load humanize %}
 {% load custom_filter %}
 
+{% block title %}
+    <title>Alamat</title>
+{% endblock title %}
+
 {% block style %}
     <link rel="stylesheet" href="{% static 'asset/css/address/style.css' %}">    
 {% endblock style %}
-    
 
 {% block body %}
     <div class="screenBlank"></div>
@@ -68,9 +71,9 @@
     </div>
 {% endblock body %}
 
-
 {% block script %}
     <script src="{% static 'asset/js/address/ajax.js' %}"></script>
     <script src="{% static 'asset/js/address/function.js' %}"></script>
+    <script src="{% static 'asset/js/address/script.js' %}"></script>
 {% endblock script %}
     

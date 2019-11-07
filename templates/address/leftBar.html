@@ -3,7 +3,7 @@
         <h1 class="title">Three Laptop</h1>
     </div>
     <div class="row col-lg-12">
-        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
+        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/barang/{{ request.GET.barang }}" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
     </div>
 </div>
 <div class="row contact">
@@ -29,8 +29,6 @@
     <div class="row col-lg-12">
         <h1 class="title">Alamat</h1>
     </div>
-    <!-- <form action="/ajax/saveAlamat" method="post"> -->
-        {% csrf_token %}
         <div class="row col-lg-12">
             <div class="form-group input">
                 <input type="text" class="form-control labelAddress" id="alamatLabelAlamat" placeholder="Label Alamat">
@@ -50,7 +48,6 @@
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonProvinsi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
                     Provinsi
                 </button>
-                <input type="hidden" name="provinsi" value="" id="inputHiddenProvinsi">
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
 
                     {% for province in allProvince %}
@@ -63,7 +60,6 @@
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
                     Kabupaten / Kota
                 </button>
-                <input type="hidden" name="kabupaten" value="" id="inputHiddenKabupaten">
                 <div class="dropdown-menu dropdown-menu-kabupaten" aria-labelledby="dropdownMenuOffset">
 
                     {% include 'address/listKabupaten.html' %}
@@ -74,7 +70,6 @@
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKecamatan" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
                     Kecamatan
                 </button>
-                <input type="hidden" name="kecamatan" value="" id="inputHiddenKecamatan">
                 <div class="dropdown-menu dropdown-menu-kecamatan" aria-labelledby="dropdownMenuOffset">
 
                     {% include 'address/listKecamatan.html' %}
@@ -91,7 +86,7 @@
         </div>
         <div class="row col-lg-12 additionalInformation">
             <div class="row">
-                <textarea name="" id="alamatInformasiTambahan" placeholder="Informasi Tambahan"></textarea>
+                <textarea name="" id="alamatInformasiTambahan" placeholder="Informasi Tambahan">{{test}}</textarea>
                 <div class="borderBottom"></div>
                 <small id="passwordHelp" class="form-text text-muted">Isikan dengan detail alamatmu seperti dusun, RT/RW, ciri-ciri rumah</small>
             </div>
@@ -107,5 +102,4 @@
                 <button class="btn rounded-0" onclick="getAddress('{{user.username}}')">Prosess</button>
             </div>
         </div>
-    <!-- </form> -->
 </div>

@@ -262,18 +262,20 @@ body{
 .login-register{
     position: fixed;
     width: 60%;
-    height: 440px;
+    height: 0px; /*440*/
     background-color: #f4f4f4;
     z-index: 4;
     display: block;
-    margin: 5% auto;
+    margin: auto;
     left: 0;
     right: 0;
-    top: -90%;
+    top: 0;
+    bottom: 0;
     opacity: 0;
+    visibility: hidden;
     border-radius: 0px;
-    box-shadow: rgba(0, 0, 0, 0.116) 0px 3px 10px 0px;
-    transition: all 1s;
+    box-shadow: #0000001e 0px 3px 10px 0px;
+    /* transition: all 1s; */
     overflow: hidden;
 }
 
@@ -529,14 +531,15 @@ body{
 .cartPage{
     position: fixed;
     z-index: 6;
-    display: block;
+    height: 0px; /*650*/
     margin: auto;
-    margin-top: 50px;
-    left: -160%;
+    left: 0;
     right: 0;
+    top: 0;
+    bottom: 0;
     background-color: white;
-    height: 650px;
     visibility: hidden;
+    overflow: hidden;
     opacity: 0;
 }
 
@@ -551,6 +554,7 @@ body{
     margin-top: 10px;
     overflow: auto;
     height: 450px;
+    width: 100%;
 }
 
 .cartPage .header-bar h3{
@@ -681,10 +685,12 @@ body{
     right: 0;
     background-color: white;
     z-index: 5;
-    width: 55%;
-    height: 580px;
-    margin-top: -600px;
+    width: 55%; /*55%*/
+    height: 0px; /*580*/
+    top: 0;
+    bottom: 0;
     opacity: 0;
+    overflow: hidden;
     visibility: hidden;
 }
 
@@ -698,17 +704,15 @@ body{
 .pageProfile .row:nth-child(1){
     border-bottom: solid 1px #f4f4f4;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .pageProfile .leftBar{
-    background-color: #f4f4f4;
     margin-right: 5px;
     padding-bottom: 25px;
 }
 
 .pageProfile .rightBar{
-    background-color: #f4f4f4;
     margin-left: 5px;
     height: 407px;
 }
@@ -762,7 +766,7 @@ body{
 }
 
 .pageProfile .leftBar input{
-    background-color: white;
+    background-color: #f4f4f4;
     border-radius: 0;
     font-size: 14px;
     height: 40px;
@@ -931,17 +935,17 @@ body{
 }
 
 @media only screen and (min-width: 750px) and (max-width: 1440px){ /* Laptop */
-    .cartPage{
-        margin-top: 20px;
-        height: 600px;
-    }
 
     .cartPage .list{
         height: 400px;
     }
 
-    .login-register{
-        margin-top: 5px;
+    .register .fullname{
+        margin-top: 20px;
+    }
+
+    .register .input{
+        margin-top: 7px;
     }
 }
 

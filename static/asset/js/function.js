@@ -48,15 +48,17 @@ function screenBlank(action) {
 function pageLogin_Register(action) {
     if (action == 'show') {
         $('.login-register').css({
+            'visibility': 'visible',
             'transition': 'all 1s',
-            'opacity': '1',
-            'top': '5%',
+            'height': '440px',
+            'opacity': '1'
         });
     } else if (action == 'close') {
         $('.login-register').css({
             'transition': 'all 1s',
             'opacity': '0',
-            'top': '-90%',
+            'height': '0px',
+            'visibility': 'hidden',
         });
     }
 }
@@ -85,8 +87,10 @@ function showLogin_Register(action) {
         ShowLoginPage();
         screenBlank('show');
         $('.login-register').css({
+            'visibility': 'visible',
+            'transition': 'all 1s',
             'height': '440px',
-            'margin-top': '5%'
+            'opacity': '1'
         });
     }
     if (action == 'register') {
@@ -94,13 +98,15 @@ function showLogin_Register(action) {
         ShowRegisterPage();
         screenBlank('show');
         $('.login-register').css({
-            'height': '630px',
-            'margin-top': '30px'
+            'visibility': 'visible',
+            'transition': 'all 1s',
+            'height': '635px',
+            'opacity': '1'
         });
         if (mediaQuery('720', '1440').matches) {
             $('.login-register').css({
-                'height': '610px',
-                'margin-top': '-20px'
+                'height': '625px',
+                'top': '0'
             });
         }
     }
@@ -112,8 +118,16 @@ function pageCart(action) {
             'transition': 'all 1s',
             'visibility': 'visible',
             'opacity': '1',
-            'left': '0',
+            'height': '650px'
         });
+        if (mediaQuery(750, 1440).matches) {
+            $('.cartPage').css({
+                'transition': 'all 1s',
+                'visibility': 'visible',
+                'opacity': '1',
+                'height': '600px'
+            });
+        }
         screenBlank('show');
         $.ajax({
             url: '/ajax/cart',
@@ -129,8 +143,8 @@ function pageCart(action) {
     if (action == 'close') {
         $('.cartPage').css({
             'transition': 'all 1s',
-            'left': '-160%',
             'opacity': '0',
+            'height': '0px',
             'visibility': 'hidden',
         });
         screenBlank('close');
@@ -184,7 +198,7 @@ function profile(action) {
     if (action == 'close') {
         $('.pageProfile').css({
             'transition': 'all 1s',
-            'margin-top': '-600px',
+            'height': '0px',
             'opacity': '0',
             'visibility': 'hidden',
         });
@@ -195,14 +209,9 @@ function profile(action) {
         $('.pageProfile').css({
             'visibility': 'visible',
             'transition': 'all 1s',
-            'margin-top': '150px',
+            'height': '580px',
             'opacity': '1',
         });
-        if (mediaQuery(750, 1440).matches) {
-            $('.pageProfile').css({
-                'margin-top': '30px'
-            });
-        }
         screenBlank('show');
     }
 }

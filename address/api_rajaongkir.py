@@ -1,37 +1,39 @@
 import http.client
 import json
+import requests
 
-api_key = '1a5b8aa3d26f5de3986fe987cf40314e'
+api_key = 'd83bacaaaa625ab17c3bd8c620de72ff'
 conn = http.client.HTTPSConnection("api.rajaongkir.com")
 
 def getCity(nama):
     headers = { 'key': api_key }
-    conn.request("GET", "/starter/city", headers=headers)  
-    res = conn.getresponse()
-    data = res.read()
-    data_json = json.loads(data.decode("utf-8"))
+    data_json = requests.get('https://api.rajaongkir.com//starter/city', headers).json()
     result = data_json['rajaongkir']['results']
     for city in result:
         if city['city_name'] == nama:
             city_id = city['city_id']
             return city_id
+    print('tidak ditemukan')
 
 def cekTarif(asal, tujuan, berat, ekspedisi):
-    origin      = getCity(asal)
-    destination = getCity(tujuan)
-    weight      = berat
-    courier     = ekspedisi
-    payload = "origin=" + origin + "&destination=" + destination + "&weight=" + weight + "&courier=" + courier
+    origin      = str(getCity(asal))
+    destination = str(getCity(tujuan))
+    weight      = str(berat)
+    courier     = str(ekspedisi)
+    
     headers = {
-        'key': "1a5b8aa3d26f5de3986fe987cf40314e",
-        'content-type': "application/x-www-form-urlencoded"
+        'content-type': 'application/x-www-form-urlencoded',
+        'key': api_key,
     }
 
-    conn.request("POST", "/starter/cost", str(payload), headers)
-    res = conn.getresponse()
-    data = res.read()
-    data_json = json.loads(data.decode('utf-8'))
-    return data_json['rajaongkir']['results']
+    data = {
+        'origin': origin,
+        'destination': destination,
+        'weight': weight,
+        'courier': courier
+    }
+    response = requests.post('https://api.rajaongkir.com/starter/cost', headers=headers, data=data).json()
+    return response['rajaongkir']['results']
 
 def template(list, ekpdsi):
     template = []
@@ -54,6 +56,22 @@ def template(list, ekpdsi):
                 ]
             )
     return template
+
+headers = {
+    'content-type': 'application/x-www-form-urlencoded',
+    'key': api_key,
+}
+
+data = {
+    'origin': '501',
+    'destination': '114',
+    'weight': '1700',
+    'courier': 'jne'
+}
+
+response = requests.post('https://api.rajaongkir.com/starter/cost', headers=headers, data=data)
+print(response.json())
+
 
 # [{
 #     'code': 'jne',

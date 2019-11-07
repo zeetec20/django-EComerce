@@ -13,9 +13,11 @@ def makeInvoice(id, payerEmail, description, amount):
     }
     response = requests.post('https://api.xendit.co/v2/invoices', data=data, auth=('xnd_development_O46JfOtygef9kMNsK+ZPGT+ZZ9b3ooF4w3Dn+R1k+2fT/7GlCAN3jg==', ''))
     url = response.json()
+    print(url)
     data = {
         'invoiceUrl': url['invoice_url'],
-        'id': url['external_id']
+        'id': url['external_id'],
+        'raw': url
     }
     return data
 
