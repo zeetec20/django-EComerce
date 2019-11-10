@@ -80,6 +80,7 @@ body{
     width: 18px;
     float: left;
     margin: 17px;
+    cursor: pointer;
 }
 
 .header1 .buttonMain{
@@ -198,6 +199,7 @@ body{
     color: #313131;
     margin-top: 15px;
     font-weight: bold;
+    margin-bottom: 15px;
 }
 
 .footer .body2 .title{
@@ -205,6 +207,7 @@ body{
     margin-top: 15px;
     font-weight: bold;
     width: 100%;
+    margin-bottom: 15px;
 }
 
 .footer .body2 .text{
@@ -215,6 +218,7 @@ body{
     color: #313131;
     font-size: 14px;
     margin-top: 5px;
+    cursor: pointer;
 }
 
 .footer .inputSubscribe input{
@@ -222,6 +226,7 @@ body{
     border-right: none;
     border-color: white;
     background-color: #f4f4f4;
+    color: #313131;
 }
 
 .footer .inputSubscribe input:hover{
@@ -240,6 +245,7 @@ body{
     color: #313131;
     background-color: #f4f4f4;
     z-index: 3 !important;
+    box-shadow: none;
 }
 
 .footer .inputSubscribe .button:hover{

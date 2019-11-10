@@ -23,9 +23,9 @@ function register(event) {
         processData: false,
         contentType: false,
         success: function(data) {
-            $('#form-register').get(0).reset();
             pageLogin_Register('close');
             screenBlank('close');
+            $('#form-register').get(0).reset();
         }
     });
     
@@ -78,7 +78,20 @@ function ajaxProfile() {
         success: function (returnData) {
             $('.pageProfile').html(returnData);
         }
-    })
+    });
+}
+
+function ajaxSubscribe(email) {
+    $.ajax({
+        url: '/ajax/subscribe',
+        type: 'GET',
+        data: {
+            'email': email
+        },
+        success: function (returnData) {
+            
+        }
+    });
 }
 
 $('#form-register').submit(register);

@@ -1,13 +1,15 @@
 import random
 import math
 import requests as req
-import http
 
 from django.views import View
+from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth import get_user_model
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 from goods.models import Barang, SemuaBrand
 from users.forms import RegisterForm
@@ -52,7 +54,7 @@ class Index(View):
 
         if request.user.is_authenticated:
             if request.user.profile == "":
-                self.context['profile_user'] = '/static/asset/images/icon/user.png'
+                self.context['profile_user'] = 'static/asset/images/icon/user.png'
             else:
                 self.context['profile_user'] = request.user.profile
         
@@ -90,8 +92,11 @@ class Ajax(View):
             if self.action == 'login':
                 inputUsername = request.POST['username']
                 inputPassword = request.POST['password']
+                print(inputPassword, inputUsername)
                 user = authenticate(request, username=inputUsername, password=inputPassword)
-                login(request, user)
+                print(user)
+                if user != '':
+                    login(request, user)
 
                 if request.user.profile == "":
                     self.context['profile_user'] = '/static/asset/images/icon/user.png'
@@ -106,11 +111,30 @@ class Ajax(View):
             if self.action == 'register':
                 form = RegisterForm(request.POST, request.FILES or None)
                 if form.is_valid():
+                    token = getTokenUser()
                     form.save()
                     user = get_user_model().objects.get(username = request.POST['username'])
                     user.is_active = False
-                    user.token = getTokenUser()
+                    user.token = token
+                    user.set_password(form.cleaned_data['password'])
                     user.save()
+
+                    email_context = {
+                        'token': token,
+                        'username': user.username,
+                        'email': user.email,
+                        'fullName': user.fullname,
+                        'url': 'http://127.0.0.1:8000/user/activate/' + str(token)
+                    }
+                    html = render_to_string('email/register.html', email_context)
+                    msg = EmailMessage(
+                        'Selamat datang di Three Laptop',
+                        html,
+                        'jusles363@gmail.com',
+                        [request.POST['email']]
+                    )
+                    msg.content_subtype = 'html'
+                    msg.send()
 
                     return JsonResponse({'success': True})
                 else:
@@ -209,7 +233,9 @@ class Ajax(View):
                 id_transaksi = getIdTransaksi()
 
                 if alamat['simpan'] == 'true':
-                    pass
+                    saveAlamat = "Label: {}\rNama Lengkap: {}\rProvinsi: {}\rKabupaten: {}\rKecamatan: {}\rKode Pos: {}\rInformasi Tambahan: {}\r".format(
+                        alamat[0], alamat[1], alamat[2], alamat[3], alamat[4], alamat[5], alamat[6]
+                    )
                 
                 kotaAsal = 'Banyuwangi'
                 kotaTujuan = alamat['kabupaten']
@@ -232,6 +258,23 @@ class Ajax(View):
             if self.action == 'xendit':
                 data = makeInvoice(request.GET['id_transaksi'], request.user.email, request.GET['description'], str(request.GET['amount']))
                 return JsonResponse(data)
+
+            if self.action == 'subscribe':
+                email = request.GET['email']
+                html = render_to_string('email/subscribe.html', {})
+                msg = EmailMessage(
+                    'Selamat datang di Three Laptop',
+                    html,
+                    'jusles363@gmail.com',
+                    [email]
+                )
+                msg.content_subtype = 'html'
+                msg.send()
+                return JsonResponse({'success': 'true'})
         else:
             return redirect('index')
         return HttpResponse("ajax django")
+
+class Test(TemplateView):
+    template_name = 'email/subscribe.html'
+    

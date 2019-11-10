@@ -152,7 +152,7 @@
         <div class="row col-lg-12 header1">
             <div class="searchBar col-lg-6">
                 <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh">
-                <input class="form-control search" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control search" type="search" placeholder="Pencarian" aria-label="Search">
             </div>
             <div class="cart col-lg-6 col-sm-12">
                 <div class="dropdown button">
@@ -169,8 +169,8 @@
                     </div>
                 </div>
                 
-                <h6 class="checkOut">Check Out</h6>
-                <h6 class="cartText cart" onclick="pageCart('show');">Cart [ <span id="numberCart">0</span> ]</h6>
+                <h6 class="checkOut" onclick="pageCart('show');">Bayar</h6>
+                <h6 class="cartText cart" onclick="pageCart('show');">Keranjang [ <span id="numberCart">0</span> ]</h6>
                 <img class="iconCart cart" onclick="pageCart('show');" src="{% static 'asset/images/icon/cart.png' %}" alt="" onclick="checkCookie('barang')">
             </div>
         </div>
@@ -192,17 +192,17 @@
             </div>
             <div class="col-lg-9 col-sm-12 body2">
                 <div class="row header">
-                    <h3 class="titleLeft">Featured Collection</h3>
+                    <h3 class="titleLeft">Product Populer</h3>
                     <div class="dropdown buttonRight">
                         <button type="button" class="btn btn-secondary dropdown-toggle buttonMain" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                            Short By
+                            Populer
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            <a class="dropdown-item" href="#">Popular</a>
-                            <a class="dropdown-item" href="#">Price Low to High</a>
-                            <a class="dropdown-item" href="#">Price High to Low</a>
-                            <a class="dropdown-item" href="#">Name A -> Z</a>
-                            <a class="dropdown-item" href="#">Price Z -> A</a>
+                            <a class="dropdown-item" href="#">Populer</a>
+                            <a class="dropdown-item" href="#">Harga Rendah ke Tinggi</a>
+                            <a class="dropdown-item" href="#">Harga Tinggi ke Rendah</a>
+                            <a class="dropdown-item" href="#">Nama A -> Z</a>
+                            <a class="dropdown-item" href="#">Nama Z -> A</a>
                         </div>
                     </div>
                 </div>
@@ -230,35 +230,35 @@
         <div class="row">
             <div class="col-md-6 col-sm-12 body1">
                 <div class="row ">
-                    <h4 class="title">Link</h4>
+                    <h4 class="title">Lain lain</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Search</h4>
+                    <h4 class="footerLink" onclick="linkSearch()">Pencarian</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">News</h4>
+                    <h4 class="footerLink">Berita Terbaru</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Our Story</h4>
+                    <h4 class="footerLink">Tentang Kami</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">FAQ</h4>
+                    <h4 class="footerLink">Pertanyaan</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Return Police</h4>
+                    <h4 class="footerLink">Kebijakan</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Contact us</h4>
+                    <h4 class="footerLink">Contact</h4>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 body2">
                 <div class="row">
-                    <h4 class="title">Subscribe</h4>
-                    <h6 class="text">Sign up for the latest news</h6>
+                    <h4 class="title">Berita Terbaru</h4>
+                    <h6 class="text">Segera berlangganan, agar mendapatkan berita terbaru dari kami!</h6>
                     <div class="input-group inputSubscribe">
-                        <input type="email" class="form-control" placeholder="your@email.com" aria-label="email" aria-describedby="button-addon2">
+                        <input type="email" class="form-control" id="inputSubscribe" placeholder="email@kamu.com" aria-label="email" aria-describedby="button-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary button" type="button" id="button-addon2">Button</button>
+                            <button class="btn btn-outline-secondary button" type="button" id="button-addon2" onclick="ajaxSubscribe($('#inputSubscribe').val());">Berlangganan</button>
                         </div>
                     </div>
                 </div>

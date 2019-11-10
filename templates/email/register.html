@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body{
+            height: 100%;
+        }
+        
+        .head{
+            position: absolute;
+            margin: auto;
+            width: 80%;
+            padding: 20px;
+            background-color: #313131;
+            top: 15px;
+            left: 0;
+            right: 0;
+        }
+        
+        .head .title{
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 5px;
+            color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        
+        .head .caption{
+            font-size: 18px;
+            color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding-bottom: 5px;
+        }
+        
+        .footer{
+            background-color: #313131;
+            padding: 15px;
+            padding-bottom: 15px;
+            width: 80%;
+            margin: auto;
+        }
+        
+        .footer h1{
+            font-size: 12px;
+            color: white;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        
+        .containerFooter{
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+            bottom: 15px;
+        }
+        
+        .content{
+            position: absolute;
+            top: 140px;
+            width: 80%;
+            margin: auto;
+            left: 0;
+            right: 0;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        
+        .content .response{
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .detailAkun .label{
+            font-size: 12px;
+            font-weight: bold;
+            color: #313131;
+            margin-bottom: 0px;
+            width: 100px;
+            padding-left: 5px;
+            padding-bottom: 2px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        
+        .detailAkun .detail{
+            border-top: solid 1px #313131;
+            font-size: 14px;
+            padding: 7px;
+            padding-left: 5px;
+            width: 300px;
+            margin-bottom: 20px;
+            background-color: #f4f4f4;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        
+        .button{
+            position: absolute;
+            width: 70%;
+            margin: auto;
+            left: 0;
+            right: 0;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .button .btn{
+            width: 100%;
+            background-color: #313131;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            border: solid 1.4px #313131;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            cursor: pointer;
+        }
+
+        .button .btn:hover{
+            transition: all 0.7s;
+            background-color: white;
+            color: #313131;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row head col-lg-12">
+            <div class="col-lg-12">
+                <h1 class="title">Three Laptop</h1>
+            </div>
+            <div class="co-lg-12">
+                <h1 class="caption">Terimakasih telah melakukan registrasi di Three Laptop</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container content">
+        <div class="row col-lg-12">
+            <p class="response" style="color: #313131;">
+                Terima kasih telah bergabung dengan Three Laptop. 
+                Berikut adalah detail akun Anda. Pastikan Anda menyimpannya dengan aman.
+            </p>
+        </div>
+        <div class="row col-lg-12 detailAkun">
+            <div class="username col-lg-12">
+                <h1 class="labelUsername label">Username</h1>
+                <h1 class="username detail" style="color: #313131;">{{username}}</h1>
+            </div>
+            <div class="username col-lg-12">
+                <h1 class="labelUsername label">Email</h1>
+                <h1 class="username detail" style="color: #313131;">{{email}}</h1>
+            </div>
+            <div class="username col-lg-12">
+                <h1 class="labelUsername label">Nama Lengkap</h1>
+                <h1 class="username detail" style="color: #313131;">{{fullName}}</h1>
+            </div>
+        </div>
+        <div class="row col-lg-12">
+            <p class="response" style="color: #313131;">
+                Namun, sebelum Anda menggunakan akun tersebut, 
+                harap lakukan aktivasi dengan mengklik tombol di bawah ini
+            </p>
+        </div>
+        <div class="row col-lg-12 button">
+            <a href="{{ url }}"><button class="btn">Aktivasi Akun</button></a>
+        </div>
+    </div>
+    <div class="container containerFooter">
+        <div class="row col-lg-12 footer">
+            <h1>Copyright © 2019 Three Laptop</h1>
+        </div>
+    </div>
+        
+</body>
+</html>

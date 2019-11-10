@@ -20,7 +20,7 @@ def cekTarif(asal, tujuan, berat, ekspedisi):
     destination = str(getCity(tujuan))
     weight      = str(berat)
     courier     = str(ekspedisi)
-    
+
     headers = {
         'content-type': 'application/x-www-form-urlencoded',
         'key': api_key,
@@ -56,23 +56,6 @@ def template(list, ekpdsi):
                 ]
             )
     return template
-
-headers = {
-    'content-type': 'application/x-www-form-urlencoded',
-    'key': api_key,
-}
-
-data = {
-    'origin': '501',
-    'destination': '114',
-    'weight': '1700',
-    'courier': 'jne'
-}
-
-response = requests.post('https://api.rajaongkir.com/starter/cost', headers=headers, data=data)
-print(response.json())
-
-
 # [{
 #     'code': 'jne',
 #     'name': 'Jalur Nugraha Ekakurir (JNE)',

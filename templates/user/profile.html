@@ -39,7 +39,7 @@
     </div>
     <div class="row col-lg-6 rightBar">
         <div class="col-lg-12 foto">
-            <img src="/media/{{profile_user}}" alt="">
+            <img src="{% if user.profile == '' %}/static/asset/images/icon/user.png{% else %}/media/{{user.profile}}{% endif %}" class="profile" alt="">
         </div>
         <div class="col-lg-12 changeProfile">
             <label class="btn" for="image">Ganti Foto Profile</label>

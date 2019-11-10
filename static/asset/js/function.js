@@ -216,6 +216,13 @@ function profile(action) {
     }
 }
 
+function linkSearch() {
+    window.scrollTo({top: 0, behavior: "smooth"});
+    setTimeout(function(){
+        $('.search').focus();
+    }, 750);
+}
+
 // delete_cookie('barang');
 // checkCookie('barang');
 

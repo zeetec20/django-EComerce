@@ -2,11 +2,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from .views import Index, Ajax
+from .views import Index, Ajax, Test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Index.as_view(), name = 'index'),
+    path('test', Test.as_view()),
     
     path('ajax/logout', Ajax.as_view(action='logout'), name='logout'),
     path('ajax/login', Ajax.as_view(action='login'), name='login'),
@@ -15,6 +16,7 @@ urlpatterns = [
     path('ajax/search', Ajax.as_view(action='search'), name='search'),
     path('ajax/profile', Ajax.as_view(action='profile'), name='profile'),
     path('ajax/ongkir', Ajax.as_view(action='ongkir'), name='ongkir'),
+    path('ajax/subscribe', Ajax.as_view(action='subscribe'), name='subscribe'),
 
     path('ajax/api/kabupaten', Ajax.as_view(action = 'get_kabupaten'), name='api_kabupaten'),
     path('ajax/api/kecamatan', Ajax.as_view(action = 'get_kecamatan'), name='api_kecamatan'),

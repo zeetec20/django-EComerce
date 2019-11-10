@@ -4,13 +4,14 @@ from django.contrib.auth import get_user_model
 from django.views import View
 
 def activate(request, numberToken):
-    # user = get_user_model().objects.get(token=numberToken)
-    # user.is_activate = True
-    # user.save()
+    user = get_user_model().objects.get(token=numberToken)
+    print(user.is_active)
+    user.is_active = True
+    user.save()
     context = {
-        'username': 'zeetec',
-        'email': 'jusles363@gmail.com',
-        'fullname': 'Firman Justisio Lestari'
+        'username': user.username,
+        'email': user.email,
+        'fullname': user.fullname
     }
     return render(request, 'user/activate.html', context)
 
