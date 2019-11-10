@@ -1,4 +1,9 @@
 <img src="{% if user.profile == '' %}/static/asset/images/icon/user.png{% else %}/media/{{user.profile}}{% endif %}" class="profile" alt="">
 <a class="dropdown-item username" style="color: #313131;">{{ user.username }}</a>
+
+{% if staff in user.groups.all %}
+<a class="dropdown-item" href="/admin" target="_blank">Admin</a>
+{% endif %}
+    
 <a class="dropdown-item" onclick="profile('show')">Profil</a>
 <a class="dropdown-item" id="logout" onclick="logout()">Logout</a>

@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from django.shortcuts import redirect
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Subscribe
 
 class CustomUserAdmin(UserAdmin):
     add_form        = CustomUserCreationForm
@@ -19,3 +20,4 @@ class CustomUserAdmin(UserAdmin):
             obj.delete()
 
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Subscribe)

@@ -121,7 +121,8 @@ body{
 }
 
 .userBar .dropdown-item:nth-child(3):hover,
-.userBar .dropdown-item:nth-child(4):hover{
+.userBar .dropdown-item:nth-child(4):hover,
+.userBar .dropdown-item:nth-child(5):hover{
     color: white !important;
     cursor: pointer;
 }
@@ -145,6 +146,19 @@ body{
     text-decoration: none;
 }
 
+.select .row img{
+    width: 17px;
+    cursor: pointer;
+}
+
+.select .row{
+    /* margin: auto; */
+}
+
+.select .row img:nth-child(1){
+    margin-left: -13px;
+}
+
 .body2 .header{
     height: 50px;
     width: 100% !important;
@@ -153,6 +167,8 @@ body{
 .body2 .titleLeft{
     float: left;
     margin: 5px;
+    font-weight: bold;
+    font-size: 26px;
 }
 
 .body2 .header .buttonRight{
@@ -193,6 +209,7 @@ body{
 .footer{
     border-top: solid 1px #e8e8e8;
     background-color: white;
+    margin-top: 30px;
 }
 
 .footer .body1 .title{
@@ -534,6 +551,34 @@ body{
     cursor: pointer;
 }
 
+.type{
+    margin-top: 20px;
+}
+
+.type h3{
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.type img{
+    width: 100%;
+    cursor: pointer;
+    box-shadow: #00000031 0px 5px 15px 0px;
+}
+
+.type img:hover{
+    transition: all 0.5s;
+    box-shadow: #0000005e 0px 5px 15px 0px;
+}
+
+.type .row{
+    margin-bottom: 28px;
+}
+
+.type .row:nth-child(1){
+    margin-bottom: 10px;
+}
+
 .cartPage{
     position: fixed;
     z-index: 6;
@@ -606,7 +651,7 @@ body{
     font-weight: bold;
     display: block;
     margin: 20px auto;
-    margin-top: 25px;
+    margin-top: 22px;
     height: 30px;
     text-align: center;
 }
@@ -623,7 +668,7 @@ body{
 
 .cartPage .total h6{
     font-size: 14px;
-    margin-top: 25px;
+    margin-top: 27px;
     text-align: center;
 }
 
@@ -883,6 +928,11 @@ body{
         display: block;
         margin: auto;
         text-align: center;
+    }
+
+    .select .col-lg-2{
+        margin: auto;
+        margin-bottom: 20px;
     }
 
     .login-register .buttonSelect{

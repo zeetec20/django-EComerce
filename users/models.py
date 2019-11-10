@@ -7,7 +7,6 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 
 class CustomUser(AbstractUser):
-    
     def path_upload(self, filename):
         return ('users/' + slugify(self.username) + '/image/' + filename)
 
@@ -27,3 +26,15 @@ class CustomUser(AbstractUser):
             print ("Error: %s - %s." % (e.filename, e.strerror))
         
         super(CustomUser, self).delete()
+    
+    class Meta:
+        verbose_name_plural = 'User'
+
+class Subscribe(models.Model):
+    email = models.EmailField(primary_key=True)
+    
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name_plural = 'Berlangganan'

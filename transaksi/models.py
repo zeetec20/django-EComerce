@@ -35,3 +35,6 @@ class Transaksi(models.Model):
         user.save()
 
         super(Transaksi, self).save()
+
+    class Meta:
+        verbose_name_plural = 'Transaksi'

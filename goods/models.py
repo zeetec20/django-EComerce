@@ -9,12 +9,18 @@ class SemuaJenis(models.Model):
 
     def __str__(self):
         return "{}".format(self.jenis)
+    
+    class Meta:
+        verbose_name_plural = 'Jenis Barang'
 
 class SemuaBrand(models.Model):
     brand       = models.CharField(max_length = 30)
 
     def __str__(self):
         return "{}".format(self.brand)
+
+    class Meta:
+        verbose_name_plural = 'Brand'
 
 class Barang(models.Model):
     def pathUpload(self, filename):
@@ -51,3 +57,6 @@ class Barang(models.Model):
             print ("Error: %s - %s." % (e.filename, e.strerror))
         
         super(Barang, self).delete()
+
+    class Meta:
+        verbose_name_plural = 'Barang'

@@ -9,13 +9,13 @@
 
     <div class="row col-lg-12 header">
         <div class="col-lg-6 header-bar product">
-            <h3>Product</h3>
+            <h3>Produk</h3>
         </div>
         <div class="col-lg-2 header-bar price">
-            <h3>Price</h3>
+            <h3>Harga</h3>
         </div>
         <div class="col-lg-2 header-bar quantity">
-            <h3>Quantity</h3>
+            <h3>Jumlah</h3>
         </div>
         <div class="col-lg-2 header-bar total">
             <h3>Total</h3>
@@ -53,23 +53,10 @@
 
 <div class="row col-lg-12 action">
     <div class="row col-lg-6">
-        <button class="btn">Check Out</button>
+        <button class="btn">Bayar</button>
     </div>
     <div class="row col-lg-6">
         <h5 class="subtotal">Subtotal <span class="number">Rp. {{totalHarga | intcomma}}</span></h5>
         <h5 class="message">Taxes and shipping calculated at checkout</h5>
     </div>
 </div>
-
-<script>
-    function cart(id) {
-        var harga = $('#price' + id).text();
-        var jumlah = $('#quantity' +id).val();
-        var totalPrice = parseFloat(harga.replace(/,/g,'')) * parseFloat(jumlah);
-        return totalPrice;
-    }
-
-    for(let a = 0; a >= 5; a++){
-        cart(a);
-    }
-</script>

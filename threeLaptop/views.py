@@ -6,13 +6,14 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
-from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth import get_user_model
+from django.contrib.auth import logout, login, authenticate, get_user_model
+from django.contrib.auth.models import Group
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 from goods.models import Barang, SemuaBrand
 from users.forms import RegisterForm
+from users.models import Subscribe
 from users.token import getTokenUser, getIdTransaksi
 from address.api_rajaongkir import cekTarif, template as templateRajaOngkir
 from transaksi.xendit import makeInvoice
@@ -51,12 +52,7 @@ class Index(View):
         self.context['allBrand'] = SemuaBrand.objects.all()
         self.context['barangLane'] = barangLane
         self.context['registerForm'] = RegisterForm()
-
-        if request.user.is_authenticated:
-            if request.user.profile == "":
-                self.context['profile_user'] = 'static/asset/images/icon/user.png'
-            else:
-                self.context['profile_user'] = request.user.profile
+        self.context['staff'] = Group.objects.get(name='staff')
         
         if request.is_ajax():
             if 'pagination' in request.GET:
@@ -113,9 +109,11 @@ class Ajax(View):
                 if form.is_valid():
                     token = getTokenUser()
                     form.save()
+                    pembeli = Group.objects.get(name='pembeli')
                     user = get_user_model().objects.get(username = request.POST['username'])
                     user.is_active = False
                     user.token = token
+                    user.groups.add(pembeli)
                     user.set_password(form.cleaned_data['password'])
                     user.save()
 
@@ -261,16 +259,25 @@ class Ajax(View):
 
             if self.action == 'subscribe':
                 email = request.GET['email']
-                html = render_to_string('email/subscribe.html', {})
-                msg = EmailMessage(
-                    'Selamat datang di Three Laptop',
-                    html,
-                    'jusles363@gmail.com',
-                    [email]
-                )
-                msg.content_subtype = 'html'
-                msg.send()
-                return JsonResponse({'success': 'true'})
+                subscribe = Subscribe.objects.all()
+                emailSubscribe = []
+                for eml in subscribe:
+                    emailSubscribe.append(eml.email)
+
+                if email in emailSubscribe:
+                    return JsonResponse({'success': 'false'})
+                else:
+                    Subscribe.objects.create(email = email)
+                    html = render_to_string('email/subscribe.html', {})
+                    msg = EmailMessage(
+                        'Selamat datang di Three Laptop',
+                        html,
+                        'jusles363@gmail.com',
+                        [email]
+                    )
+                    msg.content_subtype = 'html'
+                    msg.send()
+                    return JsonResponse({'success': 'true'})
         else:
             return redirect('index')
         return HttpResponse("ajax django")

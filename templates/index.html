@@ -184,15 +184,37 @@
             <div class="col-lg-3 col-xs-12 body1">
                 
                 {% for brand in allBrand %}
-                    <div class="row">
-                        <h3 class="select select{{forloop.counter}}">{{brand}}</h3>
-                    </div>
+                <div class="row">
+                    <h3 class="select select{{forloop.counter}}">{{brand}}</h3>
+                </div>
                 {% endfor %}
+
+                <div class="row">
+                    <div class="select selectMediaSocial">
+                        <div class="row col-lg-9">
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/whatsapp.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/facebook.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/instagram.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/telegram.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/twitter.svg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     
             </div>
             <div class="col-lg-9 col-sm-12 body2">
                 <div class="row header">
-                    <h3 class="titleLeft">Product Populer</h3>
+                    <h3 class="titleLeft">Produk Populer</h3>
                     <div class="dropdown buttonRight">
                         <button type="button" class="btn btn-secondary dropdown-toggle buttonMain" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
                             Populer
@@ -209,20 +231,34 @@
                 <div class="row listBarang">
                     {% include 'listBarang.html' %}
                 </div>
+                <div class="type">
+                    <div class="row">
+                        <h3>Pilih Laptop Sesuai Keinginanmu</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-3">
+                            <img src="{% static 'asset/images/gaming.png' %}" alt="">
+                        </div>
+                        <div class="col-sm-4 col-sm-3">
+                            <img src="{% static 'asset/images/general.png' %}" alt="">
+                        </div>
+                        <div class="col-sm-4 col-sm-3">
+                            <img src="{% static 'asset/images/graphic-design.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-3">
+                            <img src="{% static 'asset/images/hybrid.png' %}" alt="">
+                        </div>
+                        <div class="col-sm-4 col-sm-3">
+                            <img src="{% static 'asset/images/netbook.png' %}" alt="">
+                        </div>
+                        <div class="col-sm-4 col-sm-3">
+                            <img src="{% static 'asset/images/ultrabook.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container type">
-        <div class="row">
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
         </div>
     </div>
 
@@ -236,7 +272,7 @@
                     <h4 class="footerLink" onclick="linkSearch()">Pencarian</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Berita Terbaru</h4>
+                    <h4 class="footerLink" onclick="$('#inputSubscribe').focus()">Berita Terbaru</h4>
                 </div>
                 <div class="row ">
                     <h4 class="footerLink">Tentang Kami</h4>
