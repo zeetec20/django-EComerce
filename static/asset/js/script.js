@@ -12,6 +12,12 @@ $('#logout').click(function () {
     logout();
 })
 
+$("#inputSearch").on('keyup', function (e) {
+    if (e.keyCode === 13) {
+        search($("#inputSearch").val());
+    }
+});
+
 // showLogin_Register('login');
 // screenBlank('show');
 // listBarang('show');

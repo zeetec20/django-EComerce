@@ -17,6 +17,8 @@ urlpatterns = [
     path('ajax/profile', Ajax.as_view(action='profile'), name='profile'),
     path('ajax/ongkir', Ajax.as_view(action='ongkir'), name='ongkir'),
     path('ajax/subscribe', Ajax.as_view(action='subscribe'), name='subscribe'),
+    path('ajax/csrf', Ajax.as_view(action='csrf'), name='csrf'),
+    path('ajax/sort/<str:typeSort>', Ajax.as_view(action='sort'), name='barangMurah'),
 
     path('ajax/api/kabupaten', Ajax.as_view(action = 'get_kabupaten'), name='api_kabupaten'),
     path('ajax/api/kecamatan', Ajax.as_view(action = 'get_kecamatan'), name='api_kecamatan'),
@@ -25,6 +27,7 @@ urlpatterns = [
     path('barang/', include('goods.urls')),
     path('address/', include('address.urls')),
     path('user/', include('users.urls')),
+    # path('<str:error404>')
 ]
 
 if settings.DEBUG:

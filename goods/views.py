@@ -2,8 +2,10 @@ import random
 
 from django.shortcuts import render
 from django.views import View
-from .models import Barang
+from django.contrib.auth.models import Group
+
 from users.forms import RegisterForm
+from .models import Barang, SemuaBrand
 
 class DetailBarang(View):
     context = {
@@ -46,10 +48,12 @@ class DetailBarang(View):
             else:
                 self.context['profile_user'] = request.user.profile
 
+        self.context['allBrand']        = SemuaBrand.objects.all()
         self.context['lineDeskripsi']   = lineDeskripsi
         self.context['barang']          = barang
         self.context['barangSimilar']   = barangSimilar
         self.context['warna']           = warna
         self.context['warnaLength']     = len(warna)
         self.context['registerForm']    = RegisterForm()
+        self.context['staff']           = Group.objects.get(name='staff')
         return render(self.request, 'barang/index.html', self.context)

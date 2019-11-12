@@ -151,8 +151,8 @@
     <div class="container header">
         <div class="row col-lg-12 header1">
             <div class="searchBar col-lg-6">
-                <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh">
-                <input class="form-control search" type="search" placeholder="Pencarian" aria-label="Search">
+                <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh" onclick="search($('#inputSearch').val())">
+                <input class="form-control search" type="search" id="inputSearch" placeholder="Pencarian" aria-label="Search">
             </div>
             <div class="cart col-lg-6 col-sm-12">
                 <div class="dropdown button">
@@ -181,7 +181,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-xs-12 body1">
+            <div class="col-lg-3 col-sm-12 body1">
                 
                 {% for brand in allBrand %}
                 <div class="row">
@@ -214,17 +214,17 @@
             </div>
             <div class="col-lg-9 col-sm-12 body2">
                 <div class="row header">
-                    <h3 class="titleLeft">Produk Populer</h3>
+                    <h3 class="titleLeft">Produk Terbaru</h3>
                     <div class="dropdown buttonRight">
-                        <button type="button" class="btn btn-secondary dropdown-toggle buttonMain" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                            Populer
+                        <button type="button" class="btn btn-secondary dropdown-toggle buttonMain sort" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Terbaru
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            <a class="dropdown-item" href="#">Populer</a>
-                            <a class="dropdown-item" href="#">Harga Rendah ke Tinggi</a>
-                            <a class="dropdown-item" href="#">Harga Tinggi ke Rendah</a>
-                            <a class="dropdown-item" href="#">Nama A -> Z</a>
-                            <a class="dropdown-item" href="#">Nama Z -> A</a>
+                            <a class="dropdown-item" href="#" onclick="sortBarang('barangTerbaru'); $('.body2 .header .sort').html('Terbaru&nbsp')">Terbaru</a>
+                            <a class="dropdown-item" href="#" onclick="sortBarang('barangMurah'); $('.body2 .header .sort').html('Harga Rendah ke Tinggi&nbsp')">Harga Rendah ke Tinggi</a>
+                            <a class="dropdown-item" href="#" onclick="sortBarang('barangMahal'); $('.body2 .header .sort').html('Harga Tinggi ke Rendah&nbsp')">Harga Tinggi ke Rendah</a>
+                            <a class="dropdown-item" href="#" onclick="sortBarang('barangAZ'); $('.body2 .header .sort').html('Nama A -> Z&nbsp')">Nama A -> Z</a>
+                            <a class="dropdown-item" href="#" onclick="sortBarang('barangZA'); $('.body2 .header .sort').html('Nama Z -> A&nbsp')">Nama Z -> A</a>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                 </div>
                 <div class="type">
                     <div class="row">
-                        <h3>Pilih Laptop Sesuai Keinginanmu</h3>
+                        <h3>Kualitas Terbaik</h3>
                     </div>
                     <div class="row">
                         <div class="col-sm-4 col-sm-3">
@@ -251,10 +251,10 @@
                             <img src="{% static 'asset/images/hybrid.png' %}" alt="">
                         </div>
                         <div class="col-sm-4 col-sm-3">
-                            <img src="{% static 'asset/images/netbook.png' %}" alt="">
+                            <img src="{% static 'asset/images/ultrabook.png' %}" alt="">
                         </div>
                         <div class="col-sm-4 col-sm-3">
-                            <img src="{% static 'asset/images/ultrabook.png' %}" alt="">
+                            <img src="{% static 'asset/images/netbook.png' %}" alt="">
                         </div>
                     </div>
                 </div>
@@ -269,7 +269,7 @@
                     <h4 class="title">Lain lain</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink" onclick="linkSearch()">Pencarian</h4>
+                    <h4 class="footerLink" onclick="toSearch()">Pencarian</h4>
                 </div>
                 <div class="row ">
                     <h4 class="footerLink" onclick="$('#inputSubscribe').focus()">Berita Terbaru</h4>
@@ -301,18 +301,14 @@
             </div>
         </div>
 
-        <div class="row footer2">
-            <div class="col-lg-10 col-sm-10">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12">
-                        <h6 class="copyright">Copyright © 2019, Three Laptop. E-Commerce Software by Three Laptop</h6>
-                    </div>
+        <div class="row footer2 col-lg-12 col-sm-12">
+            <div class="col-lg-6 col-sm-12">
+                <h6 class="copyright">Copyright © 2019, Three Laptop. E-Commerce Software by Three Laptop</h6>
+            </div>
 
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="sponsor">
-                            <img src="" alt="">
-                        </div>
-                    </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="partner">
+                    <img src="" alt="">
                 </div>
             </div>
         </div>

@@ -3,6 +3,9 @@ import shutil
 
 from django.db import models
 from django.utils.text import slugify
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from users.models import Subscribe
 
 class SemuaJenis(models.Model):
     jenis       = models.CharField(max_length = 30)
@@ -48,6 +51,20 @@ class Barang(models.Model):
     def save(self):
         os.chmod('/media', 0o757)
         self.slugifyBarang = slugify(self.nama)
+        allEmailSubscribe = Subscribe.objects.all()
+        msgEmail = []
+        for email in allEmailSubscribe:
+            msgEmail.append(email.email)
+        html = render_to_string('email/goods.html', {})
+        msg = EmailMessage(
+            'Lihat Produk Terbaru Three Laptop',
+            html,
+            'jusles363@gmail.com',
+            msgEmail
+        )
+        msg.content_subtype = 'html'
+        msg.send()
+        
         super(Barang, self).save()
     
     def delete(self):

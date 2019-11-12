@@ -170,8 +170,8 @@
                     </div>
                 </div>
                 
-                <h6 class="checkOut">Check Out</h6>
-                <h6 class="cartText cart" onclick="pageCart('show');">Cart [ <span id="numberCart">0</span> ]</h6>
+                <h6 class="checkOut" onclick="pageCart('show');">Bayar</h6>
+                <h6 class="cartText cart" onclick="pageCart('show');">Keranjang [ <span id="numberCart">0</span> ]</h6>
                 <img class="iconCart cart" onclick="pageCart('show');" src="{% static 'asset/images/icon/cart.png' %}" alt="" onclick="checkCookie('barang')">
             </div>
         </div>
@@ -182,27 +182,33 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-xs-12 body1">
+            <div class="col-lg-3 col-sm-12 body1">
+                {% for brand in allBrand %}
                 <div class="row">
-                    <h3 class="select">ASUS</h3>
+                    <h3 class="select select{{forloop.counter}}">{{brand}}</h3>
                 </div>
-                <div class="row">
-                    <h3 class="select">HP</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">Lenovo</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">MacBook</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">MSI</h3>
-                </div>
-                <div class="row">
-                    <h3 class="select">Acer</h3>
-                </div>
-                <div class="row socialMedia">
+                {% endfor %}
 
+                <div class="row">
+                    <div class="select selectMediaSocial">
+                        <div class="row col-lg-9">
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/whatsapp.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/facebook.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/instagram.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/telegram.svg' %}" alt="">
+                            </div>
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="{% static 'asset/images/icon/social-media/twitter.svg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-9 col-sm-12 body2">

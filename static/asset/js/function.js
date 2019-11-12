@@ -216,7 +216,7 @@ function profile(action) {
     }
 }
 
-function linkSearch() {
+function toSearch() {
     window.scrollTo({top: 0, behavior: "smooth"});
     setTimeout(function(){
         $('.search').focus();

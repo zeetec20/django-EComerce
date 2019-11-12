@@ -2,6 +2,7 @@ import random
 import math
 import requests as req
 
+from django.middleware import csrf
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
@@ -53,6 +54,7 @@ class Index(View):
         self.context['barangLane'] = barangLane
         self.context['registerForm'] = RegisterForm()
         self.context['staff'] = Group.objects.get(name='staff')
+        self.context['url'] = '/'
         
         if request.is_ajax():
             if 'pagination' in request.GET:
@@ -90,7 +92,6 @@ class Ajax(View):
                 inputPassword = request.POST['password']
                 print(inputPassword, inputUsername)
                 user = authenticate(request, username=inputUsername, password=inputPassword)
-                print(user)
                 if user != '':
                     login(request, user)
 
@@ -98,7 +99,8 @@ class Ajax(View):
                     self.context['profile_user'] = '/static/asset/images/icon/user.png'
                 else:
                     self.context['profile_user'] = request.user.profile
-
+                
+                self.context['staff'] = Group.objects.get(name='staff')
                 if 'from' in request.POST:
                     return render(self.request, 'user.html', self.context)
                 else:
@@ -138,11 +140,14 @@ class Ajax(View):
                 else:
                     return JsonResponse({'success': False})
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         if request.is_ajax():
             if self.action == 'logout':
                 logout(request)
                 return JsonResponse({'success': True})
+
+            if self.action == 'csrf':
+                return JsonResponse({'csrf': csrf.get_token(request)})
 
             if self.action == 'cart':
                 if 'barang' in request.COOKIES and request.COOKIES['barang'] != "":
@@ -202,7 +207,32 @@ class Ajax(View):
                 return render(self.request, 'address/listKecamatan.html', self.context)
         
             if self.action == 'search':
-                barang = Barang.objects.filter(name__unaccent__lower__trigram_simila = request.GET['search'])
+                barang = Barang.objects.filter(nama__icontains = request.GET['keyword'])
+                page = 1
+                barangAll = barang
+                if 'pagination' in request.GET:
+                    if int(request.GET['pagination']) > 1:
+                        start   = (int(request.GET['pagination']) - 1) * 9
+                        end     = start * 2
+                        barangAll = barang[start:end]
+                        page = int(request.GET['pagination'])
+
+                self.context['pagination'] = math.ceil(len(barangAll) / 9)
+                paginationNumber = [page, page + 1, page + 2]
+                self.context['paginationNumber'] = paginationNumber
+
+                barangLane = [[], []]
+                if len(barangAll) < 9:
+                    for brng in barangAll:
+                        barangLane[1].append(brng)
+                else:
+                    for brng in barangAll:
+                        if len(barangLane[1]) == 9:
+                            break
+                        barangLane[1].append(brng)
+                        
+                self.context['barangLane'] = barangLane
+                self.context['url'] = "/ajax/search?keyword=" + request.GET['keyword']
                 return render(self.request, 'listBarang.html', self.context)
             
             if self.action == 'profile':
@@ -278,10 +308,45 @@ class Ajax(View):
                     msg.content_subtype = 'html'
                     msg.send()
                     return JsonResponse({'success': 'true'})
+
+            if self.action == 'sort':
+                if kwargs['typeSort'] == 'barangMurah':
+                    sort = 'harga'
+                if kwargs['typeSort'] == 'barangMahal':
+                    sort = '-harga'
+                if kwargs['typeSort'] == 'barangAZ':
+                    sort = 'nama'
+                if kwargs['typeSort'] == 'barangZA':
+                    sort = '-nama'
+                
+                page = 1
+                barang = Barang.objects.all().order_by(sort)
+                barangAll = barang
+                if 'pagination' in request.GET:
+                    if int(request.GET['pagination']) > 1:
+                        start   = (int(request.GET['pagination']) - 1) * 9
+                        end     = start * 2
+                        barangAll = barang[start:end]
+                        page = int(request.GET['pagination'])
+
+                self.context['pagination'] = math.ceil(len(barangAll) / 9)
+                paginationNumber = [page, page + 1, page + 2]
+                self.context['paginationNumber'] = paginationNumber
+
+                barangLane = [[], []]
+                for brng in barangAll:
+                    if len(barangLane[1]) == 9:
+                        break
+                    barangLane[1].append(brng)
+                        
+                self.context['barangLane'] = barangLane
+                self.context['url'] = '/ajax/sort/' + kwargs['typeSort']
+                return render(self.request, 'listBarang.html', self.context)
+
         else:
             return redirect('index')
         return HttpResponse("ajax django")
 
 class Test(TemplateView):
-    template_name = 'email/subscribe.html'
+    template_name = 'email/goods.html'
     

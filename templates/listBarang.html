@@ -29,17 +29,19 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item {% if paginationNumber.0 < 2 %}disabled{% endif %}">
-                <a class="page-link" onclick="pagination('{{ paginationNumber.0 | mathMinus:1 }}')" aria-label="Previous">
+                <a url='{{url}}' class="page-link" onclick="pagination('{{ paginationNumber.0 | mathMinus:1 }}', $('.paginationBar .page-link').attr('url'))" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             
             {% for number in paginationNumber %}
-                <li class="page-item {% if number > pagination %}disabled" {% else %} onclick="pagination('{{number}}')" {% endif %}><a class="page-link page{{number}} {% if forloop.counter == 1 %}active{% endif %}" {% if number > pagination %}{% else %} onclick="pagination('{{number}}')" {% endif %}>{{number}}</a></li>
+                <li class="page-item {% if number > pagination %}disabled" {% else %} onclick="" {% endif %}>
+                    <a url='{{url}}' class="page-link page{{number}} {% if forloop.counter == 1 %}active{% endif %}" {% if number > pagination %}{% else %} onclick="pagination('{{number}}', $('.paginationBar .page-link').attr('url'))" {% endif %}>{{number}}</a>
+                </li>
             {% endfor %}
                 
             <li class="page-item {% if paginationNumber.0 == pagination %}disabled{% endif %}">
-                <a class="page-link" onclick="pagination('{{ paginationNumber.0 | mathPlus:1 }}')" aria-label="Next">
+                <a url='{{url}}' class="page-link" onclick="pagination('{{ paginationNumber.0 | mathPlus:1 }}', $('.paginationBar .page-link').attr('url'))" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

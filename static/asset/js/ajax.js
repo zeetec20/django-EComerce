@@ -1,3 +1,14 @@
+function getCSRF() {
+    $.ajax({
+        url: '/ajax/csrf',
+        data: {
+            
+        },
+        success: function (returnData) {
+            $('input[name="csrfmiddlewaretoken"]').val(returnData['csrf']);
+        }
+    });
+}
 
 function logout() {
     $.ajax({
@@ -47,23 +58,23 @@ function login(event) {
             screenBlank('close');
             $('#form-login').get(0).reset();
             $('.userBar').html(data);
+            getCSRF();
         }
     });
 
     return false;
 }
 
-function pagination(page) {
+function pagination(page, url) {
+    console.log(url);
     $.ajax({
-        url: '/',
+        url: url,
         type: 'GET',
         data: {
             'pagination': page
         },
         success: function (returnData) {
             $('.listBarang').html(returnData);
-            // listBarang('close');
-            // listBarang('show');
         }
     });
 }
@@ -92,6 +103,108 @@ function ajaxSubscribe(email) {
             
         }
     });
+}
+
+function search(keyword) {
+    $.ajax({
+        url: '/ajax/search',
+        type: 'GET',
+        data: {
+            'keyword': keyword
+        },
+        success: function (returnData) {
+            $('.listBarang').html(returnData);
+            $('.body2 .header .titleLeft').text('Hasil Pencarian ' + keyword);
+            $('.body2 .header .buttonMain').html('Urutkan&nbsp');
+        }
+    });
+}
+
+function paginationSearch(keyword, key) {
+    $.ajax({
+        url: '/ajax/search',
+        type: 'GET',
+        data: {
+            'keyword': keyword,
+            'pagination': key
+        },
+        success: function (returnData) {
+            $('.listBarang').html(returnData);
+        }
+    });
+}
+
+function barangTerbaru() {
+    $.ajax({
+        url: '/',
+        type: 'GET',
+        data: {
+            'pagination': '1'
+        },
+        success: function (returnData) {
+            $('.listBarang').html(returnData);
+            $('.body2 .header .titleLeft').text('Produk Terbaru');
+        }
+    });
+}
+
+function sortBarang(sort) {
+    let url = '/ajax/sort/';
+    if (sort == 'barangTerbaru') {
+        barangTerbaru();
+    }
+    if (sort == 'barangMurah') {
+        $.ajax({
+            url: url + sort,
+            type: 'GET',
+            data: {
+                
+            },
+            success: function (returnData) {
+                $('.listBarang').html(returnData);
+                $('.body2 .header .titleLeft').text('Produk Harga Rendah ke Tinggi');
+            }
+        });
+    }
+    if (sort == 'barangMahal') {
+        $.ajax({
+            url: url + sort,
+            type: 'GET',
+            data: {
+                
+            },
+            success: function (returnData) {
+                $('.listBarang').html(returnData);
+                $('.body2 .header .titleLeft').text('Produk Harga Tinggi ke Rendah');
+            }
+        });
+    }
+    if (sort == 'barangAZ') {
+        $.ajax({
+            url: url + sort,
+            type: 'GET',
+            data: {
+                
+            },
+            success: function (returnData) {
+                $('.listBarang').html(returnData);
+                $('.body2 .header .titleLeft').text('Produk Nama A ke Z');
+            }
+        });
+    }
+    if (sort == 'barangZA') {
+        $.ajax({
+            url: url + sort,
+            type: 'GET',
+            data: {
+                
+            },
+            success: function (returnData) {
+                $('.listBarang').html(returnData);
+                $('.body2 .header .titleLeft').text('Produk Nama Z ke A');
+            }
+        });
+    }
 }
 
 $('#form-register').submit(register);
