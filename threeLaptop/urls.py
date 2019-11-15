@@ -1,8 +1,11 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.conf.urls import handler404
 from .views import Index, Ajax, Test
+
+from users.views import error404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,8 +30,10 @@ urlpatterns = [
     path('barang/', include('goods.urls')),
     path('address/', include('address.urls')),
     path('user/', include('users.urls')),
-    # path('<str:error404>')
+    # path('<str:url1>/<str:url2>/<str:url3>/<str:url4>/<str:url5>/<str:url6>/<str:url7>/<str:url8>/<str:url9>/<str:url10>'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+# handler404 = 'users.views.error_404_view'

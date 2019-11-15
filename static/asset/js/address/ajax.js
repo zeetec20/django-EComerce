@@ -1,4 +1,4 @@
-function ongkir(kontak, alamat) {
+function ongkir(kontak, alamat, method, jumlahBarang) {
     $.ajax({
         url: '/ajax/ongkir',
         type: 'GET',
@@ -13,7 +13,10 @@ function ongkir(kontak, alamat) {
             'kecamatan': alamat[4],
             'kodePos': alamat[5],
             'informasiTambahan': alamat[6],
-            'simpan': alamat[7]
+            'simpan': alamat[7],
+
+            'method': method,
+            'jumlahBarang': jumlahBarang
         },
         success: function (returnData) {
             screenBlank('hidden');
@@ -33,18 +36,33 @@ function ongkir(kontak, alamat) {
     })
 }
 
-function xendit() {
+function xendit(method, barang) {
     let id_transaksi    = $('#id_transaksi').val();
-    let description     = "Barang: {0} | Quantity: {1} | Price: {2}".format($('.listBarang .barang .title').text(), $('.listBarang .barang .quantity').text().split(' ')[1], $('.listBarang .barang .harga').text());
+    let description     = "Barang: {0} | Quantity: {1} | Price: {2}".format(
+        $('.listBarang .barang .title').text(), 
+        $('.listBarang .barang .quantity').text().split(' ')[1], 
+        $('.listBarang .barang .harga').text()
+    );
     let amount          = $('#total').text().replace(/,/g, '').split(' ')[1];
-    console.log($('#total').text());
-    console.log(amount);
+
+    if (method == 'cart') {
+        description = [];
+        for (let index = 0; index < barang; index++) {
+            description.push("Barang: {0} | Jumlah: {1} | Harga: {2}".format(
+                $('.listBarang .barang{0} .title'.format(index + 1)).text(), 
+                $('.listBarang .barang{0} .quantity'.format(index + 1)).text().split(' ')[1], 
+                $('.listBarang .barang{0} .harga'.format(index + 1)).text()
+            ));
+        }
+    }
+    console.log(description)
+
     $.ajax({
         url: '/ajax/api/xendit',
         type: 'GET',
         data: {
             'id_transaksi': id_transaksi,
-            'description': description,
+            'description': description.toString().replace(',', ', '),
             'amount': '{0}'.format(amount),
         },
         success: function (returnData) {

@@ -3,7 +3,7 @@
         <h1 class="title">Three Laptop</h1>
     </div>
     <div class="row col-lg-12">
-        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/barang/{{ request.GET.barang }}" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
+        <h1 class="link"><a href="\" class="linkItem">Beranda</a> &nbsp;>&nbsp; {% if method == 'barang' %}<a href="/barang/{{ request.GET.barang }}" class="linkItem">Barang</a> &nbsp;>&nbsp;{% endif %}<a href="" class="linkItem active">Alamat</a> </h1>
     </div>
 </div>
 
@@ -36,7 +36,7 @@
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelInformasiTambahan">Informasi Tambahan</h6>
-                <textarea name="" id="" class="informasiTambahan">{{ alamat.informasiTambahan }}</textarea>
+                <textarea name="" id="" class="informasiTambahan" disabled>{{ alamat.informasiTambahan }}</textarea>
                 <input type="hidden" name="informasiTambahan" value="" id="informasiTambahanHidden">
             </div>
             <div class="row col-lg-12 data">
@@ -76,7 +76,7 @@
             </div>
             <input type="hidden" name="" id="id_transaksi" value="{{ id_transaksi }}">
             <div class="row col-lg-12 data">
-                <button class="btn bayar" onclick="xendit();">Lanjut ke Pembayaran</button>
+                <button class="btn bayar" onclick="xendit('{{method}}', '{{ jumlahBarang }}');">Lanjut ke Pembayaran</button>
             </div>
         </div>
     <!-- </form> -->
@@ -146,5 +146,27 @@
     border-color: #313131;
     color: #313131;
     border-radius: 0;
+}
+
+.dropdown-menu{
+    background-color: white;
+    color: #313131;
+    border-radius: 0;
+    border-color: #313131;
+}
+
+.dropdown-menu a{
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.dropdown-menu a:hover{
+    background-color: #313131;
+    color: white !important;
+}
+
+.dropdown-menu a:focus{
+    background-color: #313131;
+    color: white !important;
 }
 </style>

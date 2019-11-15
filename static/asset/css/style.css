@@ -560,8 +560,12 @@ body{
     width: 100%;
     height: 180px;
     cursor: pointer;
-    /* box-shadow: #00000031 0px 5px 15px 0px; */
+    box-shadow: #313131 0px 0px 0px 0px;
     transition: all 0.5s;
+}
+
+.type img:hover{
+    box-shadow: #313131 15px 15px 0px 0px;
 }
 
 .type .row{
@@ -914,6 +918,84 @@ body{
 .pageProfile .iconClose:hover{
     transition: 0.5s;
     transform: rotate(180deg);
+}
+
+.aboutPage{
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    width: 900px;
+    height: 0px;
+    z-index: 5;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.aboutPage .title{
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+    color: #313131;
+}
+
+.aboutPage .header img{
+    position: absolute;
+    right: -5px;
+    margin-top: 10px;
+    width: 15px;
+    cursor: pointer;
+    color: #313131;
+}
+
+.aboutPage .header img:hover{
+    transition: all 0.5s;
+    transform: rotate(180deg);
+}
+
+.aboutPage .header{
+    border-bottom: solid 1px #e8e8e8;
+    margin: auto;
+    height: 60px;
+}
+
+.aboutPage .content .text{
+    margin-top: 40px;
+    font-size: 18px;
+    text-align: center;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.aboutPage .button{
+    position: absolute;
+    bottom: 40px;
+}
+
+.aboutPage .btn{
+    background-color: white;
+    color: #313131;
+    border-radius: 0;
+    border: solid 1px #313131 !important;
+    font-size: 14px;
+    font-weight: bold;
+    width: 60%;
+    margin: auto;
+    margin-top: 40px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.aboutPage .btn:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white;
 }
 
 @media only screen and (min-width: 100px) and (max-width: 750px){ /* HP */

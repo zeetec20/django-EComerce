@@ -14,7 +14,7 @@ SECRET_KEY = 'ld-mwby624=75&w66cl_^+0t0@3_qp9(rj-cmw=!ex+bg_6_u9'
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 AUTH_USER_MODEL = "users.CustomUser" 
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'threeLaptop',
     'goods',
     'address',
     'transaksi',

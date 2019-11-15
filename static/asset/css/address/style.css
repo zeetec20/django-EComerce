@@ -76,6 +76,7 @@
     color: #313131 !important;
     background-color: #f4f4f4;
     letter-spacing: 0.3px;
+    font-size: 14px;
 }
 
 .leftBar .input input:focus{
@@ -119,13 +120,23 @@
     border-color: #313131;
 }
 
+.address .provinsi .dropdown-menu a:hover,
+.address .kabupaten .dropdown-menu a:hover,
+.address .kecamatan .dropdown-menu a:hover{
+    background-color: #313131;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
 .address .provinsi,
 .address .kabupaten,
 .address .kecamatan{
     margin: auto;
 }
 
-.address .buttonGroup{
+.address .buttonGroup,
+.buttonProses{
     width: 80%;
     border-radius: 0;
     background-color: white;
@@ -133,16 +144,17 @@
     color: #313131;
     margin: 2.5px auto;
     overflow: hidden;
+    box-shadow: none !important;
 }
 
-.address .buttonGroup:hover{
+.address .buttonGroup:hover,
+.buttonProses:hover{
     transition: 0.5s;
     background-color: #313131;
     color: white;
 }
 
 .address .buttonGroup:focus{
-    box-shadow: none;
     background-color: #313131;
     color: white;
 }

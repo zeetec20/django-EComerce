@@ -13,6 +13,26 @@
 {% block body %}
     <div class="screenBlank"></div>
 
+    <div class="container aboutPage">
+        <div class="row col-lg-12 header">
+            <h1 class="title">Tentang Kami Three Laptop</h1>
+            <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="" class="iconClose">
+        </div>
+        <div class="row col-lg-12 content">
+            <h1 class="text">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                It has survived not only five centuries, but also the leap into electronic typesetting, 
+                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </h1>
+        </div>
+        <div class="row col-lg-12 button">
+            <button class="btn" onclick="tentangKami('hidden')">Kembali ke Halaman</button>
+        </div>
+    </div>
+
     <div class="container cartPage shadow-lg">
         {% include "cart.html" %}
     </div>
@@ -275,16 +295,13 @@
                     <h4 class="footerLink" onclick="$('#inputSubscribe').focus()">Berita Terbaru</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Tentang Kami</h4>
+                    <h4 class="footerLink" onclick="tentangKami('visible')">Tentang Kami</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Pertanyaan</h4>
+                    <h4 class="footerLink" onclick='window.open("https://mail.google.com/mail/?view=cm&fs=1&to=jusles363@gmail.com&su=Tanya dong Three Laptop!", "_blank")'>Pertanyaan</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink">Kebijakan</h4>
-                </div>
-                <div class="row ">
-                    <h4 class="footerLink">Contact</h4>
+                    <h4 class="footerLink" onclick="window.scrollTo({top: 280, behavior: 'smooth'});">Contact</h4>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 body2">

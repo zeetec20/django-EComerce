@@ -3,7 +3,7 @@
         <h1 class="title">Three Laptop</h1>
     </div>
     <div class="row col-lg-12">
-        <h1 class="link"><a href="\" class="linkItem">Home</a> &nbsp;>&nbsp; <a href="/barang/{{ request.GET.barang }}" class="linkItem">Barang</a> &nbsp;>&nbsp; <a href="" class="linkItem active">Address</a> </h1>
+        <h1 class="link"><a href="\" class="linkItem">Beranda</a> &nbsp;>&nbsp; {% if method == 'barang' %}<a href="/barang/{{ request.GET.barang }}" class="linkItem">Barang</a> &nbsp;>&nbsp;{% endif %}<a href="" class="linkItem active">Alamat</a> </h1>
     </div>
 </div>
 <div class="row contact">
@@ -93,13 +93,12 @@
         </div>
         <div class="row col-lg-12 saveInformation">
             <label class="container">Simpan alamat ini untuk pembelian selanjutnya
-                <input type="checkbox" id="alamatSimpanAlamat" value="true">
-                <span class="checkmark"></span>
+                <input type="checkbox" id="alamatSimpanAlamat" value="false" onclick="if (this.value == 'false') {this.value = 'true'} else {this.value = 'false'}"><span class="checkmark"></span>
             </label>
         </div>
         <div class="row col-lg-12 submit">
             <div>
-                <button class="btn rounded-0" onclick="getAddress('{{user.username}}')">Prosess</button>
+                <button class="btn rounded-0 buttonProses" onclick="getAddress('{{user.username}}', '{{method}}', '{{jumlahBarang}}')">Proses</button>
             </div>
         </div>
 </div>

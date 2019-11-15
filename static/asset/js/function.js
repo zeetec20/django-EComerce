@@ -223,6 +223,60 @@ function toSearch() {
     }, 750);
 }
 
+function tentangKami(action) {
+    if (action == 'visible') {
+        $('.aboutPage').css({
+            'visibility': 'visible',
+            'transition': 'all 0.5s',
+            'height': '400px',
+            'opacity': '1'
+        });
+        screenBlank('show');
+    }
+    if (action == 'hidden') {
+        $('.aboutPage').css({
+            'transition': 'all 0.5s',
+            'height': '0px',
+            'opacity': '0',
+            'visibility': 'hidden',
+        });
+        screenBlank('close');
+    }
+}
+
+function cartBayar() {
+    let slugify = []
+    for (let index = 1; index < (parseInt($('.list').attr('barang')) + 1); index++) {
+        slugify.push($('.list .barang{0} .name .barang'.format(index)).attr('slugify'));
+    }
+    let quantity = []
+    for (let index = 1; index < (parseInt($('.list').attr('barang')) + 1); index++) {
+        quantity.push($('#quantity' + index).val());
+    }
+    let color = []
+    for (let index = 1; index < (parseInt($('.list').attr('barang')) + 1); index++) {
+        color.push($('.list .warna' + index).text());
+    }
+    let barang = slugify.toString().replace(',', ' ');
+    quantity = quantity.toString().replace(',', ' ');
+    color = color.toString().replace(',', ' ');
+    url = "http://127.0.0.1:8000/address/zeetec/cart?barang={0}&quantity={1}&color={2}".format(barang, quantity, color);
+    window.location.href = url;
+}
+
+function quantityCart(quantity, idBarang, list = $('.list').attr('barang')) {
+    let hargaAwal = parseInt($('.list #totalPrice' + idBarang).attr('harga'));
+    let harga = hargaAwal * parseInt(quantity);
+    $('.list #totalPrice' + idBarang).text('Rp. {0}'.format(harga.toString().numberComma()));
+
+    let hargaTotalItem = 0, hargaTotal = 0
+    for (let index = 1; index < (parseInt(list) + 1); index++) {
+        hargaTotalItem = parseInt($('.list #totalPrice' + index).attr('harga') * $('#quantity' + index).val());
+        hargaTotal += hargaTotalItem
+    }
+    $('#subtotal').html('Subtotal <b>Rp. {0}</b>'.format(hargaTotal.toString().numberComma()));
+}
+
 // delete_cookie('barang');
 // checkCookie('barang');
 

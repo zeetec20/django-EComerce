@@ -66,7 +66,7 @@ function getAlamat() {
     let kabupaten           = $('.buttonKabupaten').text();
     let kecamatan           = $('.buttonKecamatan').text();
     let kodePos             = $('#alamatKodePos').val();
-    let informasiTambahan    = $('#alamatInformasiTambahan').val();
+    let informasiTambahan   = $('#alamatInformasiTambahan').val();
     let simpan              = $('#alamatSimpanAlamat').val();
 
     kabupatenLength = kabupaten.length
@@ -76,7 +76,7 @@ function getAlamat() {
     return [label, namaLengkap, provinsi, kabupaten, kecamatan, kodePos, informasiTambahan, simpan];
 }
 
-function getAddress(username) {
+function getAddress(username, method, jumlahBarang) {
     // let user    = username;
     let kontak  = getKontak();
     let alamat  = getAlamat();
@@ -88,7 +88,7 @@ function getAddress(username) {
         'opacity': '1',
         'width': '80px',
     })
-    ongkir(kontak, alamat);
+    ongkir(kontak, alamat, method, jumlahBarang);
 }
 
 function ekspedisi(namaEkpd, ekpd) {

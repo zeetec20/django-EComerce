@@ -22,17 +22,17 @@
         </div>
     </div>
 
-    <div class="list">
+    <div class="list" barang="{{barangCart | length}}">
         {% for barang in barangCart %}
-        <div class="row col-lg-12 cart" cart="{{forloop.counter}}" onloadstart="cart('{{forloop.counter}}')">
+        <div class="row col-lg-12 cart barang{{forloop.counter}}" cart="{{forloop.counter}}" onloadstart="cart('{{forloop.counter}}')">
             <div class="col-lg-6 col-sm-12 content product">
                 <div class="row">
                     <div class="col-lg-4 cover">
                         <img src="/media/{{barang.cover}}" alt="" class="col-lg-12">
                     </div>
                     <div class="col-lg-8 name">
-                        <h6 class="">{{barang.nama}}</h6>
-                        <h6>{{barang.warna}}</h6>
+                        <h6 class="barang" slugify="{{barang.slugify}}">{{barang.nama}}</h6>
+                        <h6 class="warna warna{{forloop.counter}}">{{barang.warna}}</h6>
                         <h6 class="" onclick="removeBarangCart('{{barang.nama}}')">remove</h6>
                     </div>
                 </div>
@@ -41,10 +41,10 @@
                 <h6>Rp. <span id="price{{forloop.counter}}">{{barang.harga | intcomma}}</span></h6>
             </div>
             <div class="col-lg-2 content quantity">
-                <input type="number" name="quantity" id="quantity{{forloop.counter}}" value="{{barang.jumlah}}">
+                <input type="number" name="quantity" id="quantity{{forloop.counter}}" value="{{barang.jumlah}}" onchange="quantityCart(this.value, '{{forloop.counter}}')" min="1">
             </div>
             <div class="col-lg-2 content total">
-                <h6 id="totalPrice{{forloop.counter}}">Rp. {{barang.hargaTotal | intcomma}}</h6>
+                <h6 id="totalPrice{{forloop.counter}}" harga="{{barang.hargaTotal}}">Rp. {{barang.hargaTotal | intcomma}}</h6>
             </div>
         </div>
         {% endfor %}
@@ -53,10 +53,10 @@
 
 <div class="row col-lg-12 action">
     <div class="row col-lg-6">
-        <button class="btn">Bayar</button>
+        <button class="btn" onclick="cartBayar()">Bayar</button>
     </div>
     <div class="row col-lg-6">
-        <h5 class="subtotal">Subtotal <span class="number">Rp. {{totalHarga | intcomma}}</span></h5>
+        <h5 class="subtotal" id="subtotal" harga="{{totalHarga}}">Subtotal <span class="number">Rp. {{totalHarga | intcomma}}</span></h5>
         <h5 class="message">Taxes and shipping calculated at checkout</h5>
     </div>
 </div>

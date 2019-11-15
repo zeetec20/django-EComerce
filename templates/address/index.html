@@ -32,24 +32,46 @@
             <div class="col-lg-6 rightBar">
                 <div class="row">
                     <div class="row col-lg-12 listBarang">
-                        <div class="row barang col-lg-12">
-                            <div class="col-lg-3 cover">
-                                <img src="/media/{{barang.image1}}" alt="">
+                        
+                        {% if method == 'barang' %}
+                            <div class="row barang col-lg-12">
+                                <div class="col-lg-3 cover">
+                                    <img src="/media/{{barang.image1}}" alt="">
+                                </div>
+                                <div class="col-lg-6 data">
+                                    <h1 class="title row">{{barang.nama}}</h1>
+                                    <h1 class="warna row">{{request.GET.color}}</h1>
+                                </div>
+                                <div class="col-lg-3 angka">
+                                    <h1 class="harga row">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                                    <h1 class="quantity row">Jumlah: {{request.GET.quantity}}</h1>
+                                </div>
                             </div>
-                            <div class="col-lg-6 data">
-                                <h1 class="title row">{{barang.nama}}</h1>
-                                <h1 class="warna row">{{request.GET.color}}</h1>
-                            </div>
-                            <div class="col-lg-3 angka">
-                                <h1 class="harga row">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
-                                <h1 class="quantity row">Jumlah: {{request.GET.quantity}}</h1>
-                            </div>
-                        </div>
+                        {% else %}
+                            
+                            {% for barang,quantity in barang %}
+                                <div class="row barang barang{{forloop.counter}} col-lg-12">
+                                    <div class="col-lg-3 cover">
+                                        <img src="/media/{{barang.image1}}" alt="">
+                                    </div>
+                                    <div class="col-lg-6 data">
+                                        <h1 class="title row">{{barang.nama}}</h1>
+                                        <h1 class="warna row">{{request.GET.color | splitSpace:forloop.counter }}</h1>
+                                    </div>
+                                    <div class="col-lg-3 angka">
+                                        <h1 class="harga row">Rp. {{ barang.harga | parse:"int" | mathMultiplication:quantity | intcomma }}</h1>
+                                        <h1 class="quantity row">Jumlah: {{ quantity }}</h1>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                                
+                        {% endif %}
+                            
                     </div>
                     <div class="row col-lg-12 calculate">
                         <div class="row col-lg-12 barang">
-                            <h1 class="col-lg-6">Total Barang Barang</h1>
-                            <h1 class="col-lg-6" id="totalHargaBarang">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                            <h1 class="col-lg-6">Total Harga Barang </h1>
+                            <h1 class="col-lg-6" id="totalHargaBarang">Rp. {{hargaTotal | intcomma}}</h1>
                         </div>
                         <div class="row col-lg-12 pengiriman">
                             <h1 class="col-lg-6">Harga Pengiriman</h1>
@@ -61,7 +83,7 @@
                             <h1 class="label">Total</h1>
                         </div>
                         <div class="col-lg-6">
-                            <h1 class="jumlah" id="total">Rp. {% if method == 'barang' %}{{hargaTotal | intcomma}}{% endif %}</h1>
+                            <h1 class="jumlah" id="total">Rp. {{hargaTotal | intcomma}}</h1>
                         </div>
                     </div>
                 </div>

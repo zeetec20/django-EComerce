@@ -171,6 +171,7 @@ class Ajax(View):
                             'jumlah': listBarang[2],
                             'cover': barang.image1,
                             'harga': barang.harga,
+                            'slugify': barang.slugifyBarang,
                             'hargaTotal': int(listBarang[2]) * int(barang.harga)
                         })
                         # cookie = "{} : {} : {}".format(listBarang[0], listBarang[1], listBarang[2])
@@ -260,10 +261,10 @@ class Ajax(View):
                 
                 id_transaksi = getIdTransaksi()
 
-                if alamat['simpan'] == 'true':
-                    saveAlamat = "Label: {}\rNama Lengkap: {}\rProvinsi: {}\rKabupaten: {}\rKecamatan: {}\rKode Pos: {}\rInformasi Tambahan: {}\r".format(
-                        alamat[0], alamat[1], alamat[2], alamat[3], alamat[4], alamat[5], alamat[6]
-                    )
+                # if alamat['simpan'] == 'true':
+                #     saveAlamat = "Label: {}\rNama Lengkap: {}\rProvinsi: {}\rKabupaten: {}\rKecamatan: {}\rKode Pos: {}\rInformasi Tambahan: {}\r".format(
+                #         alamat[0], alamat[1], alamat[2], alamat[3], alamat[4], alamat[5], alamat[6]
+                #     )
                 
                 kotaAsal = 'Banyuwangi'
                 kotaTujuan = alamat['kabupaten']
@@ -273,6 +274,8 @@ class Ajax(View):
                 dataOngkirJne   = cekTarif(kotaAsal, kotaTujuan, berat, ekspedisi[1])
                 dataOngkirPos   = cekTarif(kotaAsal, kotaTujuan, berat, ekspedisi[2])
                 
+                self.context['jumlahBarang']    = request.GET['jumlahBarang']
+                self.context['method']          = request.GET['method']
                 self.context['id_transaksi']    = id_transaksi
                 self.context['alamat']          = alamat
                 self.context['kontak']          = kontak
@@ -349,4 +352,3 @@ class Ajax(View):
 
 class Test(TemplateView):
     template_name = 'email/goods.html'
-    

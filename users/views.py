@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.views import View
+from django.views.generic.base import TemplateView
 
 def activate(request, numberToken):
     user = get_user_model().objects.get(token=numberToken)
@@ -22,3 +23,7 @@ class Ajax(View):
         else:
             return redirect('index')
         return HttpResponse('Ajax')
+
+def error404(request):
+    data = {"name": "ThePythonDjango.com"}
+    return render(request,'users/notfound.html', data)
