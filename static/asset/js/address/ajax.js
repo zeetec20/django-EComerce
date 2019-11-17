@@ -62,7 +62,7 @@ function xendit(method, barang) {
         type: 'GET',
         data: {
             'id_transaksi': id_transaksi,
-            'description': description.toString().replace(',', ', '),
+            'description': description.toString().replace(/,/g, ', '),
             'amount': '{0}'.format(amount),
         },
         success: function (returnData) {

@@ -14,6 +14,7 @@ class Index(View):
         pass
 
     def get(self, request, *args, **kwargs):
+        province = req.get("http://dev.farizdotid.com/api/daerahindonesia/provinsi").json()
         hargaTotal = 0
         if kwargs['username'] != request.user.username:
             return redirect('/')
@@ -28,8 +29,6 @@ class Index(View):
                 informasiTamabahan = request.user.alamat.split('\r')[6:][0].replace('Informasi Tambahan: ', '')
                 self.context['informasiTambahan']   = str(informasiTamabahan)
 
-                province = req.get("http://dev.farizdotid.com/api/daerahindonesia/provinsi").json()
-                print(self.context['provinsi'][len(self.context['provinsi']) - 2])
                 if self.context['provinsi'][len(self.context['provinsi']) - 1].isspace():
                     self.context['provinsi'] = self.context['provinsi'][:len(self.context['provinsi']) - 1]
                 for prov in province['semuaprovinsi']:

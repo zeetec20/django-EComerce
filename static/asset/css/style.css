@@ -298,6 +298,10 @@ body{
     overflow: hidden;
 }
 
+.login-register small{
+    color: #7f858a;
+}
+
 .login-register .cancel{
     position: absolute;
     right: 0;
@@ -352,7 +356,8 @@ body{
     background-color: white;
 }
 
-.login .input .borderBottom{
+.login .input .borderBottom,
+.register .input .borderBottom{
     position: relative;
     background-color: #313131;
     height: 1px;
@@ -361,7 +366,8 @@ body{
     margin: auto;
 }
 
-.login .input input:focus{
+.login .input input:focus,
+.register .input input:focus{
     box-shadow: 0px 0px 0px 0px;
 }
 
@@ -453,6 +459,11 @@ body{
     border-radius: 0px;
     border-color: white;
     background-color: white;
+}
+
+.register .form-group input:focus ~ .borderBottom{
+    transition: all 0.5s;
+    width: 100%;
 }
 
 .register .form-group input:focus{
@@ -680,6 +691,13 @@ body{
     border: solid 1px #313131;
     width: 150px;
     height: 40px !important;
+    margin-top: 5px;
+}
+
+.cartPage .action button:hover{
+    transition: all 0.5s;
+    background-color: #313131;
+    color: white;
 }
 
 .cartPage .action h5{

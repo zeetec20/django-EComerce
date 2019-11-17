@@ -27,43 +27,49 @@ class CustomUserChangeForm(UserChangeForm):
         }
 
 class RegisterForm(forms.ModelForm):
+    
     class Meta:
         model   = CustomUser
-        fields  = {
+        fields  = (
             'fullname',
             'email',
             'username',
             'password',
             'profile'
-        }
+        )
 
         widgets = {
             'fullname': forms.TextInput(
                 attrs = {
+                    'is_required': False,
                     'class': 'form-control form-control-sm',
                     'placeholder': 'Nama Lengkap'
                 }
             ),
             'email': forms.EmailInput(
                 attrs = {
+                    'is_required': False,
                     'class': 'form-control form-control-sm',
                     'placeholder': 'email@kamu.com'
                 }
             ),
             'username': forms.TextInput(
                 attrs = {
+                    'is_required': False,
                     'class': 'form-control form-control-sm',
                     'placeholder': 'Username'
                 }
             ),
             'password': forms.PasswordInput(
                 attrs = {
+                    'is_required': False,
                     'class': 'form-control form-control-sm',
                     'placeholder': 'Password'
                 }
             ),
             'profile': forms.FileInput(
                 attrs = {
+                    'is_required': False,
                     'class': 'form-control form-control-sm profile',
                     'title': ' ',
                     'data-buttonText': 'Profile'

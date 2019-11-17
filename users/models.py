@@ -1,10 +1,10 @@
 import shutil
 import os
+from uuid import uuid4
 from django.db import models
 from django.utils.text import slugify
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.contrib.auth import get_user_model
-from uuid import uuid4
 
 class CustomUser(AbstractUser):
     def path_upload(self, filename):
@@ -19,16 +19,23 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return "{}. {} | {}".format(self.id, self.username, self.email)
 
-    def save(self):
-        token = uuid4()
-        allUser = get_user_model().objects.all()
-        allToken = []
-        for user in allUser:
-            allToken.append(user.token)
-        while token in allToken:
+    def save(self, *args, **kwargs):
+        if self.id in get_user_model().objects.all().values_list('id', flat=True): #UPDATE
+            pass
+        else: # CREATE
+            if self.is_staff:
+                staff = Group.objects.get(name = 'staff')
+                self.groups.add(staff)
+        if self.token == None:
             token = uuid4()
-        self.token = token
-        return super(CustomUser, self).save()
+            allUser = get_user_model().objects.all()
+            allToken = []
+            for user in allUser:
+                allToken.append(user.token)
+            while token in allToken:
+                token = uuid4()
+            self.token = token
+        super(CustomUser, self).save(*args, **kwargs)
 
     def delete(self):
         

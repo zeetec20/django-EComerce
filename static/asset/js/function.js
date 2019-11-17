@@ -1,3 +1,32 @@
+function smallLoginRegister(action = 'loginRegister') {
+    if (action == 'login') {
+        $('.login .username small').text('Tolong masukkan username dari akun yang anda miliki')
+        $('.login .password small').text('Masukkan password yang sesuai dengan username anda')
+        $('.login .username small, .login .password small').css({
+            'color': '#7f858a'
+        })
+    }
+    if (action == 'register') {
+        $('.register .fullName small').text('Masukkan Nama Lengkap anda')
+        $('.register .username small').text('Masukkan username yang anda inginkan')
+        $('.register .email small').text('Masukkan email yang anda gunakan')
+        $('.register .password small').text('Masukkan password yang nada inginkan dan jaga baik-baik')
+        $('.register .divProfile small').text('Masukkan foto / gambar terlebih dahulu sebelum register')
+        
+        $('.register .fullName small,' 
+        + '.register .username small,'
+        + '.register .email small,'
+        + '.register .password small,'
+        + '.register .divProfile small').css({
+            'color': '#7f858a'
+        })
+    }
+    if (action == 'loginRegister') {
+        smallLoginRegister('login')
+        smallLoginRegister('register')
+    }
+}
+
 function cart() {
     $.ajax({
         url: '/ajax/cart',
@@ -60,6 +89,9 @@ function pageLogin_Register(action) {
             'height': '0px',
             'visibility': 'hidden',
         });
+        setTimeout(() => {
+            smallLoginRegister()
+        }, 1000);
     }
 }
 
@@ -92,6 +124,7 @@ function showLogin_Register(action) {
             'height': '440px',
             'opacity': '1'
         });
+        smallLoginRegister('register')
     }
     if (action == 'register') {
         pageLogin_Register('show');
@@ -109,6 +142,7 @@ function showLogin_Register(action) {
                 'top': '0'
             });
         }
+        smallLoginRegister('login')
     }
 }
 
@@ -248,6 +282,7 @@ function cartBayar() {
     let slugify = []
     for (let index = 1; index < (parseInt($('.list').attr('barang')) + 1); index++) {
         slugify.push($('.list .barang{0} .name .barang'.format(index)).attr('slugify'));
+        console.log($('.list .barang{0} .name .barang'.format(index)).attr('slugify'))
     }
     let quantity = []
     for (let index = 1; index < (parseInt($('.list').attr('barang')) + 1); index++) {
@@ -257,9 +292,9 @@ function cartBayar() {
     for (let index = 1; index < (parseInt($('.list').attr('barang')) + 1); index++) {
         color.push($('.list .warna' + index).text());
     }
-    let barang = slugify.toString().replace(',', ' ');
-    quantity = quantity.toString().replace(',', ' ');
-    color = color.toString().replace(',', ' ');
+    let barang = slugify.toString().replace(/,/g, ' ');
+    quantity = quantity.toString().replace(/,/g, ' ');
+    color = color.toString().replace(/,/g, ' ');
     url = "http://127.0.0.1:8000/address/zeetec/cart?barang={0}&quantity={1}&color={2}".format(barang, quantity, color);
     window.location.href = url;
 }

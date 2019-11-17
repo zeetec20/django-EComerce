@@ -431,3 +431,7 @@
     opacity: 0;
     visibility: hidden;
 }
+
+small{
+    color: #7f858a;
+}

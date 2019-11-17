@@ -52,7 +52,7 @@ class Index(View):
 
         self.context['allBrand'] = SemuaBrand.objects.all()
         self.context['barangLane'] = barangLane
-        self.context['registerForm'] = RegisterForm()
+        self.context['registerForm'] = RegisterForm(use_required_attribute=False)
         self.context['staff'] = Group.objects.get(name='staff')
         self.context['url'] = '/'
         
@@ -88,23 +88,25 @@ class Ajax(View):
                 return JsonResponse({'success': True})
 
             if self.action == 'login':
-                inputUsername = request.POST['username']
-                inputPassword = request.POST['password']
-                print(inputPassword, inputUsername)
-                user = authenticate(request, username=inputUsername, password=inputPassword)
-                if user != '':
-                    login(request, user)
-
-                if request.user.profile == "":
-                    self.context['profile_user'] = '/static/asset/images/icon/user.png'
-                else:
-                    self.context['profile_user'] = request.user.profile
-                
-                self.context['staff'] = Group.objects.get(name='staff')
-                if 'from' in request.POST:
-                    return render(self.request, 'user.html', self.context)
-                else:
-                    return render(self.request, 'user.html', self.context)
+                try:
+                    inputUsername = request.POST['username']
+                    inputPassword = request.POST['password']
+                    print(inputPassword, inputUsername)
+                    user = authenticate(request, username=inputUsername, password=inputPassword)
+                    if user != '':
+                        login(request, user)
+                    if request.user.profile == "":
+                        self.context['profile_user'] = '/static/asset/images/icon/user.png'
+                    else:
+                        self.context['profile_user'] = request.user.profile
+                    
+                    self.context['staff'] = Group.objects.get(name='staff')
+                    if 'from' in request.POST:
+                        return render(self.request, 'user.html', self.context)
+                    else:
+                        return render(self.request, 'user.html', self.context)
+                except:
+                    return JsonResponse({'success': 'false'})
 
             if self.action == 'register':
                 form = RegisterForm(request.POST, request.FILES or None)

@@ -41,7 +41,7 @@
                 <h6>Rp. <span id="price{{forloop.counter}}">{{barang.harga | intcomma}}</span></h6>
             </div>
             <div class="col-lg-2 content quantity">
-                <input type="number" name="quantity" id="quantity{{forloop.counter}}" value="{{barang.jumlah}}" onchange="quantityCart(this.value, '{{forloop.counter}}')" min="1">
+                <input type="number" name="quantity" id="quantity{{forloop.counter}}" value="{{barang.jumlah}}" onchange="if (this.value < 1) {this.value = 1} quantityCart(this.value, '{{forloop.counter}}')" min="1">
             </div>
             <div class="col-lg-2 content total">
                 <h6 id="totalPrice{{forloop.counter}}" harga="{{barang.hargaTotal}}">Rp. {{barang.hargaTotal | intcomma}}</h6>

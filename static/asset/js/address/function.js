@@ -22,39 +22,112 @@ function kecamatan(idKecamatan, nama) {
 function getKontak() {
     let email   = $('#contactEmail').val();
     let noHp    = $('#contactNomorHP').val();
-    return "{0}, {1}".format(email, noHp);
+    
+    empty = []
+    if (email == '') {
+        empty.push('email')
+        $('.divEmail small').text('Email anda masih kosong, tolong diisi terlebih dahulu');
+        $('.divEmail small').css({'color': '#fd6c6c'});
+    }
+    if (noHp == '') {
+        empty.push('noHp')
+        $('.divNoHP small').text('Nomer Hp anda masih kosong, tolong diisi terlebih dahulu');
+        $('.divNoHP small').css({'color': '#fd6c6c'});
+    }
+    if (empty.length == 0) {
+        return "{0}, {1}".format(email, noHp);
+    } else {
+        return false
+    }
 }
 
 function getAlamat() {
-    let label               = $('#alamatLabelAlamat').val();
-    let namaLengkap         = $('#alamatNamaLengkap').val();
-    let provinsi            = $('.buttonProvinsi').text();
-    let kabupaten           = $('.buttonKabupaten').text();
-    let kecamatan           = $('.buttonKecamatan').text();
-    let kodePos             = $('#alamatKodePos').val();
-    let informasiTambahan   = $('#alamatInformasiTambahan').val();
+    // let label               = $('#alamatLabelAlamat').val();
+    // let namaLengkap         = $('#alamatNamaLengkap').val();
+    // let provinsi            = $('.buttonProvinsi').text();
+    // let kabupaten           = $('.buttonKabupaten').text();
+    // let kecamatan           = $('.buttonKecamatan').text();
+    // let kodePos             = $('#alamatKodePos').val();
+    // let informasiTambahan   = $('#alamatInformasiTambahan').val();
+    // let simpan              = $('#alamatSimpanAlamat').val();
+
+    // kabupatenLength = kabupaten.length
+    // kabupaten = kabupaten.split(' ').slice(1);
+    // kabupaten = String(kabupaten).replace(/,/g, ' ');
+
+    // return [label, namaLengkap, provinsi, kabupaten, kecamatan, kodePos, informasiTambahan, simpan];
+
+    let label               = $('#alamatLabelAlamat');
+    let namaLengkap         = $('#alamatNamaLengkap');
+    let provinsi            = $('.buttonProvinsi');
+    let kabupaten           = $('.buttonKabupaten');
+    let kecamatan           = $('.buttonKecamatan');
+    let kodePos             = $('#alamatKodePos');
+    let informasiTambahan   = $('#alamatInformasiTambahan');
     let simpan              = $('#alamatSimpanAlamat').val();
 
-    kabupatenLength = kabupaten.length
-    kabupaten = kabupaten.split(' ').slice(1);
-    kabupaten = String(kabupaten).replace(',', ' ');
-
-    return [label, namaLengkap, provinsi, kabupaten, kecamatan, kodePos, informasiTambahan, simpan];
+    empty = []
+    if (label.val() == '') {
+        empty.push('label')
+        $('.divLabel small').css({
+            'color': '#fd6c6c'
+        });
+        $('.divLabel small').text('Label masih kosong, silahkan isikan sesuai alamat anda!');
+    }
+    if (namaLengkap.val() == '') {
+        empty.push('namaLengkap')
+        $('.divFullname small').text('Nama Lengkap masih kosong, silahkan isikan sesuai alamat anda!');
+        $('.divFullname small').css({'color': '#fd6c6c'});
+    }
+    if (provinsi.text() == 'Provinsi') {
+        empty.push('provinsi')
+        provinsi.text('Belom Memilih Provinsi!')
+    }
+    if (kabupaten.text() == 'Kabupaten / Kota') {
+        empty.push('kabupaten')
+        kabupaten.text('Belom Memilih Kabupaten!')
+    }
+    if (kecamatan.text() == 'Kecamatan') {
+        empty.push('kecamatan')
+        kecamatan.text('Belom Memilih Kecamatan!')
+    }
+    if (kodePos.val() == '' || kodePos.length == 5) {
+        empty.push('kodePos')
+        $('.divKodePos small').text('Kode Pos masih kosong, silahkan isikan sesuai alamat anda!');
+        $('.divKodePos small').css({'color': '#fd6c6c'});
+    }
+    if (informasiTambahan.val() == '') {
+        empty.push('informasi')
+        $('.divInformasiTambahan small').text('Informasi Tambahan masih kosong, silahkan isikan sesuai alamat anda!');
+        $('.divInformasiTambahan small').css({'color': '#fd6c6c'});
+    }
+    if (empty.length == 0) {
+        kabupatenLength = kabupaten.text().length
+        kabupaten = kabupaten.text().split(' ').slice(1);
+        kabupaten = String(kabupaten).replace(/,/g, ' ');
+        return [label.val(), namaLengkap.val(), provinsi.text(), kabupaten, kecamatan.text(), kodePos.val(), informasiTambahan.val(), simpan];    
+    } else {
+        return false
+    }
 }
 
 function getAddress(username, method, jumlahBarang, slugify) {
-    // let user    = username;
+    let user    = username;
     let kontak  = getKontak();
     let alamat  = getAlamat();
 
-    screenBlank('visible');
-    $('.loading').css({
-        'visibility': 'visible',
-        'transition': 'all 0.5s',
-        'opacity': '1',
-        'width': '80px',
-    })
-    ongkir(kontak, alamat, method, jumlahBarang, slugify);
+    if (kontak != false && alamat != false) {
+        screenBlank('visible');
+        $('.loading').css({
+            'visibility': 'visible',
+            'transition': 'all 0.5s',
+            'opacity': '1',
+            'width': '80px',
+        })
+        ongkir(kontak, alamat, method, jumlahBarang, slugify);
+    } else {
+        window.scrollTo({top: 30, behavior: 'smooth'});
+    }
 }
 
 function ekspedisi(namaEkpd, ekpd) {
