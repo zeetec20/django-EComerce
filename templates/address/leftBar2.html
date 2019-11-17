@@ -3,7 +3,7 @@
         <h1 class="title">Three Laptop</h1>
     </div>
     <div class="row col-lg-12">
-        <h1 class="link"><a href="\" class="linkItem">Beranda</a> &nbsp;>&nbsp; {% if method == 'barang' %}<a href="/barang/{{ request.GET.barang }}" class="linkItem">Barang</a> &nbsp;>&nbsp;{% endif %}<a href="" class="linkItem active">Alamat</a> </h1>
+        <h1 class="link"><a href="\" class="linkItem">Beranda</a> &nbsp;>&nbsp; {% if method == 'barang' %}<a href="/barang/{{ slugify }}" class="linkItem">Barang</a> &nbsp;>&nbsp;{% endif %}<a href="" class="linkItem active">Alamat</a> </h1>
     </div>
 </div>
 
@@ -11,33 +11,33 @@
     <div class="row col-lg-12">
         <h1 class="title">Alamat</h1>
     </div>
-    <!-- <form action="/ajax/saveTransaksi" method="post"> -->
+    <form action="/ajax/saveTransaksi" method="post">
         {% csrf_token %}
         <div class="row col-lg-12">
             <div class="row col-lg-12 data">
                 <h6 class="labelLabel">Label Alamat</h6>
                 <h1 class="label" id="label">{{ alamat.label }}</h1>
-                <input type="hidden" name="label" value="" id="labelHidden">
+                <input type="hidden" name="label" value="{{ alamat.label }}" id="labelHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelNamaLengkap">Nama Lengkap</h6>
                 <h1 class="namaLengkap" id="namaLengkap">{{ alamat.namaLengkap }}</h1>
-                <input type="hidden" name="namaLengkap" value="" id="namaLengkapHidden">
+                <input type="hidden" name="namaLengkap" value="{{ alamat.namaLengkap }}" id="namaLengkapHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelAlamat">Provinsi / Kabupaten / Kecamatan</h6>
                 <h1 class="alamat" id="alamat">{{ alamat.provinsi }} / {{ alamat.kabupaten }} / {{ alamat.kecamatan }}</h1>
-                <input type="hidden" name="namaLengkap" value="" id="alamatHidden">
+                <input type="hidden" name="namaLengkap" value="{{ alamat.provinsi }} / {{ alamat.kabupaten }} / {{ alamat.kecamatan }}" id="alamatHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelKodePos">Kode Pos</h6>
                 <h1 class="kodePos" id="kodePos">{{ alamat.kodePos }}</h1>
-                <input type="hidden" name="kodePos" value="" id="kodePosHidden">
+                <input type="hidden" name="kodePos" value="{{ alamat.kodePos }}" id="kodePosHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelInformasiTambahan">Informasi Tambahan</h6>
                 <textarea name="" id="" class="informasiTambahan" disabled>{{ alamat.informasiTambahan }}</textarea>
-                <input type="hidden" name="informasiTambahan" value="" id="informasiTambahanHidden">
+                <input type="hidden" name="informasiTambahan" value="{{ alamat.informasiTambahan }}" id="informasiTambahanHidden">
             </div>
             <div class="row col-lg-12 data">
                 <div class="dropdown ekspedisi row col-lg-12">
@@ -51,6 +51,7 @@
                         {% endfor %}
                             
                     </div>
+                    <input type="hidden" name="">
                 </div>
             </div>
             <div class="row col-lg-12 data">
@@ -74,12 +75,11 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="" id="id_transaksi" value="{{ id_transaksi }}">
             <div class="row col-lg-12 data">
-                <button class="btn bayar" onclick="xendit('{{method}}', '{{ jumlahBarang }}');">Lanjut ke Pembayaran</button>
+                <button class="btn bayar" type="submit" onclick="this.preventDefault(); xendit('{{method}}', '{{ jumlahBarang }}');">Lanjut ke Pembayaran</button>
             </div>
         </div>
-    <!-- </form> -->
+    </form>
 </div>
 
 <style>
@@ -168,5 +168,9 @@
 .dropdown-menu a:focus{
     background-color: #313131;
     color: white !important;
+}
+
+textarea:disabled{
+    color: #313131;
 }
 </style>

@@ -170,6 +170,7 @@
     border-color: white;
     height: 150px;
     padding: 10px;
+    color: #313131;
 }
 
 .additionalInformation textarea::placeholder{

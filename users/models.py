@@ -1,10 +1,10 @@
 import shutil
 import os
-
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
+from uuid import uuid4
 
 class CustomUser(AbstractUser):
     def path_upload(self, filename):
@@ -12,11 +12,23 @@ class CustomUser(AbstractUser):
 
     profile     = models.ImageField(upload_to = path_upload)
     fullname    = models.CharField(max_length = 40)
-    token       = models.CharField(max_length = 37)
+    token       = models.CharField(max_length = 37, blank=True, null=True)
     transaksi   = models.CharField(max_length = 400)
+    alamat      = models.TextField()
 
     def __str__(self):
         return "{}. {} | {}".format(self.id, self.username, self.email)
+
+    def save(self):
+        token = uuid4()
+        allUser = get_user_model().objects.all()
+        allToken = []
+        for user in allUser:
+            allToken.append(user.token)
+        while token in allToken:
+            token = uuid4()
+        self.token = token
+        return super(CustomUser, self).save()
 
     def delete(self):
         
@@ -38,3 +50,4 @@ class Subscribe(models.Model):
 
     class Meta:
         verbose_name_plural = 'Berlangganan'
+

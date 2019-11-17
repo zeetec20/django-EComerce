@@ -261,10 +261,13 @@ class Ajax(View):
                 
                 id_transaksi = getIdTransaksi()
 
-                # if alamat['simpan'] == 'true':
-                #     saveAlamat = "Label: {}\rNama Lengkap: {}\rProvinsi: {}\rKabupaten: {}\rKecamatan: {}\rKode Pos: {}\rInformasi Tambahan: {}\r".format(
-                #         alamat[0], alamat[1], alamat[2], alamat[3], alamat[4], alamat[5], alamat[6]
-                #     )
+                if alamat['simpan'] == 'true':
+                    saveAlamat = "Label: {}\nNama Lengkap: {}\nProvinsi: {}\nKabupaten: {}\nKecamatan: {}\nKode Pos: {}\nInformasi Tambahan: {}".format(
+                        alamat['label'], alamat['namaLengkap'], alamat['provinsi'], alamat['kabupaten'], alamat['kecamatan'], alamat['kodePos'], alamat['informasiTambahan']
+                    )
+                    user = get_user_model().objects.get(username = request.user.username)
+                    user.alamat = saveAlamat
+                    user.save()
                 
                 kotaAsal = 'Banyuwangi'
                 kotaTujuan = alamat['kabupaten']
@@ -276,6 +279,7 @@ class Ajax(View):
                 
                 self.context['jumlahBarang']    = request.GET['jumlahBarang']
                 self.context['method']          = request.GET['method']
+                self.context['slugify']         = request.GET['slugify']
                 self.context['id_transaksi']    = id_transaksi
                 self.context['alamat']          = alamat
                 self.context['kontak']          = kontak

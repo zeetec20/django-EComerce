@@ -31,14 +31,14 @@
     </div>
         <div class="row col-lg-12">
             <div class="form-group input">
-                <input type="text" class="form-control labelAddress" id="alamatLabelAlamat" placeholder="Label Alamat">
+                <input type="text" class="form-control labelAddress" id="alamatLabelAlamat" placeholder="Label Alamat" value="{{ label }}">
                 <div class="borderBottom"></div>
                 <small id="passwordHelp" class="form-text text-muted">Contoh: Alamat Rumah, Alamat Kantor, Apartemen, Rumah Kos</small>
             </div>
         </div>
         <div class="row col-lg-12">
             <div class="form-group input">
-                <input type="text" class="form-control fullname" id="alamatNamaLengkap" placeholder="Nama Lengkap">
+                <input type="text" class="form-control fullname" id="alamatNamaLengkap" placeholder="Nama Lengkap" value="{{ namaLengkap }}">
                 <div class="borderBottom"></div>
                 <small id="passwordHelp" class="form-text text-muted">Dimohon untuk mengisikan nama lengkap anda demi kemudahan pengiriman</small>
             </div>
@@ -46,7 +46,7 @@
         <div class="row col-lg-12">
             <div class="dropdown provinsi row col-lg-12">
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonProvinsi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                    Provinsi
+                    {% if provinsi != None %}{{ provinsi }}{% else %}Provinsi{% endif %}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
 
@@ -57,18 +57,20 @@
                 </div>
             </div>
             <div class="dropdown kabupaten row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
-                    Kabupaten / Kota
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kabupatenKota == None %}disabled{% endif %}>
+                    {% if kabupatenKota != None %}{{ kabupatenKota }}{% else %}Kabupaten / Kota{% endif %}
                 </button>
                 <div class="dropdown-menu dropdown-menu-kabupaten" aria-labelledby="dropdownMenuOffset">
 
-                    {% include 'address/listKabupaten.html' %}
+                    {% for kabupaten in listKabupaten %}
+    <a class="dropdown-item" kode="{{kabupaten.id}}" onclick="kabupaten('{{kabupaten.id}}', '{{kabupaten.nama}}');">{{kabupaten.nama}}</a>
+{% endfor %}
 
                 </div>
             </div>
             <div class="dropdown kecamatan row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKecamatan" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>
-                    Kecamatan
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKecamatan" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kecamatan == None %}disabled{% endif %}>
+                    {% if kecamatan != None %}{{ kecamatan }}{% else %}Kecamatan{% endif %}
                 </button>
                 <div class="dropdown-menu dropdown-menu-kecamatan" aria-labelledby="dropdownMenuOffset">
 
@@ -79,14 +81,14 @@
         </div>
         <div class="row col-lg-12 kodePost">
             <div class="form-group input">
-                <input type="number" class="form-control inputKodePost" id="alamatKodePos" placeholder="Kode Pos" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                <input type="number" class="form-control inputKodePost" id="alamatKodePos" placeholder="Kode Pos" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ kodePos }}">
                 <div class="borderBottom"></div>
                 <small id="passwordHelp" class="form-text text-muted">Dimohon untuk mengisikan kode pos dengan tepat dan benar</small>
             </div>
         </div>
         <div class="row col-lg-12 additionalInformation">
             <div class="row">
-                <textarea name="" id="alamatInformasiTambahan" placeholder="Informasi Tambahan">{{test}}</textarea>
+                <textarea name="" id="alamatInformasiTambahan" placeholder="Informasi Tambahan">{{ informasiTambahan }}</textarea>
                 <div class="borderBottom"></div>
                 <small id="passwordHelp" class="form-text text-muted">Isikan dengan detail alamatmu seperti dusun, RT/RW, ciri-ciri rumah</small>
             </div>
@@ -98,7 +100,7 @@
         </div>
         <div class="row col-lg-12 submit">
             <div>
-                <button class="btn rounded-0 buttonProses" onclick="getAddress('{{user.username}}', '{{method}}', '{{jumlahBarang}}')">Proses</button>
+                <button class="btn rounded-0 buttonProses" onclick="getAddress('{{user.username}}', '{{method}}', '{{jumlahBarang}}', '{{request.GET.barang}}')">Proses</button>
             </div>
         </div>
 </div>

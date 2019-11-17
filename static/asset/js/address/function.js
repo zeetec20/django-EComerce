@@ -15,40 +15,6 @@ function screenBlank(action) {
     }
 }
 
-function provinsi(idProvinsi, nama) {
-    $.ajax({
-        url: '/ajax/api/kabupaten',
-        type: 'GET',
-        data: {
-            'id_provinsi': idProvinsi
-        },
-        success: function (returnData) {
-            $('.dropdown-menu-kabupaten').html(returnData);
-            $('.buttonProvinsi').html(nama + '&nbsp;');
-            $('.buttonKabupaten').html('Kabupaten / Kota&nbsp;');
-            $('.buttonKecamatan').html('Kecamatan&nbsp;');
-            $('.buttonKecamatan').prop('disabled', true);
-            $('.buttonKabupaten').removeAttr('disabled');
-        }
-    });
-}
-
-function kabupaten(idKabupaten, nama) {
-    $.ajax({
-        url: '/ajax/api/kecamatan',
-        type: 'GET',
-        data: {
-            'id_kabupaten': idKabupaten
-        },
-        success: function (returnData) {
-            $('.dropdown-menu-kecamatan').html(returnData);
-            $('.buttonKabupaten').html(nama);
-            $('.buttonKecamatan').removeAttr('disabled');
-            $('.buttonKecamatan').html('Kecamatan&nbsp;');
-        }
-    })
-}
-
 function kecamatan(idKecamatan, nama) {
     $('.buttonKecamatan').html(nama);
 }
@@ -76,7 +42,7 @@ function getAlamat() {
     return [label, namaLengkap, provinsi, kabupaten, kecamatan, kodePos, informasiTambahan, simpan];
 }
 
-function getAddress(username, method, jumlahBarang) {
+function getAddress(username, method, jumlahBarang, slugify) {
     // let user    = username;
     let kontak  = getKontak();
     let alamat  = getAlamat();
@@ -88,7 +54,7 @@ function getAddress(username, method, jumlahBarang) {
         'opacity': '1',
         'width': '80px',
     })
-    ongkir(kontak, alamat, method, jumlahBarang);
+    ongkir(kontak, alamat, method, jumlahBarang, slugify);
 }
 
 function ekspedisi(namaEkpd, ekpd) {

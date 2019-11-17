@@ -171,8 +171,8 @@
     <div class="container header">
         <div class="row col-lg-12 header1">
             <div class="searchBar col-lg-6">
-                <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh" onclick="search($('#inputSearch').val())">
-                <input class="form-control search" type="search" id="inputSearch" placeholder="Pencarian" aria-label="Search">
+                <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh" onclick="if ($('#inputSearch').val() == '') {$('#inputSearch').focus();} else {search($('#inputSearch').val());}">
+                <input class="form-control search" type="search" id="inputSearch" placeholder="Pencarian" aria-label="Search" spellcheck="false">
             </div>
             <div class="cart col-lg-6 col-sm-12">
                 <div class="dropdown button">
@@ -298,7 +298,7 @@
                     <h4 class="footerLink" onclick="tentangKami('visible')">Tentang Kami</h4>
                 </div>
                 <div class="row ">
-                    <h4 class="footerLink" onclick='window.open("https://mail.google.com/mail/?view=cm&fs=1&to=jusles363@gmail.com&su=Tanya dong Three Laptop!", "_blank")'>Pertanyaan</h4>
+                    <h4 class="footerLink" onclick='window.open("https\:\/\/mail.google.com/mail/?view=cm&fs=1&to=jusles363@gmail.com&su=Tanya dong Three Laptop!", "_blank")'>Pertanyaan</h4>
                 </div>
                 <div class="row ">
                     <h4 class="footerLink" onclick="window.scrollTo({top: 280, behavior: 'smooth'});">Contact</h4>

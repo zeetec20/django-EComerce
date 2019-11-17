@@ -44,27 +44,31 @@ class Barang(models.Model):
     dateUpdate      = models.DateField(auto_now = True, null = True, blank = True)
     dateCreate      = models.DateField(auto_now_add = True, null = True, blank = True)
     slugifyBarang   = models.CharField(max_length = 100, null = True, blank = True)
+    terjual         = models.IntegerField()
 
     def __str__(self):
-        return "{}. {} | {} | Rp.{:20,.2f} | Tersedia({})".format(self.id, self.nama, self.brand, self.harga, self.tersedia)
+        return "{}. {} | {} | Rp. {:,} | Tersedia({})".format(self.id, self.nama, self.brand, self.harga, self.tersedia)
 
     def save(self):
+        if self.id in Barang.objects.all().values_list('id', flat=True): #UPDATE
+            pass
+        else: # CREATE
+            allEmailSubscribe = Subscribe.objects.all()
+            msgEmail = []
+            for email in allEmailSubscribe:
+                msgEmail.append(email.email)
+            html = render_to_string('email/goods.html', {})
+            msg = EmailMessage(
+                'Lihat Produk Terbaru Three Laptop',
+                html,
+                'jusles363@gmail.com',
+                msgEmail
+            )
+            msg.content_subtype = 'html'
+            msg.send()
+        
         os.chmod('/media', 0o757)
         self.slugifyBarang = slugify(self.nama)
-        allEmailSubscribe = Subscribe.objects.all()
-        msgEmail = []
-        for email in allEmailSubscribe:
-            msgEmail.append(email.email)
-        html = render_to_string('email/goods.html', {})
-        msg = EmailMessage(
-            'Lihat Produk Terbaru Three Laptop',
-            html,
-            'jusles363@gmail.com',
-            msgEmail
-        )
-        msg.content_subtype = 'html'
-        msg.send()
-        
         super(Barang, self).save()
     
     def delete(self):

@@ -30,6 +30,7 @@ urlpatterns = [
     path('barang/', include('goods.urls')),
     path('address/', include('address.urls')),
     path('user/', include('users.urls')),
+    path('api/', include('threeLaptopAPI.urls')),
     # path('<str:url1>/<str:url2>/<str:url3>/<str:url4>/<str:url5>/<str:url6>/<str:url7>/<str:url8>/<str:url9>/<str:url10>'),
 ]
 

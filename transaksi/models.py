@@ -5,13 +5,13 @@ from django.contrib.auth import get_user_model
 from users.models import CustomUser
 
 class Transaksi(models.Model):
-    id_transaksi    = models.IntegerField(primary_key=True)
+    id_transaksi    = models.IntegerField(primary_key=True, blank=True)
     barang          = models.CharField(max_length=400)
     pembeli         = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='+')
     harga           = models.CharField(max_length=400)
     alamat          = models.CharField(max_length=400)
     ekspedisi       = models.CharField(max_length=20)
-    pembayaran      = models.BooleanField(default=False)
+    pembayaran      = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return "{} | {} | {}".format(self.pembeli, self.barang, self.harga)
