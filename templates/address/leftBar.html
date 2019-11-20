@@ -12,7 +12,7 @@
     </div>
     <div class="row col-lg-12">
         <div class="form-group input divEmail">
-            <input type="email" class="form-control email" id="contactEmail" placeholder="Email">
+            <input type="email" class="form-control email" id="contactEmail" placeholder="Email" value="{{request.user.email}}">
             <div class="borderBottom"></div>
             <small id="passwordHelp" class="form-text">Silahkan masukkan email yang selalu anda gunakan</small>
         </div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="dropdown kabupaten row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kabupatenKota == None %}disabled{% endif %}>{% if kabupatenKota != None %}{{ kabupatenKota }}{% else %}Kabupaten / Kota{% endif %}</button>
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kabupatenAsli == None %}disabled{% endif %}>{% if kabupatenAsli != None %}{{ kabupatenAsli }}{% else %}Kabupaten / Kota{% endif %}</button>
                 <div class="dropdown-menu dropdown-menu-kabupaten" aria-labelledby="dropdownMenuOffset">
 
                     {% for kabupaten in listKabupaten %}

@@ -11,7 +11,7 @@ from goods.models import Barang as ModelBarang
 from transaksi.models import Transaksi as ModelTransaksi
 
 class Barang(APIView):
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
 
@@ -53,7 +53,7 @@ class Barang(APIView):
         else:
             response = {
                 'Pesan': "Parameter \'get\' tidak ditemukan, silahkan gunakan api seperti di contoh. " 
-                +"Contoh: http GET \'http://127.0.0.1:8000/api/listbarang?get=list-barang\' \'Authorization:Token 32fd66707c69ec27926f097abe96ea35dd33686c\'"
+                +"Contoh: http GET \'http://127.0.0.1:8000/api/barang?get=list-barang\' \'Authorization:Token 32fd66707c69ec27926f097abe96ea35dd33686c\'"
             }
         return Response(response)
 
@@ -69,7 +69,7 @@ class CustomObtainAuthToken(ObtainAuthToken):
             return Response({'pesan': 'Akun anda tidak terdaftar sebagai staff, akses ini hanya diperuntukan untuk staff!'})
             
 class Transaksi(APIView):
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         if 'get' in request.GET:
@@ -83,27 +83,50 @@ class Transaksi(APIView):
                     }
                 ]
                 for trns in transaksiModel:
+                    harga_barang = trns.detailHarga.split(' - ')[0].split('Harga: ')
+                    index = 0
+                    harga = harga_barang
+                    if len(harga_barang) > 2:
+                        harga = ''
+                        for hrg in harga_barang:
+                            index += 1
+                            if index > 1:
+                                print(hrg)
+                                if harga == '':
+                                    harga = hrg.split(', Barang:')[0]
+                                else:
+                                    harga += ' - ' + hrg.split(', Barang:')[0]
+                            harga = harga.replace(', ', ',')
+                    else:
+                        harga = harga_barang[1]
+
+                    harga_barang = harga
                     transaksi[1]['list_transaksi'].append({
                         'id_transaksi'  : trns.id_transaksi,
-                        # 'barang'        : trns.barang,
+                        'barang'        : trns.barang,
                         'pembeli'       : {
                             'username'      : trns.pembeli.username,
                             'email'         : trns.pembeli.email,
                             'nama_lengkap'  : trns.pembeli.fullname
                         },
-                        # 'harga'         : trns.harga,
+                        'harga'         : {
+                            'harga_barang':  harga,
+                            'harga_pengiriman': trns.detailHarga.split(' - ')[1].replace('Harga Pengiriman: ', ''),
+                            'total_harga': 'Rp. {:,}'.format(int(trns.detailHarga.split(' - ')[2]))
+                        },
                         'alamat'        : trns.alamat,
                         'ekspedisi'     : trns.ekspedisi
                     })
+                return Response(transaksi)
 
 # mengecek token api
 # http POST http://127.0.0.1:8000/api/get_api_token username=zeetec password=admin123
 
 # mendapatkan list barang
-# http GET 'http://127.0.0.1:8000/api/listbarang?get=list-barang' 'Authorization:Token 32fd66707c69ec27926f097abe96ea35dd33686c'
+# http GET 'http://127.0.0.1:8000/api/barang?get=list-barang' 'Authorization:Token 32fd66707c69ec27926f097abe96ea35dd33686c'
 
 # mendapatkan list barang detail
-# 
+# http GET 'http://127.0.0.1:8000/api/transaksi?get=list-transaksi' 'Authorization:Token 32fd66707c69ec27926f097abe96ea35dd33686c'
 
 # mendapatkan list transaksi
 # http GET 'http://127.0.0.1:8000/api/listbarang?get=list-transaksi' 'Authorization:Token 32fd66707c69ec27926f097abe96ea35dd33686c'

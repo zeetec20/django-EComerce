@@ -19,14 +19,16 @@ class Index(View):
         if kwargs['username'] != request.user.username:
             return redirect('/')
         else:
+            print(request.user.alamat)
             if request.user.alamat != '':
-                self.context['label']               = request.user.alamat.split('\r')[0].split(': ')[1]
-                self.context['namaLengkap']         = request.user.alamat.split('\r')[1].split(': ')[1]
-                self.context['provinsi']            = request.user.alamat.split('\r')[2].split(': ')[1]
-                self.context['kabupatenKota']       = request.user.alamat.split('\r')[3].split(': ')[1]
-                self.context['kecamatan']           = request.user.alamat.split('\r')[4].split(': ')[1]
-                self.context['kodePos']             = request.user.alamat.split('\r')[5].split(': ')[1]
-                informasiTamabahan = request.user.alamat.split('\r')[6:][0].replace('Informasi Tambahan: ', '')
+                self.context['label']               = request.user.alamat.split(' | ')[0].split(': ')[1]
+                self.context['namaLengkap']         = request.user.alamat.split(' | ')[1].split(': ')[1]
+                self.context['provinsi']            = request.user.alamat.split(' | ')[2].split(': ')[1]
+                self.context['kabupatenKota']       = request.user.alamat.split(' | ')[3].split(': ')[1].split('/')[0]
+                self.context['kabupatenAsli']       = request.user.alamat.split(' | ')[3].split(': ')[1].split('/')[1]
+                self.context['kecamatan']           = request.user.alamat.split(' | ')[4].split(': ')[1]
+                self.context['kodePos']             = request.user.alamat.split(' | ')[5].split(': ')[1]
+                informasiTamabahan = request.user.alamat.split(' | ')[6:][0].replace('Informasi Tambahan: ', '')
                 self.context['informasiTambahan']   = str(informasiTamabahan)
 
                 if self.context['provinsi'][len(self.context['provinsi']) - 1].isspace():

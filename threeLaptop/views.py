@@ -71,22 +71,6 @@ class Ajax(View):
 
     def post(self, request):
         if request.is_ajax():
-            if self.action == 'saveAlamat':
-                alamat = {
-                    'label': request.POST['label'],
-                    'namaLengkap': request.POST['namaLengkap'],
-                    'provinsi': request.POST['provinsi'],
-                    'kabupaten': request.POST['kabupaten'],
-                    'kecamatan': request.POST['kecamatan'],
-                    'kodePos': request.POST['kodePos'],
-                    'informasiTambahan': request.POST['informasiTambahan']
-                }
-                user = get_user_model().objects.get(username = request.user)
-                user.alamat = ''
-                user.save()
-
-                return JsonResponse({'success': True})
-
             if self.action == 'login':
                 try:
                     inputUsername = request.POST['username']
@@ -141,6 +125,22 @@ class Ajax(View):
                     return JsonResponse({'success': True})
                 else:
                     return JsonResponse({'success': False})
+
+            if self.action == 'saveTransaksi':
+                transaksi = Transaksi(
+                    id_transaksi = str(request.POST['id_transaksi']),
+                    barang = request.POST['barang'],
+                    harga = request.POST['harga'],
+                    detailHarga = request.POST['detailHarga'],
+                    alamat = request.POST['userAlamat'],
+                    pembeli = request.user, 
+                    ekspedisi = request.POST['ekspedisi'],
+                )
+                transaksi.save()
+                user = get_user_model().objects.get(username = request.user.username)
+                user.transaksi = str(request.POST['id_transaksi']) if user.transaksi == None or user.transaksi == '' else user.transaksi + ', ' + str(request.POST['id_transaksi'])
+                user.save()
+                return JsonResponse({'success': 'true'})
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
@@ -255,6 +255,7 @@ class Ajax(View):
                     'namaLengkap': request.GET['namaLengkap'],
                     'provinsi': request.GET['provinsi'],
                     'kabupaten': request.GET['kabupaten'],
+                    'kabupatenAsli': request.GET['kabupatenAsli'],
                     'kecamatan': request.GET['kecamatan'],
                     'kodePos': request.GET['kodePos'],
                     'informasiTambahan': request.GET['informasiTambahan'],
@@ -263,10 +264,10 @@ class Ajax(View):
                 
                 id_transaksi = getIdTransaksi()
 
+                saveAlamat = "Label: {} | Nama Lengkap: {} | Provinsi: {} | Kabupaten: {}/{} | Kecamatan: {} | Kode Pos: {} | Informasi Tambahan: {}".format(
+                    alamat['label'], alamat['namaLengkap'], alamat['provinsi'], alamat['kabupaten'], alamat['kabupatenAsli'], alamat['kecamatan'], alamat['kodePos'], alamat['informasiTambahan']
+                )
                 if alamat['simpan'] == 'true':
-                    saveAlamat = "Label: {}\nNama Lengkap: {}\nProvinsi: {}\nKabupaten: {}\nKecamatan: {}\nKode Pos: {}\nInformasi Tambahan: {}".format(
-                        alamat['label'], alamat['namaLengkap'], alamat['provinsi'], alamat['kabupaten'], alamat['kecamatan'], alamat['kodePos'], alamat['informasiTambahan']
-                    )
                     user = get_user_model().objects.get(username = request.user.username)
                     user.alamat = saveAlamat
                     user.save()
@@ -289,11 +290,13 @@ class Ajax(View):
                 self.context['tiki']            = templateRajaOngkir(dataOngkirTiki[0]['costs'], dataOngkirTiki[0]['code'])
                 self.context['jne']             = templateRajaOngkir(dataOngkirJne[0]['costs'], dataOngkirTiki[0]['code'])
                 self.context['pos']             = templateRajaOngkir(dataOngkirPos[0]['costs'], dataOngkirTiki[0]['code'])
+                self.context['userAlamat']      = saveAlamat
 
                 return render(self.request, 'address/leftBar2.html', self.context)
             
             if self.action == 'xendit':
                 data = makeInvoice(request.GET['id_transaksi'], request.user.email, request.GET['description'], str(request.GET['amount']))
+                print(request.GET)
                 return JsonResponse(data)
 
             if self.action == 'subscribe':

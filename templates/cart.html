@@ -53,7 +53,7 @@
 
 <div class="row col-lg-12 action">
     <div class="row col-lg-6">
-        <button class="btn" onclick="cartBayar()">Bayar</button>
+        <button class="btn" onclick="if (getCookie('barang') != '') {cartBayar()}">Bayar</button>
     </div>
     <div class="row col-lg-6">
         <h5 class="subtotal" id="subtotal" harga="{{totalHarga}}">Subtotal <span class="number">Rp. {{totalHarga | intcomma}}</span></h5>

@@ -11,33 +11,28 @@
     <div class="row col-lg-12">
         <h1 class="title">Alamat</h1>
     </div>
-    <form action="/ajax/saveTransaksi" method="post">
+    <form action="/ajax/saveTransaksi" method="post" id="formSaveTransaksi">
         {% csrf_token %}
         <div class="row col-lg-12">
             <div class="row col-lg-12 data">
                 <h6 class="labelLabel">Label Alamat</h6>
                 <h1 class="label" id="label">{{ alamat.label }}</h1>
-                <input type="hidden" name="label" value="{{ alamat.label }}" id="labelHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelNamaLengkap">Nama Lengkap</h6>
                 <h1 class="namaLengkap" id="namaLengkap">{{ alamat.namaLengkap }}</h1>
-                <input type="hidden" name="namaLengkap" value="{{ alamat.namaLengkap }}" id="namaLengkapHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelAlamat">Provinsi / Kabupaten / Kecamatan</h6>
                 <h1 class="alamat" id="alamat">{{ alamat.provinsi }} / {{ alamat.kabupaten }} / {{ alamat.kecamatan }}</h1>
-                <input type="hidden" name="namaLengkap" value="{{ alamat.provinsi }} / {{ alamat.kabupaten }} / {{ alamat.kecamatan }}" id="alamatHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelKodePos">Kode Pos</h6>
                 <h1 class="kodePos" id="kodePos">{{ alamat.kodePos }}</h1>
-                <input type="hidden" name="kodePos" value="{{ alamat.kodePos }}" id="kodePosHidden">
             </div>
             <div class="row col-lg-12 data">
                 <h6 class="labelInformasiTambahan">Informasi Tambahan</h6>
                 <textarea name="" id="" class="informasiTambahan" disabled>{{ alamat.informasiTambahan }}</textarea>
-                <input type="hidden" name="informasiTambahan" value="{{ alamat.informasiTambahan }}" id="informasiTambahanHidden">
             </div>
             <div class="row col-lg-12 data">
                 <div class="dropdown ekspedisi row col-lg-12">
@@ -51,7 +46,6 @@
                         {% endfor %}
                             
                     </div>
-                    <input type="hidden" name="">
                 </div>
             </div>
             <div class="row col-lg-12 data">
@@ -76,9 +70,17 @@
                 </div>
             </div>
             <div class="row col-lg-12 data">
-                <button class="btn bayar" type="submit" onclick="this.preventDefault(); xendit('{{method}}', '{{ jumlahBarang }}');">Lanjut ke Pembayaran</button>
+                <button class="btn bayar" type="submit">Lanjut ke Pembayaran</button>
             </div>
         </div>
+
+        <input type="hidden" name="barang" id="inputHiddenBarang">
+        <input type="hidden" name="harga" id="inputHiddenHarga">
+        <input type="hidden" name="ekspedisi" id="inputHiddenEkspedisi">
+        <input type="hidden" name="id_transaksi" id="inputHiddenId_transaksi" value="{{id_transaksi}}">
+        <input type="hidden" name="userAlamat" id="inputHiddenUserAlamat" value="{{ userAlamat }}">
+        {% csrf_token %}
+
     </form>
 </div>
 
@@ -174,3 +176,32 @@ textarea:disabled{
     color: #313131;
 }
 </style>
+
+<script>
+$('#formSaveTransaksi').submit(function (elems) {
+    elems.preventDefault()
+
+    $('#inputHiddenHarga').val($('#total').text())
+    $('#inputHiddenBarang').val(xendit('{{method}}', '{{ jumlahBarang }}', action = 'getBarang'))
+    let jenisPengiriman = $('.ekspedisi .buttonJenisPengiriman').html().replace('$nbsp;', '')
+    $('#inputHiddenEkspedisi').val($('.ekspedisi .buttonEkspedisi').html().replace('$nbsp;', '') + ' - ' + jenisPengiriman)
+
+    $.ajax({
+        url: '/ajax/saveTransaksi',
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken'   : $('input[name="csrfmiddlewaretoken"]').val(),
+            'barang'                : $('#inputHiddenBarang').val(),
+            'harga'                 : $('#inputHiddenHarga').val(),
+            'ekspedisi'             : $('#inputHiddenEkspedisi').val(),
+            'id_transaksi'          : $('#inputHiddenId_transaksi').val(),
+            'userAlamat'            : $('#inputHiddenUserAlamat').val(),
+            'detailHarga'           : '{0} - {1} - {2}'.format($('#inputHiddenBarang').val(), 'Harga Pengiriman: ' + $('#hargaPengiriman').text(), xendit('{{method}}', '{{ jumlahBarang }}', action = 'getHarga'))
+        },
+        success: function (params) {
+            
+        }
+    })
+    xendit('{{method}}', '{{ jumlahBarang }}')
+})
+</script>

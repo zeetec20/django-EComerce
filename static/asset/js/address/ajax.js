@@ -10,10 +10,11 @@ function ongkir(kontak, alamat, method, jumlahBarang, slugify) {
             'namaLengkap': alamat[1],
             'provinsi': alamat[2],
             'kabupaten': alamat[3],
-            'kecamatan': alamat[4],
-            'kodePos': alamat[5],
-            'informasiTambahan': alamat[6],
-            'simpan': alamat[7],
+            'kabupatenAsli': alamat[4],
+            'kecamatan': alamat[5],
+            'kodePos': alamat[6],
+            'informasiTambahan': alamat[7],
+            'simpan': alamat[8],
 
             'method': method,
             'jumlahBarang': jumlahBarang,
@@ -37,13 +38,9 @@ function ongkir(kontak, alamat, method, jumlahBarang, slugify) {
     })
 }
 
-function xendit(method, barang) {
-    let id_transaksi    = $('#id_transaksi').val();
-    let description     = "Barang: {0} | Quantity: {1} | Price: {2}".format(
-        $('.listBarang .barang .title').text(), 
-        $('.listBarang .barang .quantity').text().split(' ')[1], 
-        $('.listBarang .barang .harga').text()
-    );
+function xendit(method, barang, action='getInvoice') {
+    let description     = ''
+    let id_transaksi    = $('#inputHiddenId_transaksi').val();
     let amount          = $('#total').text().replace(/,/g, '').split(' ')[1];
 
     if (method == 'cart') {
@@ -55,42 +52,47 @@ function xendit(method, barang) {
                 $('.listBarang .barang{0} .harga'.format(index + 1)).text()
             ));
         }
+        description = description.toString().replace(/,/g, ', ')
+    } else {
+        description = "Barang: {0} | Jumlah: {1} | Harga: {2}".format(
+            $('.listBarang .barang .title').text(), 
+            $('.listBarang .barang .quantity').text().split(' ')[1], 
+            $('.listBarang .barang .harga').text()
+        )
     }
 
-    $.ajax({
-        url: '/ajax/api/xendit',
-        type: 'GET',
-        data: {
-            'id_transaksi': id_transaksi,
-            'description': description.toString().replace(/,/g, ', '),
-            'amount': '{0}'.format(amount),
-        },
-        success: function (returnData) {
-            screenBlank('visible');
-            textBox('visible');
-            let href = returnData['invoiceUrl'];
-            $('.textBox button').attr({
-                'onclick': 'window.location.href = \'{0}\''.format(href),
-            })
-            // setTimeout(function () {
-            //     window.open(href, "_blank");
-            // }, 5000)
-        }
-    });
+    if (action == 'getInvoice') {
+        $.ajax({
+            url: '/ajax/api/xendit',
+            type: 'GET',
+            data: {
+                'id_transaksi': id_transaksi,
+                'description': description,
+                'amount': '{0}'.format(amount),
+            },
+            success: function (returnData) {
+                screenBlank('visible');
+                textBox('visible');
+                let href = returnData['invoiceUrl'];
+                $('.textBox button').attr({
+                    'onclick': 'window.location.href = \'{0}\''.format(href),
+                })
+
+                // setTimeout(function () {
+                //     window.open(href, "_blank");
+                // }, 5000)
+            }
+        });
+    } else if (action == 'getBarang') {
+        console.log(method)
+        return description
+    } else if (action == 'getHarga') {
+        return amount
+    }
 }
 
 function saveTransaksi(id_transaksi, barang, harga, alamat) {
     let data = new FormData();
-    $.ajax({
-        url: '/ajax/saveTransaksi',
-        type: 'POST',
-        data: {
-
-        },
-        success: function (params) {
-            
-        }
-    })
 }
 
 function provinsi(idProvinsi, nama) {

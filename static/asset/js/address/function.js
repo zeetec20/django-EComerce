@@ -105,7 +105,8 @@ function getAlamat() {
         kabupatenLength = kabupaten.text().length
         kabupaten = kabupaten.text().split(' ').slice(1);
         kabupaten = String(kabupaten).replace(/,/g, ' ');
-        return [label.val(), namaLengkap.val(), provinsi.text(), kabupaten, kecamatan.text(), kodePos.val(), informasiTambahan.val(), simpan];    
+        kabupatenAsli = $('.buttonKabupaten').text()
+        return [label.val(), namaLengkap.val(), provinsi.text(), kabupaten, kabupatenAsli, kecamatan.text(), kodePos.val(), informasiTambahan.val(), simpan];    
     } else {
         return false
     }
@@ -131,7 +132,7 @@ function getAddress(username, method, jumlahBarang, slugify) {
 }
 
 function ekspedisi(namaEkpd, ekpd) {
-    $('.buttonEkspedisi').html(namaEkpd + '&nbsp');
+    $('.buttonEkspedisi').html(namaEkpd);
     $('.buttonJenisPengiriman').removeAttr('disabled');
     $('.buttonJenisPengiriman').html('Jenis Pengiriman&nbsp');
     $('.jne, .tiki, .pos').css({
@@ -168,7 +169,7 @@ function jenisPengiriman(harga, nama) {
     let total = totalHargaBarang + parseInt(harga);
     $('#hargaPengiriman').text('Rp. {0}'.format(harga.toString().numberComma()));
     $('#total').text('Rp. {0}'.format(total.toString().numberComma()));
-    $('.buttonJenisPengiriman').text(nama);
+    $('.buttonJenisPengiriman').text(nama)
 }
 
 function textBox(action) {

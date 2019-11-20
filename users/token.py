@@ -16,7 +16,7 @@ def getIdTransaksi():
     semuaTransaksi = Transaksi.objects.all()
     semuaId_Transaksi = []
     for transaksi in semuaTransaksi:
-        semuaTransaksi.append(transaksi.id_transaksi)
+        semuaId_Transaksi.append(transaksi.id_transaksi)
     
     id = uuid4().int
     while id in semuaId_Transaksi:

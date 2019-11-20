@@ -22,6 +22,7 @@ urlpatterns = [
     path('ajax/subscribe', Ajax.as_view(action='subscribe'), name='subscribe'),
     path('ajax/csrf', Ajax.as_view(action='csrf'), name='csrf'),
     path('ajax/sort/<str:typeSort>', Ajax.as_view(action='sort'), name='barangMurah'),
+    path('ajax/saveTransaksi', Ajax.as_view(action='saveTransaksi'), name='saveTransaksi'),
 
     path('ajax/api/kabupaten', Ajax.as_view(action = 'get_kabupaten'), name='api_kabupaten'),
     path('ajax/api/kecamatan', Ajax.as_view(action = 'get_kecamatan'), name='api_kecamatan'),
