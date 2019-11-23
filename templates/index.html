@@ -304,6 +304,7 @@
                     <h4 class="footerLink" onclick="window.scrollTo({top: 280, behavior: 'smooth'});">Contact</h4>
                 </div>
             </div>
+            
             <div class="col-md-6 col-sm-12 body2">
                 <div class="row">
                     <h4 class="title">Berita Terbaru</h4>
@@ -339,8 +340,8 @@
     
     {% if user.is_authenticated == False %}
         <script>
-            // showLogin_Register('login');
-            // screenBlank('show');
+            showLogin_Register('login');
+            screenBlank('show');
         </script>
     {% endif %}
         

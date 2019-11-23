@@ -41,32 +41,29 @@ function getKontak() {
     }
 }
 
-function getAlamat() {
-    // let label               = $('#alamatLabelAlamat').val();
-    // let namaLengkap         = $('#alamatNamaLengkap').val();
-    // let provinsi            = $('.buttonProvinsi').text();
-    // let kabupaten           = $('.buttonKabupaten').text();
-    // let kecamatan           = $('.buttonKecamatan').text();
-    // let kodePos             = $('#alamatKodePos').val();
-    // let informasiTambahan   = $('#alamatInformasiTambahan').val();
-    // let simpan              = $('#alamatSimpanAlamat').val();
+function getAlamat(address, validation = 'default') {
+    let label, namaLengkap, provinsi, kabupaten, kecamatan, kodePos, informasiTambahan
 
-    // kabupatenLength = kabupaten.length
-    // kabupaten = kabupaten.split(' ').slice(1);
-    // kabupaten = String(kabupaten).replace(/,/g, ' ');
-
-    // return [label, namaLengkap, provinsi, kabupaten, kecamatan, kodePos, informasiTambahan, simpan];
-
-    let label               = $('#alamatLabelAlamat');
-    let namaLengkap         = $('#alamatNamaLengkap');
-    let provinsi            = $('.buttonProvinsi');
-    let kabupaten           = $('.buttonKabupaten');
-    let kecamatan           = $('.buttonKecamatan');
-    let kodePos             = $('#alamatKodePos');
-    let informasiTambahan   = $('#alamatInformasiTambahan');
+    if (address == 'addressUser') {
+        label               = $('.addressUser #alamatLabelAlamat');
+        namaLengkap         = $('.addressUser #alamatNamaLengkap');
+        provinsi            = $('.addressUser .buttonProvinsi');
+        kabupaten           = $('.addressUser .buttonKabupaten');
+        kecamatan           = $('.addressUser .buttonKecamatan');
+        kodePos             = $('.addressUser #alamatKodePos');
+        informasiTambahan   = $('.addressUser #alamatInformasiTambahan');
+    } else {
+        label               = $('.newAddress #alamatLabelAlamat');
+        namaLengkap         = $('.newAddress #alamatNamaLengkap');
+        provinsi            = $('.newAddress .buttonProvinsi');
+        kabupaten           = $('.newAddress .buttonKabupaten');
+        kecamatan           = $('.newAddress .buttonKecamatan');
+        kodePos             = $('.newAddress #alamatKodePos');
+        informasiTambahan   = $('.newAddress #alamatInformasiTambahan');
+    }
     let simpan              = $('#alamatSimpanAlamat').val();
 
-    empty = []
+    let empty = []
     if (label.val() == '') {
         empty.push('label')
         $('.divLabel small').css({
@@ -79,15 +76,15 @@ function getAlamat() {
         $('.divFullname small').text('Nama Lengkap masih kosong, silahkan isikan sesuai alamat anda!');
         $('.divFullname small').css({'color': '#fd6c6c'});
     }
-    if (provinsi.text() == 'Provinsi') {
+    if (provinsi.text() == 'Provinsi' || provinsi.text() == 'Provinsi$nbsp' || provinsi.text() == 'Belom Memilih Provinsi!') {
         empty.push('provinsi')
         provinsi.text('Belom Memilih Provinsi!')
     }
-    if (kabupaten.text() == 'Kabupaten / Kota') {
+    if (kabupaten.text() == 'Kabupaten / Kota' || kabupaten.html() == 'Kabupaten / Kota$nbsp' || kabupaten.text() == 'Belom Memilih Kabupaten!') {
         empty.push('kabupaten')
         kabupaten.text('Belom Memilih Kabupaten!')
     }
-    if (kecamatan.text() == 'Kecamatan') {
+    if (kecamatan.text() == 'Kecamatan' || kecamatan.text() == 'Kecamatan ' || kecamatan.text() == 'Belom Memilih Kecamatan!') {
         empty.push('kecamatan')
         kecamatan.text('Belom Memilih Kecamatan!')
     }
@@ -101,21 +98,45 @@ function getAlamat() {
         $('.divInformasiTambahan small').text('Informasi Tambahan masih kosong, silahkan isikan sesuai alamat anda!');
         $('.divInformasiTambahan small').css({'color': '#fd6c6c'});
     }
+
+    if (validation == 'resetValidation') {
+        $('.divLabel small').text('Contoh: Alamat Rumah, Alamat Kantor, Apartemen, Rumah Kos');
+        $('.divFullname small').text('Dimohon untuk mengisikan nama lengkap anda demi kemudahan pengiriman');
+        if (address == 'newAddress') {
+            provinsi.text('Provinsi')
+            kabupaten.text('Kabupaten / Kota')
+            kecamatan.text('Kecamatan')
+        }
+        $('.divKodePos small').text('Dimohon untuk mengisikan kode pos dengan tepat dan benar');
+        $('.divInformasiTambahan small').text('Isikan dengan detail alamatmu seperti dusun, RT/RW, ciri-ciri rumah');
+
+        $('.divLabel small, .divFullname small, .divKodePos small, .divInformasiTambahan small').css({
+            'color': '#7f858a'
+        });
+
+        return false
+    }
+
     if (empty.length == 0) {
-        kabupatenLength = kabupaten.text().length
+        let kabupatenLength = kabupaten.text().length
         kabupaten = kabupaten.text().split(' ').slice(1);
         kabupaten = String(kabupaten).replace(/,/g, ' ');
-        kabupatenAsli = $('.buttonKabupaten').text()
+        let kabupatenAsli = ''
+        if (address == 'addressUser') {
+            kabupatenAsli = $('.addressUser .buttonKabupaten').text()
+        } else {
+            kabupatenAsli = $('.newAddress .buttonKabupaten').text()
+        }
         return [label.val(), namaLengkap.val(), provinsi.text(), kabupaten, kabupatenAsli, kecamatan.text(), kodePos.val(), informasiTambahan.val(), simpan];    
     } else {
         return false
     }
 }
 
-function getAddress(username, method, jumlahBarang, slugify) {
+function getAddress(username, method, jumlahBarang, slugify, address) {
     let user    = username;
     let kontak  = getKontak();
-    let alamat  = getAlamat();
+    let alamat  = getAlamat(address);
 
     if (kontak != false && alamat != false) {
         screenBlank('visible');
@@ -188,5 +209,16 @@ function textBox(action) {
             'opacity': '0',
             'visibility': 'hidden',
         });
+    }
+}
+
+function address(action) {
+    if (action == 'addressUser') {
+        $('.addressUser').css('display', 'block')
+        $('.newAddress').css('display', 'none')
+    }
+    if (action == 'newAddress') {
+        $('.addressUser').css('display', 'none')
+        $('.newAddress').css('display', 'block')
     }
 }

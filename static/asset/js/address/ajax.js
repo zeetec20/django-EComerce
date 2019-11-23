@@ -105,8 +105,8 @@ function provinsi(idProvinsi, nama) {
         success: function (returnData) {
             $('.dropdown-menu-kabupaten').html(returnData);
             $('.buttonProvinsi').html(nama + '&nbsp;');
-            $('.buttonKabupaten').html('Kabupaten / Kota&nbsp;');
-            $('.buttonKecamatan').html('Kecamatan&nbsp;');
+            $('.buttonKabupaten').text('Kabupaten / Kota');
+            $('.buttonKecamatan').html('Kecamatan');
             $('.buttonKecamatan').prop('disabled', true);
             $('.buttonKabupaten').removeAttr('disabled');
         }
@@ -124,7 +124,7 @@ function kabupaten(idKabupaten, nama) {
             $('.dropdown-menu-kecamatan').html(returnData);
             $('.buttonKabupaten').html(nama);
             $('.buttonKecamatan').removeAttr('disabled');
-            $('.buttonKecamatan').html('Kecamatan&nbsp;');
+            $('.buttonKecamatan').html('Kecamatan');
         }
     })
 }

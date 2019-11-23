@@ -19,7 +19,7 @@
     </div>
     <div class="row col-lg-12">
         <div class="form-group input divNoHP">
-            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control nomorHP" id="contactNomorHP" placeholder="081231131272" maxlength="13" minlength="11">
+            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control nomorHP" id="contactNomorHP" placeholder="08**********" maxlength="13" minlength="11">
             <div class="borderBottom"></div>
             <small id="passwordHelp" class="form-text">Silahkan masukkan nomer hp anda yang bisa dihubungi</small>
         </div>
@@ -29,72 +29,138 @@
     <div class="row col-lg-12">
         <h1 class="title">Alamat</h1>
     </div>
-        <div class="row col-lg-12">
-            <div class="form-group input divLabel">
-                <input type="text" class="form-control labelAddress" id="alamatLabelAlamat" placeholder="Label Alamat" value="{{ label }}">
-                <div class="borderBottom"></div>
-                <small class="form-text">Contoh: Alamat Rumah, Alamat Kantor, Apartemen, Rumah Kos</small>
-            </div>
-        </div>
-        <div class="row col-lg-12">
-            <div class="form-group input divFullname">
-                <input type="text" class="form-control fullname" id="alamatNamaLengkap" placeholder="Nama Lengkap" value="{{ namaLengkap }}">
-                <div class="borderBottom"></div>
-                <small class="form-text">Dimohon untuk mengisikan nama lengkap anda demi kemudahan pengiriman</small>
-            </div>
-        </div>
-        <div class="row col-lg-12">
-            <div class="dropdown provinsi row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonProvinsi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">{% if provinsi != None %}{{ provinsi }}{% else %}Provinsi{% endif %}</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-
-                    {% for province in allProvince %}
-                        <a class="dropdown-item" kode="{{province.id}}" onclick="provinsi('{{province.id}}', '{{province.nama}}');">{{province.nama}}</a>
-                    {% endfor %}
-
+        <div class="addressUser">
+            <div class="row col-lg-12">
+                <div class="form-group input divLabel">
+                    <input type="text" class="form-control labelAddress" id="alamatLabelAlamat" placeholder="Label Alamat" value="{{ label }}">
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Contoh: Alamat Rumah, Alamat Kantor, Apartemen, Rumah Kos</small>
                 </div>
             </div>
-            <div class="dropdown kabupaten row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kabupatenAsli == None %}disabled{% endif %}>{% if kabupatenAsli != None %}{{ kabupatenAsli }}{% else %}Kabupaten / Kota{% endif %}</button>
-                <div class="dropdown-menu dropdown-menu-kabupaten" aria-labelledby="dropdownMenuOffset">
-
-                    {% for kabupaten in listKabupaten %}
-                        <a class="dropdown-item" kode="{{kabupaten.id}}" onclick="kabupaten('{{kabupaten.id}}', '{{kabupaten.nama}}');">{{kabupaten.nama}}</a>
-                    {% endfor %}
-
+            <div class="row col-lg-12">
+                <div class="form-group input divFullname">
+                    <input type="text" class="form-control fullname" id="alamatNamaLengkap" placeholder="Nama Lengkap" value="{{ namaLengkap }}">
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Dimohon untuk mengisikan nama lengkap anda demi kemudahan pengiriman</small>
                 </div>
             </div>
-            <div class="dropdown kecamatan row col-lg-12">
-                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKecamatan" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kecamatan == None %}disabled{% endif %}>{% if kecamatan != None %}{{ kecamatan }}{% else %}Kecamatan{% endif %}</button>
-                <div class="dropdown-menu dropdown-menu-kecamatan" aria-labelledby="dropdownMenuOffset">
+            <div class="row col-lg-12">
+                <div class="dropdown provinsi row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonProvinsi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">{% if provinsi != None %}{{ provinsi }}{% else %}Provinsi{% endif %}</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
 
-                    {% include 'address/listKecamatan.html' %}
+                        {% for province in allProvince %}
+                            <a class="dropdown-item" kode="{{province.id}}" onclick="provinsi('{{province.id}}', '{{province.nama}}');">{{province.nama}}</a>
+                        {% endfor %}
 
+                    </div>
+                </div>
+                <div class="dropdown kabupaten row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kabupatenAsli == None %}disabled{% endif %}>{% if kabupatenAsli != None %}{{ kabupatenAsli }}{% else %}Kabupaten / Kota{% endif %}</button>
+                    <div class="dropdown-menu dropdown-menu-kabupaten" aria-labelledby="dropdownMenuOffset">
+
+                        {% for kabupaten in listKabupaten %}
+                            <a class="dropdown-item" kode="{{kabupaten.id}}" onclick="kabupaten('{{kabupaten.id}}', '{{kabupaten.nama}}');">{{kabupaten.nama}}</a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="dropdown kecamatan row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKecamatan" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" {% if kecamatan == None %}disabled{% endif %}>{% if kecamatan != None %}{{ kecamatan }}{% else %}Kecamatan{% endif %}</button>
+                    <div class="dropdown-menu dropdown-menu-kecamatan" aria-labelledby="dropdownMenuOffset">
+
+                        {% include 'address/listKecamatan.html' %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="row col-lg-12 kodePost">
+                <div class="form-group input divKodePos">
+                    <input type="number" class="form-control inputKodePost" id="alamatKodePos" placeholder="Kode Pos" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ kodePos }}">
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Dimohon untuk mengisikan kode pos dengan tepat dan benar</small>
+                </div>
+            </div>
+            <div class="row col-lg-12 additionalInformation">
+                <div class="row divInformasiTambahan">
+                    <textarea name="" id="alamatInformasiTambahan" placeholder="Informasi Tambahan">{{ informasiTambahan }}</textarea>
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Isikan dengan detail alamatmu seperti dusun, RT/RW, ciri-ciri rumah</small>
                 </div>
             </div>
         </div>
-        <div class="row col-lg-12 kodePost">
-            <div class="form-group input divKodePos">
-                <input type="number" class="form-control inputKodePost" id="alamatKodePos" placeholder="Kode Pos" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="{{ kodePos }}">
-                <div class="borderBottom"></div>
-                <small class="form-text">Dimohon untuk mengisikan kode pos dengan tepat dan benar</small>
+
+        <div class="newAddress">
+            <div class="row col-lg-12">
+                <div class="form-group input divLabel">
+                    <input type="text" class="form-control labelAddress" id="alamatLabelAlamat" placeholder="Label Alamat" value="">
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Contoh: Alamat Rumah, Alamat Kantor, Apartemen, Rumah Kos</small>
+                </div>
             </div>
-        </div>
-        <div class="row col-lg-12 additionalInformation">
-            <div class="row divInformasiTambahan">
-                <textarea name="" id="alamatInformasiTambahan" placeholder="Informasi Tambahan">{{ informasiTambahan }}</textarea>
-                <div class="borderBottom"></div>
-                <small class="form-text">Isikan dengan detail alamatmu seperti dusun, RT/RW, ciri-ciri rumah</small>
+            <div class="row col-lg-12">
+                <div class="form-group input divFullname">
+                    <input type="text" class="form-control fullname" id="alamatNamaLengkap" placeholder="Nama Lengkap" value="">
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Dimohon untuk mengisikan nama lengkap anda demi kemudahan pengiriman</small>
+                </div>
+            </div>
+            <div class="row col-lg-12">
+                <div class="dropdown provinsi row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonProvinsi" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">Provinsi</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+
+                        {% for province in allProvince %}
+                            <a class="dropdown-item" kode="{{province.id}}" onclick="provinsi('{{province.id}}', '{{province.nama}}');">{{province.nama}}</a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="dropdown kabupaten row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKabupaten" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>Kabupaten / Kota</button>
+                    <div class="dropdown-menu dropdown-menu-kabupaten" aria-labelledby="dropdownMenuOffset">
+
+                        {% for kabupaten in listKabupaten %}
+                            <a class="dropdown-item" kode="{{kabupaten.id}}" onclick="kabupaten('{{kabupaten.id}}', '{{kabupaten.nama}}');">{{kabupaten.nama}}</a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="dropdown kecamatan row col-lg-12">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle buttonGroup buttonKecamatan" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" disabled>Kecamatan</button>
+                    <div class="dropdown-menu dropdown-menu-kecamatan" aria-labelledby="dropdownMenuOffset">
+
+                        {% include 'address/listKecamatan.html' %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="row col-lg-12 kodePost">
+                <div class="form-group input divKodePos">
+                    <input type="number" class="form-control inputKodePost" id="alamatKodePos" placeholder="Kode Pos" maxlength="5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="">
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Dimohon untuk mengisikan kode pos dengan tepat dan benar</small>
+                </div>
+            </div>
+            <div class="row col-lg-12 additionalInformation">
+                <div class="row divInformasiTambahan">
+                    <textarea name="" id="alamatInformasiTambahan" placeholder="Informasi Tambahan"></textarea>
+                    <div class="borderBottom"></div>
+                    <small class="form-text">Isikan dengan detail alamatmu seperti dusun, RT/RW, ciri-ciri rumah</small>
+                </div>
             </div>
         </div>
         <div class="row col-lg-12 saveInformation">
+            <label class="container"{% if alamatUser == 'false' %}style="display: none;"{% endif %}>Gunakan alamat yang sudah tersimpan
+                <input type="checkbox" id="useDataAlamatUser" show='newAddress' onclick="if ($('#useDataAlamatUser').attr('show') == 'addressUser') {$('#useDataAlamatUser').attr('show', 'newAddress')} else {$('#useDataAlamatUser').attr('show', 'addressUser')} address($('#useDataAlamatUser').attr('show')); getAlamat($('#useDataAlamatUser').attr('show'), 'resetValidation')"><span class="checkmark"></span>
+            </label>
             <label class="container">Simpan alamat ini untuk pembelian selanjutnya
                 <input type="checkbox" id="alamatSimpanAlamat" value="false" onclick="if (this.value == 'false') {this.value = 'true'} else {this.value = 'false'}"><span class="checkmark"></span>
             </label>
         </div>
         <div class="row col-lg-12 submit">
             <div>
-                <button class="btn rounded-0 buttonProses" onclick="getAddress('{{user.username}}', '{{method}}', '{{jumlahBarang}}', '{{request.GET.barang}}')">Proses</button>
+                <button class="btn rounded-0 buttonProses" onclick="getAddress('{{user.username}}', '{{method}}', '{{jumlahBarang}}', '{{request.GET.barang}}', $('#useDataAlamatUser').attr('show'))">Proses</button>
             </div>
         </div>
 </div>

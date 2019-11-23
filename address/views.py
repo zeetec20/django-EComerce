@@ -1,6 +1,8 @@
 import requests as req
 
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
+
 from django.views import View
 from goods.models import Barang
 
@@ -19,8 +21,11 @@ class Index(View):
         if kwargs['username'] != request.user.username:
             return redirect('/')
         else:
-            print(request.user.alamat)
-            if request.user.alamat != '':
+            self.context['alamatUser'] = 'false'
+            user = get_user_model().objects.get(username = kwargs['username'])
+            print(user.alamat)
+            if user.alamat != '':
+                self.context['alamatUser'] = 'true'
                 self.context['label']               = request.user.alamat.split(' | ')[0].split(': ')[1]
                 self.context['namaLengkap']         = request.user.alamat.split(' | ')[1].split(': ')[1]
                 self.context['provinsi']            = request.user.alamat.split(' | ')[2].split(': ')[1]
@@ -28,7 +33,7 @@ class Index(View):
                 self.context['kabupatenAsli']       = request.user.alamat.split(' | ')[3].split(': ')[1].split('/')[1]
                 self.context['kecamatan']           = request.user.alamat.split(' | ')[4].split(': ')[1]
                 self.context['kodePos']             = request.user.alamat.split(' | ')[5].split(': ')[1]
-                informasiTamabahan = request.user.alamat.split(' | ')[6:][0].replace('Informasi Tambahan: ', '')
+                informasiTamabahan = user.alamat.split(' | ')[6:][0].replace('Informasi Tambahan: ', '')
                 self.context['informasiTambahan']   = str(informasiTamabahan)
 
                 if self.context['provinsi'][len(self.context['provinsi']) - 1].isspace():
@@ -43,7 +48,6 @@ class Index(View):
                                 kecamatan = req.get("http://dev.farizdotid.com/api/daerahindonesia/provinsi/kabupaten/" + idKecamatan + "/kecamatan").json()
                                 self.context['listKabupaten'] = kabupaten['kabupatens']
                                 self.context['listKecamatan'] = kecamatan['kecamatans']
-
         if self.method == 'barang':
             if 'barang' not in request.GET and 'quantity' not in request.GET and 'color' not in request.GET:
                 return redirect('/')

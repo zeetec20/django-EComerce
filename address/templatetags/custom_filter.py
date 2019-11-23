@@ -18,6 +18,14 @@ def mathPlus(value, input):
 def mathMultiplication(value, input):
     return value * int(input)
 
+@register.filter
+def split(value, input):
+    return value.split(input)
+
+@register.filter
+def length(value):
+    return len(value)
+
 @register.filter(name='splitSpace')
 def splitSpace(value, input):
     return value.split(' ')[input - 1]

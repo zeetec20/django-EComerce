@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filter %}
 
 <div class="row col-lg-12">
     <h1 class="title">Profile Akun</h1>
@@ -50,7 +51,7 @@
         </div>
         <div class="row col-lg-12 transaksi">
             <h1 class="left col-lg-5">Pembelian : </h1>
-            <h1 class="right col-lg-7">{{user.transaksi}} Pembelian</h1>
+            <h1 class="right col-lg-7">{% if user.transaksi != '' or user.transaksi != None %}{{user.transaksi | split:', ' | length }} Pembelian{% endif %}</h1>
         </div>
     </div>
 </div>

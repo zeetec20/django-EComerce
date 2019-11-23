@@ -278,7 +278,7 @@ function tentangKami(action) {
     }
 }
 
-function cartBayar() {
+function cartBayar(username) {
     let slugify = []
     for (let index = 1; index < (parseInt($('.list').attr('barang')) + 1); index++) {
         slugify.push($('.list .barang{0} .name .barang'.format(index)).attr('slugify'));
@@ -295,7 +295,7 @@ function cartBayar() {
     let barang = slugify.toString().replace(/,/g, ' ');
     quantity = quantity.toString().replace(/,/g, ' ');
     color = color.toString().replace(/,/g, ' ');
-    url = "http://127.0.0.1:8000/address/zeetec/cart?barang={0}&quantity={1}&color={2}".format(barang, quantity, color);
+    url = "http://127.0.0.1:8000/address/{3}/cart?barang={0}&quantity={1}&color={2}".format(barang, quantity, color, username);
     window.location.href = url;
 }
 

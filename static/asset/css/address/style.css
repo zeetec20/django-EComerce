@@ -159,6 +159,10 @@
     color: white;
 }
 
+.address .addressUser{
+    display: none;
+}
+
 .additionalInformation .row{
     width: 90%;
     margin: auto;
@@ -231,6 +235,10 @@
     cursor: pointer;
     height: 0;
     width: 0;
+}
+
+.saveInformation .container .disabled{
+    display: none !important;
 }
 
 .saveInformation .checkmark {

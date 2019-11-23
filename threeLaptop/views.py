@@ -23,7 +23,7 @@ from transaksi.models import Transaksi
 class Index(View):
     template_name = 'index.html'
     context = {
-    
+        
     }
 
     def get(self, request, *args, **kwargs):
@@ -33,12 +33,12 @@ class Index(View):
             if int(request.GET['pagination']) > 1:
                 start   = (int(request.GET['pagination']) - 1) * 9
                 end     = start * 2
-                barangAll = Barang.objects.all()[start:end]
+                barangAll = Barang.objects.all().order_by('-id')[start:end]
                 page = int(request.GET['pagination'])
             else:
-                barangAll = Barang.objects.all()
+                barangAll = Barang.objects.all().order_by('-id')
         else:
-            barangAll = Barang.objects.all()
+            barangAll = Barang.objects.all().order_by('-id')
 
         self.context['pagination'] = math.ceil(len(jumlahBarang) / 9)
         paginationNumber = [page, page + 1, page + 2]

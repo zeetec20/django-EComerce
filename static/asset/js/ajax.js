@@ -156,16 +156,25 @@ function ajaxProfile() {
 }
 
 function ajaxSubscribe(email) {
-    $.ajax({
+    if (email != '') {
+        $.ajax({
         url: '/ajax/subscribe',
-        type: 'GET',
-        data: {
-            'email': email
-        },
-        success: function (returnData) {
-            
-        }
-    });
+            type: 'GET',
+            data: {
+                'email': email
+            },
+            success: function (returnData) {
+                $('#inputSubscribe').val('')
+                $('#inputSubscribe').attr('disabled', 'true')
+                $('#inputSubscribe').attr('placeholder', 'Selamat anda sekarang sudah berlangganan')
+            }
+        });
+        $('#inputSubscribe').val('')
+        $('#inputSubscribe').attr('placeholder', 'Loading...')
+    } else {
+        $('.footer .inputSubscribe input').focus()
+        $('#inputSubscribe').attr('placeholder', 'Anda belom mengisikan email!')
+    }
 }
 
 function search(keyword) {
