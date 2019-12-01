@@ -7,5 +7,5 @@ String.prototype.format = function() {
 }
 
 String.prototype.numberComma = function () {
-    return this.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return this.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }

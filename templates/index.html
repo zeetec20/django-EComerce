@@ -37,7 +37,7 @@
         {% include "cart.html" %}
     </div>
 
-    <div class="container pageProfile">
+    <div class="container pageProfile" style="overflow: auto;">
         {% include 'user/profile.html' %}
     </div>
 
@@ -170,10 +170,14 @@
 
     <div class="container header">
         <div class="row col-lg-12 header1">
-            <div class="searchBar col-lg-6">
-                <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh" onclick="if ($('#inputSearch').val() == '') {$('#inputSearch').focus();} else {search($('#inputSearch').val());}">
-                <input class="form-control search" type="search" id="inputSearch" placeholder="Pencarian" aria-label="Search" spellcheck="false">
-            </div>
+            
+            {% block search %}
+                <div class="searchBar col-lg-6">
+                    <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh" onclick="if ($('#inputSearch').val() == '') {$('#inputSearch').focus();} else {search($('#inputSearch').val());}">
+                    <input class="form-control search" type="search" id="inputSearch" placeholder="Pencarian" aria-label="Search" spellcheck="false">
+                </div>
+            {% endblock search %}
+            
             <div class="cart col-lg-6 col-sm-12">
                 <div class="dropdown button">
                     <h1 class="dropdown-toggle buttonMain" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
@@ -195,7 +199,8 @@
             </div>
         </div>
         <div class="row header2 col-lg-12 col-sm-12">
-            <h1 class="title" onclick="checkCookie('barang')">Three Laptop</h1>
+            <h1 class="title" onclick="window.location.href = '/'" style="cursor: pointer;">Three Laptop</h1>
+            <!-- checkCookie('barang') -->
         </div>
     </div>
 
@@ -211,20 +216,20 @@
 
                 <div class="row">
                     <div class="select selectMediaSocial">
-                        <div class="row col-lg-9">
-                            <div class="col-lg-2 col-sm-2">
+                        <div class="row col-lg-10">
+                            <div class="col-lg-2 col-sm-2 icon">
                                 <img src="{% static 'asset/images/icon/social-media/whatsapp.svg' %}" alt="">
                             </div>
-                            <div class="col-lg-2 col-sm-2">
+                            <div class="col-lg-2 col-sm-2 icon">
                                 <img src="{% static 'asset/images/icon/social-media/facebook.svg' %}" alt="">
                             </div>
-                            <div class="col-lg-2 col-sm-2">
+                            <div class="col-lg-2 col-sm-2 icon">
                                 <img src="{% static 'asset/images/icon/social-media/instagram.svg' %}" alt="">
                             </div>
-                            <div class="col-lg-2 col-sm-2">
+                            <div class="col-lg-2 col-sm-2 icon">
                                 <img src="{% static 'asset/images/icon/social-media/telegram.svg' %}" alt="">
                             </div>
-                            <div class="col-lg-2 col-sm-2">
+                            <div class="col-lg-2 col-sm-2 icon">
                                 <img src="{% static 'asset/images/icon/social-media/twitter.svg' %}" alt="">
                             </div>
                         </div>
@@ -232,12 +237,20 @@
                 </div>
                     
             </div>
+            
+            {% block body2 %}
             <div class="col-lg-9 col-sm-12 body2">
                 <div class="row header">
-                    <h3 class="titleLeft">Produk Terbaru</h3>
+                    <h3 class="titleLeft">{% if 'search' in request.GET %}Hasil Pencarian {{request.GET.search}}{% else %}Produk Terbaru{% endif %}</h3>
                     <div class="dropdown buttonRight">
                         <button type="button" class="btn btn-secondary dropdown-toggle buttonMain sort" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                            Terbaru
+                            
+                            {% if 'search' in request.GET %}
+                                Urutkan
+                            {% else %}
+                                Terbaru
+                            {% endif %}
+                                
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                             <a class="dropdown-item" href="#" onclick="sortBarang('barangTerbaru'); $('.body2 .header .sort').html('Terbaru&nbsp')">Terbaru</a>
@@ -251,34 +264,36 @@
                 <div class="row listBarang">
                     {% include 'listBarang.html' %}
                 </div>
-                <div class="type">
+                <div class="type sample">
                     <div class="row">
                         <h3>Kualitas Terbaik</h3>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4 col-sm-3">
+                        <div class="col-sm-4 col-sm-3 sampleLaptop">
                             <img src="{% static 'asset/images/gaming.png' %}" alt="">
                         </div>
-                        <div class="col-sm-4 col-sm-3">
+                        <div class="col-sm-4 col-sm-3 sampleLaptop">
                             <img src="{% static 'asset/images/general.png' %}" alt="">
                         </div>
-                        <div class="col-sm-4 col-sm-3">
+                        <div class="col-sm-4 col-sm-3 sampleLaptop">
                             <img src="{% static 'asset/images/graphic-design.png' %}" alt="">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4 col-sm-3">
+                        <div class="col-sm-4 col-sm-3 sampleLaptop">
                             <img src="{% static 'asset/images/hybrid.png' %}" alt="">
                         </div>
-                        <div class="col-sm-4 col-sm-3">
+                        <div class="col-sm-4 col-sm-3 sampleLaptop">
                             <img src="{% static 'asset/images/ultrabook.png' %}" alt="">
                         </div>
-                        <div class="col-sm-4 col-sm-3">
+                        <div class="col-sm-4 col-sm-3 sampleLaptop">
                             <img src="{% static 'asset/images/netbook.png' %}" alt="">
                         </div>
                     </div>
                 </div>
             </div>
+            {% endblock body2 %}
+                
         </div>
     </div>
 

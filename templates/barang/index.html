@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 {% load static %}
 {% load humanize %}
 
@@ -7,385 +7,132 @@
 {% endblock title %}
 
 {% block style %}
+    <link rel="stylesheet" href="{% static 'asset/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'asset/css/barang/style.css' %}">
 {% endblock style %}
-    
-{% block body %}
-    <div class="screenBlank"></div> 
 
-    <div class="container cartPage shadow-lg">
-        {% include "cart.html" %}
-    </div>  
-
-    <div class="container pageProfile">
-        {% include 'user/profile.html' %}
+{% block search %}
+    <div class="searchBar col-lg-6">
+        <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh" onclick="window.location.href = '/?search=' + $('#inputSearch').val()">
+        <input class="form-control search" type="search" id="inputSearch" placeholder="Pencarian" aria-label="Search" spellcheck="false">
     </div>
-    
-    <div class="container login-register">
-        <div class="login" id="loginPage">
-            <form action="/ajax/login" method="POST" id="form-login">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="cancel" id="buttonCloseLoginRegister" onclick="pageLogin_Register('close'); screenBlank('close')">
-                            <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
-                        </div>
-                        <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-lg btn-secondary login active">Login</button>
-                            <button type="button" class="btn btn-lg btn-secondary register" onclick="showLogin_Register('register')">Register</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        {% csrf_token %}
-                        <input type="hidden" name="from" value="goods">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group input">
-                            <input class="form-control" type="text" placeholder="Username" name="username">
-                            <div class="borderBottom"></div>
-                            <small id="emailHelp" class="form-text text-muted">Tolong masukkan username atau email yang sesuai</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group input">
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-                            <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Jangan beri tahu passowrd anda pada orang lain</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 col-sm-12 buttonLoginRegister">
-                        <div class="borderTop"></div>
-                        <div class="borderLeft"></div>
-                        <button class="btn button" type="submit">Kirim</button>
-                        <div class="borderBottom"></div>
-                        <div class="borderRight"></div>
-                    </div>
-                </div>
-            </form>
-        </div>
+{% endblock search %}
 
-        <div class="register" id="registerPage">
-            <form action="/ajax/register" enctype="multipart/form-data" id="form-register" method="POST">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="cancel" id="buttonCloseLoginRegister" onclick="pageLogin_Register('close'); screenBlank('close')">
-                            <img src="{% static 'asset/images/icon/cross-mark.png' %}" alt="">
-                        </div>
-                        <div class="btn-group buttonSelect" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-lg btn-secondary login" onclick="showLogin_Register('login')">Login</button>
-                            <button type="button" class="btn btn-lg btn-secondary register active">Register</button>
-                        </div>
-                    </div>
+{% block body2 %}
+<div class="col-lg-9 col-sm-12 body2">
+    <div class="row link">
+        <h6><a href="/">Home</a> &nbsp;&nbsp;>&nbsp;&nbsp; <a href="/barang/{{barang.slugifyBarang}}">{{barang.nama}}</a></h6>
+    </div>
+    <div class="row barang">
+        <div class="col-lg-6 leftBar">
+            <div class="row displayImage">
+                <img src="/media/{{barang.image1}}" alt="" class="col-lg-12">
+            </div>
+            <div class="row">
+                <div class="col-lg-6 image2 col-sm-6">
+                    {% if barang.image2 == "" %}
+                        <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                    {% else %}
+                        <img src="/media/{{barang.image2}}" alt="" class="imageChild1">
+                    {% endif %}
                 </div>
-                <div class="row fullname">
-                    <div class="col-md-6">
-                        <div class="form-group input">
-                            {{registerForm.fullname}}
-                            <div class="borderBottom"></div>
-                            <small id="emailHelp" class="form-text text-muted">Masukkan nama lengkap anda </small>
-                        </div>
-                    </div>
+                <div class="col-lg-6 image3 col-sm-6">
+                    {% if barang.image3 == "" %}
+                        <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                    {% else %}
+                        <img src="/media/{{barang.image3}}" alt="" class="imageChild1">
+                    {% endif %}
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group input">
-                            {{registerForm.username}}
-                            <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Masukkan username yang anda inginkan</small>
-                        </div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 image4 col-sm-6">
+                    {% if barang.image4 == "" %}
+                        <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                    {% else %}
+                        <img src="/media/{{barang.image4}}" alt="" class="imageChild1">
+                    {% endif %}
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group input">
-                            {{registerForm.email}}
-                            <div class="borderBottom"></div>
-                            <small id="emailHelp" class="form-text text-muted">Masukkan email yang anda gunakan</small>
-                        </div>
-                    </div>
+                <div class="col-lg-6 image5 col-sm-6">
+                    {% if barang.image5 == "" %}
+                        <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
+                    {% else %}
+                        <img src="/media/{{barang.image5}}" alt="" class="imageChild1">
+                    {% endif %}
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group input">
-                            {{registerForm.password}}
-                            <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Masukkan password anda, jangan beri tahu password anda ke orang lain</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group input">
-                            {{registerForm.profile}}
-                            <div class="borderBottom"></div>
-                            <small id="passwordHelp" class="form-text text-muted">Masukkan foto / gambar yang anda inginkan</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 col-sm-12 buttonLoginRegister">
-                        <div class="borderTop"></div>
-                        <div class="borderLeft"></div>
-                        <button class="btn button" onclick="" type="submit">Kirim</button>
-                        <div class="borderBottom"></div>
-                        <div class="borderRight"></div>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="row">
-            <div class="col-md-10 otherChoice">
-                <small id="emailHelp" class="form-text text-muted">Or Login Using</small>
             </div>
         </div>
-    </div>
-
-    <div class="container header">
-        <div class="row col-lg-12 header1">
-            <div class="searchBar col-lg-6">
-                <img src="{% static 'asset/images/icon/search.png' %}" alt="" class="iconSeacrh">
-                <input class="form-control search" type="search" placeholder="Search" aria-label="Search">
+        <div class="col-lg-6 rightBar">
+            <div class="row">
+                <h1 class="title">{{barang.nama}}</h1>
             </div>
-            <div class="cart col-lg-6 col-sm-12">
-                <div class="dropdown button">
-                    <h1 class="dropdown-toggle buttonMain" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                        User
-                    </h1>
-                    <div class="dropdown-menu userBar" aria-labelledby="dropdownMenuOffset">
-                        {% if user.is_authenticated %}
-                            {% include 'user.html' %}
+            <div class="row">
+                <h1 class="price">Rp. {{barang.harga | intcomma}}</h1>
+            </div>
+            <div class="row">
+                <input type="number" name="" id="quantity" class="quantity" value="1" min="1">
+                <div class="dropdown buttonColor">
+                    <button color="{% if warnaLength is not 1 %}random{% else %}{{warna.0}}{% endif %}" type="button" class="btn btn-secondary {% if warnaLength is not 1 %} dropdown-toggle {% else %} clearHover {% endif %} buttonMain rounded-0" id="buttonColor" {% if warnaLength is not 1 %} data-toggle="dropdown" {% endif %} aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                        {% if warnaLength is not 1 %}
+                            Warna
                         {% else %}
-                            <a class="dropdown-item login" onclick="showLogin_Register('login')">Login</a>
-                            <a class="dropdown-item register" onclick="showLogin_Register('register')">Register</a>
+                            {{warna.0}}
                         {% endif %}
-                    </div>
-                </div>
-                
-                <h6 class="checkOut" onclick="pageCart('show');">Bayar</h6>
-                <h6 class="cartText cart" onclick="pageCart('show');">Keranjang [ <span id="numberCart">0</span> ]</h6>
-                <img class="iconCart cart" onclick="pageCart('show');" src="{% static 'asset/images/icon/cart.png' %}" alt="" onclick="checkCookie('barang')">
-            </div>
-        </div>
-        <div class="row header2 col-lg-12 col-sm-12">
-            <a href="{% url 'index' %}"><h1 class="title">Three Laptop</h1></a>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-sm-12 body1">
-                {% for brand in allBrand %}
-                <div class="row">
-                    <h3 class="select select{{forloop.counter}}">{{brand}}</h3>
-                </div>
-                {% endfor %}
-
-                <div class="row">
-                    <div class="select selectMediaSocial">
-                        <div class="row col-lg-9">
-                            <div class="col-lg-2 col-sm-2">
-                                <img src="{% static 'asset/images/icon/social-media/whatsapp.svg' %}" alt="">
-                            </div>
-                            <div class="col-lg-2 col-sm-2">
-                                <img src="{% static 'asset/images/icon/social-media/facebook.svg' %}" alt="">
-                            </div>
-                            <div class="col-lg-2 col-sm-2">
-                                <img src="{% static 'asset/images/icon/social-media/instagram.svg' %}" alt="">
-                            </div>
-                            <div class="col-lg-2 col-sm-2">
-                                <img src="{% static 'asset/images/icon/social-media/telegram.svg' %}" alt="">
-                            </div>
-                            <div class="col-lg-2 col-sm-2">
-                                <img src="{% static 'asset/images/icon/social-media/twitter.svg' %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-9 col-sm-12 body2">
-                <div class="row link">
-                    <h6><a href="/">Home</a> &nbsp;&nbsp;>&nbsp;&nbsp; <a href="/barang/{{barang.slugifyBarang}}">{{barang.nama}}</a></h6>
-                </div>
-                <div class="row barang">
-                    <div class="col-lg-6 leftBar">
-                        <div class="row displayImage">
-                            <img src="/media/{{barang.image1}}" alt="" class="col-lg-12">
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 image2 col-sm-6">
-                                {% if barang.image2 == "" %}
-                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
-                                {% else %}
-                                    <img src="/media/{{barang.image2}}" alt="" class="imageChild1">
-                                {% endif %}
-                            </div>
-                            <div class="col-lg-6 image3 col-sm-6">
-                                {% if barang.image3 == "" %}
-                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
-                                {% else %}
-                                    <img src="/media/{{barang.image3}}" alt="" class="imageChild1">
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 image4 col-sm-6">
-                                {% if barang.image4 == "" %}
-                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
-                                {% else %}
-                                    <img src="/media/{{barang.image4}}" alt="" class="imageChild1">
-                                {% endif %}
-                            </div>
-                            <div class="col-lg-6 image5 col-sm-6">
-                                {% if barang.image5 == "" %}
-                                    <img src="/media/{{barang.image1}}" alt="" class="imageChild1">
-                                {% else %}
-                                    <img src="/media/{{barang.image5}}" alt="" class="imageChild1">
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 rightBar">
-                        <div class="row">
-                            <h1 class="title">{{barang.nama}}</h1>
-                        </div>
-                        <div class="row">
-                            <h1 class="price">Rp. {{barang.harga | intcomma}}</h1>
-                        </div>
-                        <div class="row">
-                            <input type="number" name="" id="quantity" class="quantity" value="1" min="1">
-                            <div class="dropdown buttonColor">
-                                <button color="{% if warnaLength is not 1 %}random{% else %}{{warna.0}}{% endif %}" type="button" class="btn btn-secondary {% if warnaLength is not 1 %} dropdown-toggle {% else %} clearHover {% endif %} buttonMain rounded-0" id="buttonColor" {% if warnaLength is not 1 %} data-toggle="dropdown" {% endif %} aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                                    {% if warnaLength is not 1 %}
-                                        Warna
-                                    {% else %}
-                                        {{warna.0}}
-                                    {% endif %}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                    {% for color in warna %}
-                                        <a class="dropdown-item">{{color}}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <button class="btn button1 button">Tambahkan ke Keranjang</button>
-                        </div>
-                        <div class="row">
-                            <button {% if user.is_authenticated %}onclick="buy('')"{% else %}onclick="showLogin_Register('login')"{% endif %} class="btn button2 button" id="buttonBuy" href="/address/{{user.username}}/barang?barang={{barang.slugifyBarang}}">Beli Sekarang</button>
-                        </div>
-                        <div class="row share">
-                            
-                        </div>
-                    </div>
-                    <div class="row col-lg-12">
-                        <textarea name="" id="" class="deskripsi  {% if lineDeskripsi > 22 %}deskripsi-lg {% elif lineDeskripsi < 13 %}deskripsi-sm{% endif %}">{{barang.deskripsi}}</textarea>
-                    </div>
-                </div>
-                <div class="row similar">
-                    <h5 class="title">You might also like</h5>
-                    <div class="row">
-                        
-                        {% for barang in barangSimilar %}
-                            <a href="/barang/{{barang.slugifyBarang}}" class="col-lg-4 col-sm-12 barang">
-                                <img src="/media/{{barang.image1}}" alt="" class="col-lg-12">
-                                <div class="row">
-                                    <h6 class="title">{{barang.nama}}</h6>
-                                </div>
-                                <div class="row">
-                                    <h6 class="price">Rp. {{barang.harga | intcomma}}</h6>
-                                </div>
-                            </a>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                        {% for color in warna %}
+                            <a class="dropdown-item">{{color}}</a>
                         {% endfor %}
-                            
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <button class="btn button1 button" onclick="addBarangCart('{{barang.nama}}', 'random', parseInt($('#quantity').val()));">Tambahkan ke Keranjang</button>
+            </div>
+            <div class="row">
+                <button {% if user.is_authenticated %}onclick="buy('')"{% else %}onclick="showLogin_Register('login')"{% endif %} class="btn button2 button" id="buttonBuy" href="/address/{{user.username}}/barang?barang={{barang.slugifyBarang}}">Beli Sekarang</button>
+            </div>
+            <div class="row share">
+                
+            </div>
+        </div>
+        <div class="row col-lg-12">
+            <textarea name="" id="" class="deskripsi  {% if lineDeskripsi > 22 %}deskripsi-lg {% elif lineDeskripsi < 13 %}deskripsi-sm{% endif %}">{{barang.deskripsi}}</textarea>
         </div>
     </div>
-
-    <div class="container type">
+    <div class="row similar">
+        <h5 class="title">You might also like</h5>
         <div class="row">
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
-            <div class="col-sm-4 col-sm-3"></div>
+            
+            {% for barang in barangSimilar %}
+                <a href="/barang/{{barang.slugifyBarang}}" class="col-lg-4 col-sm-12 barang">
+                    <img src="/media/{{barang.image1}}" alt="" class="col-lg-12">
+                    <div class="row">
+                        <h6 class="title">{{barang.nama}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6 class="price">Rp. {{barang.harga | intcomma}}</h6>
+                    </div>
+                </a>
+            {% endfor %}
+                
         </div>
     </div>
-
-    <div class="container footer">
-        <div class="row">
-            <div class="col-md-6 col-sm-12 body1">
-                <div class="row ">
-                    <h4 class="title">Link</h4>
-                </div>
-                <div class="row ">
-                    <h4 class="footerLink">Search</h4>
-                </div>
-                <div class="row ">
-                    <h4 class="footerLink">News</h4>
-                </div>
-                <div class="row ">
-                    <h4 class="footerLink">Our Story</h4>
-                </div>
-                <div class="row ">
-                    <h4 class="footerLink">FAQ</h4>
-                </div>
-                <div class="row ">
-                    <h4 class="footerLink">Return Police</h4>
-                </div>
-                <div class="row ">
-                    <h4 class="footerLink">Contact us</h4>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12 body2">
-                <div class="row">
-                    <h4 class="title">Subscribe</h4>
-                    <h6 class="text">Sign up for the latest news</h6>
-                    <div class="input-group inputSubscribe">
-                        <input type="email" class="form-control" placeholder="your@email.com" aria-label="email" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary button" type="button" id="button-addon2">Button</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row footer2">
-            <div class="col-lg-10 col-sm-10">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12">
-                        <h6 class="copyright">Copyright © 2019, Three Laptop. E-Commerce Software by Three Laptop</h6>
-                    </div>
-
-                    <div class="col-lg-6 col-sm-12">
-                        <div class="sponsor">
-                            <img src="" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock body %}
+</div>
+{% endblock body2 %}
     
 {% block script %}
+    <script src="{% static 'asset/js/ajax.js' %}"></script>
+    <script src="{% static 'asset/js/function.js' %}"></script>
+    <script src="{% static 'asset/js/script.js' %}"></script>
+
+    {% if user.is_authenticated == False %}
+        <script>
+            showLogin_Register('login');
+            screenBlank('show');
+        </script>
+    {% endif %}
+
     <script src="{% static 'asset/js/barang/ajax.js' %}"></script>
     <script src="{% static 'asset/js/barang/function.js' %}"></script>
     <script src="{% static 'asset/js/barang/script.js' %}"></script>
 {% endblock script %}
-    

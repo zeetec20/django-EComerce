@@ -30,12 +30,12 @@
             </div>
         </div>
         <div class="row col-lg-12 edit">
-            <a class="btn col-lg-6 col-md-12 col-sm-12">Ubah Data</a>
-            <a class="btn col-lg-6 col-md-12 col-sm-12">Ganti Password</a>
+            <a class="btn">Ubah Data</a>
+            <a class="btn">Ganti Password</a>
         </div>
         <div class="row col-lg-12 button">
-            <a class="btn col-lg-6 col-md-12 col-sm-12">Pelanggan</a>
-            <a class="btn col-lg-6 col-md-12 col-sm-12">Hidupkan Notifikasi</a>
+            <a class="btn">Pelanggan</a>
+            <a class="btn">Notifikasi On</a>
         </div>
     </div>
     <div class="row col-lg-6 rightBar">
@@ -50,8 +50,8 @@
             <a class="btn">Lihat Alamat</a>
         </div>
         <div class="row col-lg-12 transaksi">
-            <h1 class="left col-lg-5">Pembelian : </h1>
-            <h1 class="right col-lg-7">{% if user.transaksi != '' or user.transaksi != None %}{{user.transaksi | split:', ' | length }} Pembelian{% endif %}</h1>
+            <h1 class="left col-lg-5">Pembelian</h1>
+            <h1 class="right col-lg-7">{% if user.transaksi != '' or user.transaksi != None %}{{user.transaksi | split:', ' | length }}{% endif %}</h1>
         </div>
     </div>
 </div>

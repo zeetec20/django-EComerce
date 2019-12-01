@@ -56,6 +56,37 @@ class Index(View):
         self.context['staff'] = Group.objects.get(name='staff')
         self.context['url'] = '/'
         
+        if 'search' in request.GET:
+            barang = Barang.objects.filter(nama__icontains = request.GET['search'])
+            # print(barang)
+            page = 1
+            barangAll = barang
+            if 'pagination' in request.GET:
+                if int(request.GET['pagination']) > 1:
+                    start   = (int(request.GET['pagination']) - 1) * 9
+                    end     = start * 2
+                    barangAll = barang[start:end]
+                    page = int(request.GET['pagination'])
+
+            self.context['pagination'] = int(math.ceil(len(barangAll) / 9))
+            paginationNumber = [page, page + 1, page + 2]
+            print(self.context['pagination'])
+            self.context['paginationNumber'] = paginationNumber
+
+            barangLane = [[], []]
+            if len(barangAll) < 9:
+                for brng in barangAll:
+                    barangLane[1].append(brng)
+            else:
+                for brng in barangAll:
+                    if len(barangLane[1]) == 9:
+                        break
+                    barangLane[1].append(brng)
+                    
+            self.context['barangLane'] = barangLane
+            self.context['url'] = "/ajax/search?keyword=" + request.GET['search']
+            return render(self.request, self.template_name, self.context)
+        
         if request.is_ajax():
             if 'pagination' in request.GET:
                 self.template_name = 'listBarang.html'

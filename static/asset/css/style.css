@@ -9,6 +9,7 @@ html, body{
 
 body{
     background-color: white;
+    overflow-x: hidden;
 }
 
 .header{
@@ -269,7 +270,7 @@ body{
 }
 
 .footer2{
-    margin-top: 10px;
+    margin-top: 20px;
     border-top: solid 1px #e8e8e8;
 }
 
@@ -874,7 +875,6 @@ body{
     border-color: #313131;
     color: #313131;
     margin: auto;
-    display: block;
     font-size: 12px;
     font-weight: bold;
     margin-right: -1px;
@@ -907,7 +907,7 @@ body{
 }
 
 .pageProfile .buttonAction .right{
-    right: 10px;
+    right: 0;
 }
 
 .pageProfile .leftBar .button a:nth-child(2),
@@ -1099,9 +1099,102 @@ body{
     }
 }
 
-@media only screen and (min-width: 990px) and (max-width: 1050px){
-    .pageProfile .leftBar .edit a{
-        font-size: 9px;
+@media only screen and (min-width: 1000px) and (max-width: 1060px){
+    .pageProfile .leftBar .edit .btn{
+        font-size: 11px;
+        width: 100% !important;
+
+    }
+
+    .pageProfile .leftBar .button a{
+        font-size: 11px;
+        width: 100% !important;
+    }
+
+    .pageProfile .buttonAction .left{
+        width: 40%;
+        margin-bottom: 20px;
+    }
+    
+    .pageProfile .buttonAction .right{
+        width: 40%;
+        margin-bottom: 20px;
+        right: 0;
+    }
+
+    .selectMediaSocial .icon{
+        margin: 0;
+        width: 30%;
+        float: left;
+    }
+    
+    .selectMediaSocial .icon img{
+        width: 15px;
+        height: 15px;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1000px){
+    .listBarang .barang .cover{
+        height: 700px;
+    }
+}
+
+@media only screen and (min-width: 580px) and (max-width: 900px){
+    .listBarang .barang .cover{
+        height: 600px;
+    }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 580px){
+    .listBarang .barang .cover{
+        height: 400px;
+    }
+
+    .selectMediaSocial{
+        margin: auto;
+        margin-bottom: 30px;
+    }
+
+    .selectMediaSocial .icon{
+        margin: 0;
+        position: relative;
+        width: 10%;
+        margin: auto;
+    }
+
+    .selectMediaSocial .icon img{
+        width: 15px;
+        height: 15px;
+        margin: auto;
+    }
+
+    .sample .sampleLaptop img{
+        height: 300px;
+        margin-bottom: 25px;
+    }
+
+    .footer .body2{
+        margin-top: 30px;
+    }
+
+    .footer .body2 .inputSubscribe{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .login-register{
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .login-register{
+        max-height: 100%;
+    }
+
+    ::-webkit-scrollbar{
+        width: 5px;
     }
 }
 
@@ -1145,3 +1238,21 @@ body{
 a{
     text-decoration: none !important;
 }
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: #ffffff00;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #c1c1c1;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    transition: 0.5s;
+    background-color: #afafaf;
+} 

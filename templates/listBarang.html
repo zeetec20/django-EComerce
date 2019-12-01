@@ -40,11 +40,13 @@
                 </li>
             {% endfor %}
                 
-            <li class="page-item {% if paginationNumber.0 == pagination %}disabled{% endif %}">
+            
+            <li class="page-item {% if paginationNumber.0 == pagination or paginationNumber.0 > pagination %}disabled{% endif %}">
                 <a url='{{url}}' class="page-link" onclick="pagination('{{ paginationNumber.0 | mathPlus:1 }}', $('.paginationBar .page-link').attr('url'))" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
+                
         </ul>
     </nav>
 </div>
